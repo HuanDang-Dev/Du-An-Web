@@ -1,6 +1,5 @@
 <template>
-  <div class="viewMotel">
-    <NavigationComponent></NavigationComponent>
+  <div id="viewMotel">
     <div class="main-body pt-4 text-dark">
       <div class="container">
         <div class="row m-0 p-0  bg-white">
@@ -33,31 +32,14 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid py-4 second-background">
-      <div class="container">
-        <div class="row m-0 p-0">
-          <div class="col-12 m-0 p-0">
-            <ContactComponent></ContactComponent>
-          </div>
-        </div>
-      </div>
-    </div>
-    <FooterComponent></FooterComponent>
+    
   </div>
 </template>
 
 <script>
-import NavigationComponent from "./components/NavigationComponent.vue";
-import FooterComponent from "./components/FooterComponent.vue";
-import ContactComponent from "./components/ContactComponent.vue";
 
 export default {
   name: "viewMotel",
-  components: {
-    NavigationComponent,
-    FooterComponent,
-    ContactComponent
-  },
   data() {
     return {
       images: [

@@ -1,6 +1,6 @@
-@extends('layouts.component')
+@extends('layouts.app')
 
 @section('content')
-<viewMotel></viewMotel>
+<view-motel></view-motel>
 
 @endsection

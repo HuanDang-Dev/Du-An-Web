@@ -8,12 +8,12 @@ Vue.use(Vuex, bootstrap)
 
 const store = new Vuex.Store(storeVuex)
 
-Vue.component('main-app', require('./components/Home.vue').default);
+Vue.component('main-app', require('./components/MainApp.vue').default);
+Vue.component('view-motel', require('./components/ViewMotel.vue').default);
 Vue.component('rule', require('./components/Rule.vue').default);
-Vue.component('viewMotel', require('./components/ViewMotel.vue').default);
+Vue.component('welcome', require('./components/Home.vue').default);
 
 const app = new Vue({
     el: '#app',
     store
-
 });
