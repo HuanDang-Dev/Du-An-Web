@@ -135,7 +135,7 @@ img {
     top: -5px;
 }
 .btn-rating {
-    right: 40%;
+    left: 40%;
     border: none;
     background-color: initial;
 }
