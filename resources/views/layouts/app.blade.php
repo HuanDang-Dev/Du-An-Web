@@ -228,32 +228,32 @@
         <div class="navigation-component">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 col-sm-12 text-left px-5 py-2">
-                    <img class="logo-img w-25" src="/images/logo.png" alt />
+                    <div class="col-md-4 col-sm-12 text-left pl-5 py-2">
+                        <img class="logo-img ml-4" src="/images/logo.png" alt />
                     </div>
-                    <div class="col-md-7 col-sm-12 py-3 d-flex">
-                    <div class="px-4">
-                        <a href="/" class="btn-icon"><i class="fas fa-home pr-2"></i>Home </a>
-                    </div>
-                    <div class="px-4">
-                        <a href="/owner" class="btn-icon"><i class="far fa-user pr-2"></i>Tôi bán </a>
-                    </div>
-                    <div class="px-4">
-                        <a href="" class="btn-icon"><i class="far fa-comments pr-2"></i>Chat </a>
-                    </div>
-                    <div class="px-4">
-                        <a href="/post" class="btn-icon"><i class="far fa-edit pr-2"></i>Đăng tin</a>
-                    </div>
+                    <div class="col-md-8 col-sm-12 py-3 d-flex align-items-center justify-content-center">
+                        <div class="px-3">
+                            <a href="/" class="btn-icon"><i class="fas fa-home pr-2"></i>Home </a>
+                        </div>
+                        <div class="px-3">
+                            <a href="/owner" class="btn-icon"><i class="far fa-user pr-2"></i>Tôi bán </a>
+                        </div>
+                        <div class="px-3">
+                            <a href="" class="btn-icon"><i class="far fa-comments pr-2"></i>Chat </a>
+                        </div>
+                        <div class="px-3">
+                            <a href="/post" class="btn-icon"><i class="far fa-edit pr-2"></i>Đăng tin</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row pb-1">
-                    <div class="col-md-6 col-sm-12 text-left py-2 pl-5">
+                    <div class="col-md-6 col-sm-12 text-left py-2 align-items-center justify-content-center">
                         <div class="d-flex pl-5">
                             <button class="bg-search"><i class="fas fa-search pt-1 pl-2 pr-1"></i></button>
                             <input placeholder="Bất động sản" id="__inputItemProps" type="text" class="input-search w-100">
                         </div>
                     </div>
-                    <div class="col-md-5 col-sm-12 mx-4 px-5 d-flex align-items-center">
+                    <div class="col-md-5 col-sm-12 mx-4 px-5 d-flex align-items-center justify-content-center">
                         <div class="px-3">
                             <div class="d-flex align-items-center">
                                 <div class="flex-center position-ref full-height">
@@ -362,19 +362,19 @@
                 </div>
             </div>
             <div class="row m-0 p-0 pt-4 border-top text-left">
-                <div class="col-md-6 col-sm-4 px-5">
-                <h5>Liên hệ</h5>
-                <div class="text-left list-nostyle d-flex flex-row">
-                    <div><a href="#"><img  class="w-50" src="./images/facebook.png" alt=""></a></div>    
-                    <div><a href="#"><img class="w-50" src="./images/google.png" alt=""></a></div>
-                    <div><a href="#"><img class="w-50" src="./images/skype.png" alt=""></a></div>   
+                <div class="col-md-6 col-sm-12 px-5">
+                    <h5>Liên hệ</h5>
+                    <div class="text-left list-nostyle d-flex flex-row">
+                        <div><a href="#"><img  class="w-50" src="./images/facebook.png" alt=""></a></div>    
+                        <div><a href="#"><img class="w-50" src="./images/google.png" alt=""></a></div>
+                        <div><a href="#"><img class="w-50" src="./images/skype.png" alt=""></a></div>   
+                    </div>
                 </div>
-                </div>
-                <div class="col-md-6 col-sm-4 px-5">
-                <h5>Chứng nhận</h5>
-                <div class="text-left d-flex flex-row py-2">
-                    <div class="mt-1 ml-1"><img  class="w-100" src="./images/cerfiticate.png" alt=""></div>
-                </div>
+                <div class="col-md-6 col-sm-12 px-5">
+                    <h5>Chứng nhận</h5>
+                    <div class="text-left d-flex flex-row py-2">
+                        <div class="mt-1 ml-1"><img  class="w-100" src="./images/cerfiticate.png" alt=""></div>
+                    </div>
                 </div>
             </div>
             </div>
