@@ -261,10 +261,17 @@
                                         <div class="top-right links d-flex">
                                             @auth
                                                 <div class="profile">
-                                                    <div class="wrap">
+                                                    <button class="wrap btn-admin dropdown-toggle ml-3 p-2 text-font" data-toggle="dropdown" href="#">
                                                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" alt="" class="online">
-                                                        Owner
-                                                    </div>
+                                                            Owner
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-menu-title">
+                                                            <span class="pl-3">Cài đặt tài khoản</span>
+                                                        </li>
+                                                        <li><a class="pl-3 text-dark" href="{{ route('login') }}"><i class="halflings-icon off"></i>Đăng xuất</a></li>
+                                                    </ul>
                                                 </div>
                                             @else
                                                 <a href="{{ route('login') }}"><h2 class="px-2">Login</h2></a>
@@ -365,15 +372,15 @@
                 <div class="col-md-6 col-sm-12 px-5">
                     <h5>Liên hệ</h5>
                     <div class="text-left list-nostyle d-flex flex-row">
-                        <div><a href="#"><img  class="w-50" src="./images/facebook.png" alt=""></a></div>    
-                        <div><a href="#"><img class="w-50" src="./images/google.png" alt=""></a></div>
-                        <div><a href="#"><img class="w-50" src="./images/skype.png" alt=""></a></div>   
+                        <div><a href="#"><img  class="w-50" src="/images/facebook.png" alt=""></a></div>    
+                        <div><a href="#"><img class="w-50" src="/images/google.png" alt=""></a></div>
+                        <div><a href="#"><img class="w-50" src="/images/skype.png" alt=""></a></div>   
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12 px-5">
                     <h5>Chứng nhận</h5>
                     <div class="text-left d-flex flex-row py-2">
-                        <div class="mt-1 ml-1"><img  class="w-100" src="./images/cerfiticate.png" alt=""></div>
+                        <div class="mt-1 ml-1"><img  class="w-100" src="/images/cerfiticate.png" alt=""></div>
                     </div>
                 </div>
             </div>

@@ -1854,7 +1854,8 @@ __webpack_require__.r(__webpack_exports__);
         status: true,
         like: 50,
         rating: 5,
-        linkZoomIn: "/"
+        linkZoomIn: "/",
+        linkEdit: "/"
       }, {
         title: "Hoàng Anh Dương",
         name: "Tuấn Hùng",
@@ -1862,7 +1863,8 @@ __webpack_require__.r(__webpack_exports__);
         status: false,
         like: 50,
         rating: 5,
-        linkZoomIn: "/"
+        linkZoomIn: "/",
+        linkEdit: "/"
       }],
       owners: [{
         title: "Hoàng Anh Dương",
@@ -2316,23 +2318,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "owner",
   data: function data() {
@@ -2394,23 +2379,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -71482,15 +71450,27 @@ var render = function() {
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-success m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-success m-1"
                                       },
-                                      [_vm._v("Like: " + _vm._s(ad.like))]
+                                      [
+                                        _vm._v("Like:  "),
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "m-0 d-flex align-items-center"
+                                          },
+                                          [_vm._v(_vm._s(ad.like))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-success m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-success m-1"
                                       },
                                       [
                                         _vm._v("Rating: "),
@@ -71514,15 +71494,26 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass:
-                                          "label label-important  m-1"
+                                          "label d-flex align-items-center label-important  m-1"
                                       },
-                                      [_vm._v("Like: " + _vm._s(ad.like))]
+                                      [
+                                        _vm._v("Like:  "),
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "m-0 d-flex align-items-center"
+                                          },
+                                          [_vm._v(_vm._s(ad.like))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-important m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-important m-1"
                                       },
                                       [
                                         _vm._v("Rating: "),
@@ -71540,7 +71531,8 @@ var render = function() {
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-important m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-important m-1"
                                       },
                                       [_vm._v("Đã thuê")]
                                     )
@@ -71633,15 +71625,27 @@ var render = function() {
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-success m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-success m-1"
                                       },
-                                      [_vm._v("Like: " + _vm._s(owner.like))]
+                                      [
+                                        _vm._v("Like:  "),
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "m-0 d-flex align-items-center"
+                                          },
+                                          [_vm._v(_vm._s(owner.like))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-success m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-success m-1"
                                       },
                                       [
                                         _vm._v("Rating: "),
@@ -71665,15 +71669,26 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass:
-                                          "label label-important  m-1"
+                                          "label d-flex align-items-center label-important  m-1"
                                       },
-                                      [_vm._v("Like: " + _vm._s(owner.like))]
+                                      [
+                                        _vm._v("Like:  "),
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "m-0 d-flex align-items-center"
+                                          },
+                                          [_vm._v(_vm._s(owner.like))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-important m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-important m-1"
                                       },
                                       [
                                         _vm._v("Rating: "),
@@ -71691,7 +71706,8 @@ var render = function() {
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-important m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-important m-1"
                                       },
                                       [_vm._v("Đã thuê")]
                                     )
@@ -71746,9 +71762,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "navbar-side px-2" }, [
-      _c("h2", { staticClass: "pl-3 text-center" }, [_vm._v("ADMIN")])
-    ])
+    return _c(
+      "div",
+      { staticClass: "navbar-side px-2 justify-content-center" },
+      [_c("h1", [_vm._v("ADMIN")])]
+    )
   },
   function() {
     var _vm = this
@@ -72365,15 +72383,27 @@ var render = function() {
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-success m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-success m-1"
                                       },
-                                      [_vm._v("Like: " + _vm._s(owner.like))]
+                                      [
+                                        _vm._v("Like: "),
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "m-0 d-flex align-items-center"
+                                          },
+                                          [_vm._v(_vm._s(owner.like))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-success m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-success m-1"
                                       },
                                       [
                                         _vm._v("Rating: "),
@@ -72397,15 +72427,26 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass:
-                                          "label label-important  m-1"
+                                          "label d-flex align-items-center label-important  m-1"
                                       },
-                                      [_vm._v("Like: " + _vm._s(owner.like))]
+                                      [
+                                        _vm._v("Like:  "),
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "m-0 d-flex align-items-center"
+                                          },
+                                          [_vm._v(_vm._s(owner.like))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-important m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-important m-1"
                                       },
                                       [
                                         _vm._v("Rating: "),
@@ -72423,7 +72464,8 @@ var render = function() {
                                     _c(
                                       "div",
                                       {
-                                        staticClass: "label label-important m-1"
+                                        staticClass:
+                                          "label d-flex align-items-center label-important m-1"
                                       },
                                       [_vm._v("Đã thuê")]
                                     )
@@ -72487,48 +72529,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "navbar-side px-2" }, [
-      _c("h2", { staticClass: "pl-3" }, [_vm._v("Chủ cho thuê nhà trọ")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "nav-no-collapse header-nav" }, [
-        _c("ul", { staticClass: "nav pull-right" }, [
-          _c("li", { staticClass: "dropdown p-2" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn-admin dropdown-toggle ml-3 p-2 text-font",
-                attrs: { "data-toggle": "dropdown", href: "#" }
-              },
-              [
-                _vm._v(
-                  "\n                      Huan Dang\n                      "
-                ),
-                _c("span", { staticClass: "caret" })
-              ]
-            ),
-            _vm._v(" "),
-            _c("ul", { staticClass: "dropdown-menu" }, [
-              _c("li", { staticClass: "dropdown-menu-title" }, [
-                _c("span", { staticClass: "pl-3" }, [
-                  _vm._v("Cài đặt tài khoản")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  { staticClass: "pl-3 text-dark", attrs: { href: "/login" } },
-                  [
-                    _c("i", { staticClass: "halflings-icon off" }),
-                    _vm._v("Đăng xuất")
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "navbar-side px-2 justify-content-center" },
+      [_c("h1", [_vm._v("Chủ cho thuê nhà trọ")])]
+    )
   },
   function() {
     var _vm = this
@@ -72604,50 +72609,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "admin" }, [
-      _c("div", { staticClass: "navbar-side px-2" }, [
-        _c("h2", { staticClass: "pl-3" }, [_vm._v("Đăng tin")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "nav-no-collapse header-nav" }, [
-          _c("ul", { staticClass: "nav pull-right" }, [
-            _c("li", { staticClass: "dropdown p-2" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn-admin dropdown-toggle ml-3 p-2 text-font",
-                  attrs: { "data-toggle": "dropdown", href: "#" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Huan Dang\n                        "
-                  ),
-                  _c("span", { staticClass: "caret" })
-                ]
-              ),
-              _vm._v(" "),
-              _c("ul", { staticClass: "dropdown-menu" }, [
-                _c("li", { staticClass: "dropdown-menu-title" }, [
-                  _c("span", { staticClass: "pl-3" }, [
-                    _vm._v("Cài đặt tài khoản")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "pl-3 text-dark",
-                      attrs: { href: "/login" }
-                    },
-                    [
-                      _c("i", { staticClass: "halflings-icon off" }),
-                      _vm._v("Đăng xuất")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
+      _c("div", { staticClass: "navbar-side px-2 justify-content-center" }, [
+        _c("h1", [_vm._v("Đăng Tin")])
       ]),
       _vm._v(" "),
       _c(
