@@ -42,6 +42,7 @@ Route::get('deletesinglemessage/{id}', 'MessageController@delete_single_message'
 Route::get('deleteallmessage/{id}', 'MessageController@delete_all_message')->name('user.message.delete.all');
 
 
-
+Route::post('/comment', 'CommentController@store')->name('comment');
+Route::post('motel/comment', 'CommentController@index')->name('motel.comment');
 
 
