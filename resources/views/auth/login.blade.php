@@ -253,10 +253,24 @@
             <img src="/images/bg.svg">
         </div>
         <div class="login-content">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="/login">
                 <img class="mb-4" src="/images/avatar.svg">
                 @csrf
-
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(session('thongbao'))
+                <div class="alert bg-danger">
+                    <button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
+                    <span class="text-semibold">Error!</span>  {{session('thongbao')}}
+                </div>
+            @endif
                 <div class="input-div one">
                     <label for="email">{{ __('E-Mail Address') }}</label>
 

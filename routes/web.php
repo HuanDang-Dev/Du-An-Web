@@ -14,17 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', function () {
+    return view('welcome');
+});
 Route::get('/post', 'HomeController@indexPost');
 Route::get('/admin', 'HomeController@indexAdmin');
 Route::get('/owner', 'HomeController@indexOwner');
 Route::get('/rule', 'HomeController@indexRule');
-Route::get('/viewMotel', function () {
+Route::get('/viewMotel/{slug}/', function () {
     return view('viewMotel');
 });
-
+Route::post('/storemotel', 'MotelController@storeMotel');
+Route::get('/logout', 'HomeController@logout');
+Route::post('/login', 'Controller@login');
 Auth::routes();
 // Route::post('readUpdate', 'MessageController@updateUnread')->name('read');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/chat', 'HomeController@index')->name('chat');
 Route::get('userlist', 'MessageController@user_list')->name('user.list');
 Route::get('usermessage/{id}', 'MessageController@user_message')->name('user.message');
 Route::post('sendnewmessage', 'MessageController@send_message')->name('user.message.send');

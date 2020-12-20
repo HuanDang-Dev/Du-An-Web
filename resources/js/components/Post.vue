@@ -11,37 +11,49 @@
                     <h4><i class="halflings-icon white user"></i><span class="break"></span>Bài đăng</h4>
                 </div>
                 <div class="d-flex flex-column mx-5 my-1">
-                    <div class="d-flex flex-column m-4">
-                        <form action="http://localhost/process_file_upload.php" method="POST" enctype="multipart/form-data">
-                            Chọn file để upload:
-                            <input type="file" name="upload_file_input" id="upload_file_input">
-                                <br>
-                                <input type="submit" value="Upload Image" name="submit">
-                        </form>
+                   <div class="card-body">
+                       <div class="row">
+                          <div class="col-md-6">
+                              <input type="file" v-on:change="onFileChange" class="form-control">
+                          </div>
+                        <img v-bind:src="imagePreview" width="50%" height="50%" v-show="showPreview"/> 
+                       </div>
                     </div>
                     <div class="d-flex flex-column m-4">
                         <label class="" for="">Tiêu đề</label>
-                        <input class="p-2" type="text">
+                        <input class="p-2" type="text" v-model="title">
+                    </div>
+                     <div class="d-flex flex-column m-4">
+                        <label class="" for="">Quận</label>
+                        <select v-model="district_id" class="p-2" aria-placeholder="Chọn Quận">
+                        <option v-for="option in districts" v-bind:value="option.id">
+                        {{ option.name }}
+                        </option>
+                    </select>
                     </div>
                     <div class="d-flex flex-column m-4">
-                        <label class="" for="">Giá tiền</label>
-                        <input class="p-2" type="text">
+                        <label class="" for="">Địa chỉ</label>
+                        <input class="p-2" v-model="address" type="text">
+                    </div>    
+                    <div class="d-flex flex-column m-4">
+                        <label class="" for="">Diện tích (M<sup>2</sup>)</label>
+                        <input class="p-2" type="number" v-model="area">
                     </div>
                     <div class="d-flex flex-column m-4">
-                        <label class="" for="">Diện tích</label>
-                        <input class="p-2" type="text">
+                        <label class="" for="">Điện thoại</label>
+                        <input class="p-2" type="text" v-model="phone">
+                    </div>
+                    <div class="d-flex flex-column m-4">
+                        <label class="" for="">Giá tiền (VND)</label>
+                        <input class="p-2" type="number" v-model="price">
                     </div>
                     <div class="d-flex flex-column m-4">
                         <label class="" for="">Mô tả nhà trọ</label>
-                        <textarea name="" id="" cols="30" rows="10">    Vị trí địa lý:  
-
-        Gần trường đại học / cao đẳng:  
-
-        Điều kiện cơ sở vật chất:
+                        <textarea name="" id="" cols="30" rows="10" v-model="description">
                     </textarea>
                     </div>
                     <div class="d-flex px-4 py-3 mb-2">
-                        <button class="login__btn mx-3 w-25"><a class="btn-register" href="/">Đăng Tin</a></button>
+                        <button class="login__btn mx-3 w-25"><a class="btn-register" @click="post">Đăng Tin</a></button>
                         <button class="login__btn mx-3 w-25"><a class="btn-register" href="/">Hủy</a></button>
                     </div>
                 </div>
@@ -56,13 +68,74 @@ export default {
     name: "post",
     data() {
         return {
-          
+            districts: [],
+            image: '',
+            district_id: 2,
+            title: '',
+            address: 'Ha noi',
+            area: 30,
+            phone: 123,
+            price: 2000000,
+            description: 'nhà đẹp',
+            user_id: 12,
+            imagePreview: null,
+            showPreview: false,
         }
     },
     methods: {
-      
+        onFileChange(event){
+            
+            this.image = event.target.files[0];
+
+            let reader  = new FileReader();
+            reader.addEventListener("load", function () {
+                this.showPreview = true;
+                this.imagePreview = reader.result;
+            }.bind(this), false);
+
+            if( this.image ){
+                if ( /\.(jpe?g|png|gif)$/i.test( this.image.name ) ) {
+                    console.log("here");
+                    reader.readAsDataURL( this.image );
+                }
+            }
+        },
+        post(){
+            const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+ 
+            let formData = new FormData();
+            formData.append('image', this.image);
+            formData.append('title', this.title);
+            formData.append('description', this.description);
+            formData.append('price', this.price);
+            formData.append('area', this.area);
+            formData.append('address', this.address);
+            formData.append('phone', this.phone);
+            formData.append('user_id', this.user_id);
+            formData.append('district_id', this.district_id);
+
+            axios.post('/storemotel', formData, config).then(response => {
+          console.log(response)
+        }).catch(error => {
+          this.errors = error.response.data.comment
+        })
+      },
+        
+    },
+    mounted() {
+        axios.get('/api/getdistrict').then((response) => {
+            this.districts = response.data
+            // console.log(response.data)
+        })
+        // axios.get('/api/getuser').then((response) => {
+        //     // thi = response.data
+        //     console.log(response.data)
+        // })
     }
 }
+
 </script>
 
 <style>

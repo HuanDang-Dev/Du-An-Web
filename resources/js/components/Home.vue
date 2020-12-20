@@ -4,27 +4,34 @@
         <div class="container">
             <div class="row m-0 p-0  bg-white">
             <div class="card-body">
-                <h5 class="card-title text-left">Cho thuê Bất động sản</h5>
+                <div class="d-flex flex-column m-4">
+                        <label class="" for="">Quận</label>
+                        <select v-model="districtId" class="p-2" aria-placeholder="Chọn Quận">
+                        <option v-for="option in districts" v-bind:value="option.id">
+                        {{ option.name }}
+                        </option>
+                    </select>
+                    </div>
                 <div class="row">
-                <div class="item-component col-md-3 text-left" v-for="(owner, i) in owners" :key="i">
-                    <a href="/viewMotel" class=" border-primary" >
+                <div class="item-component col-md-3 text-left" v-for="(post, i) in posts" :key="i">
+                    <a :href="post.src" class=" border-primary" >
                         <div class="item">
                             <div>
-                                <img class="w-100" src="/images/nhatro.jpg" alt="">
+                                <img class="w-100" :src="post.images" alt="">
                             </div>
                             <div class="my-2 ml-2">
-                                <h4 class="m-0">{{owner.title}}</h4>
+                                <h4 class="m-0">{{post.title}}</h4>
                                 <div class="position-relative my-2">
-                                <div class="position-absolute btn-rating">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star text-warning"></i></span></div>
-                                <button class="position-absolute btn-like text-primary"><i class="far fa-thumbs-up text-primary btn-i-like"></i>{{owner.like}}</button>
+                                <div class="position-absolute btn-rating">Rating: <span v-for="item in post.rating" :key="item.id"><i class="fas fa-star text-warning"></i></span></div>
+                                <button class="position-absolute btn-like text-primary"><i class="far fa-thumbs-up text-primary btn-i-like"></i>{{post.like}}</button>
                                 </div>
                                 <br>
                                 <div class="d-flex p-1">
-                                <h6 class="text-danger mr-2 mb-0">{{owner.giatien}}  </h6>
+                                <h6 class="text-danger mr-2 mb-0">{{post.price}}  </h6>
                                 <span> - </span>
-                                <h6 class="ml-2 mb-0">  {{owner.dientich}}m<sup>2</sup></h6>
+                                <h6 class="ml-2 mb-0">  {{post.area}}m<sup>2</sup></h6>
                                 </div>
-                                <small class="text-muted"><i class="fas fa-angle-right pr-1"></i>{{owner.csvc}}</small>
+                                <small class="text-muted"><i class="fas fa-angle-right pr-1"></i>{{post.description}}</small>
                             </div>
                         </div>
                     </a>
@@ -43,58 +50,68 @@ export default {
   name: "welcome",
   data() {
     return {
-      owners: [
-        {
-          images: [
-            "/images/nhatro.jpg",
-          ],
-          title: "Hoàng Anh Dương",
-          like: 40,
-          rating: 4,
-          giatien: "10Triệu",
-          dientich: "50",
-          csvc: "Có máy nóng lạnh, điều hòa"
-        },
-        {
-          images: [
-            "/images/nhatro.jpg",
-          ],
-          title: "Hoàng Anh Dương",
-          like: 40,
-          rating: 4,
-          giatien: "10Triệu",
-          dientich: "50",
-          csvc: "Có máy nóng lạnh, điều hòa"
-        },
-        {
-          images: [
-            "/images/nhatro.jpg",
-          ],
-          title: "Hoàng Anh Dương",
-          like: 40,
-          rating: 4,
-          giatien: "10Triệu",
-          dientich: "50",
-          csvc: "Có máy nóng lạnh, điều hòa"
-        },
-        {
-          images: [
-            "/images/nhatro.jpg",
-          ],
-          title: "Hoàng Anh Dương",
-          like: 40,
-          rating: 4,
-          giatien: "10Triệu",
-          dientich: "50",
-          csvc: "Có máy nóng lạnh, điều hòa"
-        }
-      ]
+      districtId: 11,
+      posts: [],
+      districts: [],
+    //   owners: [
+    //     {
+    //       images: [
+    //         "/images/nhatro.jpg",
+    //       ],
+    //       title: "Hoàng Anh Dương",
+    //       like: 40,
+    //       rating: 4,
+    //       giatien: "10Triệu",
+    //       dientich: "50",
+    //       csvc: "Có máy nóng lạnh, điều hòa"
+    //     },
+    //     {
+    //       images: [
+    //         "/images/nhatro.jpg",
+    //       ],
+    //       title: "Hoàng Anh Dương",
+    //       like: 40,
+    //       rating: 4,
+    //       giatien: "10Triệu",
+    //       dientich: "50",
+    //       csvc: "Có máy nóng lạnh, điều hòa"
+    //     },
+    //     {
+    //       images: [
+    //         "/images/nhatro.jpg",
+    //       ],
+    //       title: "Hoàng Anh Dương",
+    //       like: 40,
+    //       rating: 4,
+    //       giatien: "10Triệu",
+    //       dientich: "50",
+    //       csvc: "Có máy nóng lạnh, điều hòa"
+    //     },
+    //     {
+    //       images: [
+    //         "/images/nhatro.jpg",
+    //       ],
+    //       title: "Hoàng Anh Dương",
+    //       like: 40,
+    //       rating: 4,
+    //       giatien: "10Triệu",
+    //       dientich: "50",
+    //       csvc: "Có máy nóng lạnh, điều hòa"
+    //     }
+    //   ]
     }
   },
 mounted() {
-  axios.get('/api/getmotel').then((response) => {
-    console.log(response.data[0]['id'])
-    console.log(this.owners)
+  axios.post('/api/getmotel', {
+          districtId: this.districtId
+        }).then((response) => {
+    console.log(response.data[0])
+    // console.log(this.owners)
+    this.posts = response.data;
+  })
+  axios.get('/api/getdistrict').then((response) => {
+            this.districts = response.data
+            // console.log(response.data)
   })
 }
 };

@@ -236,10 +236,10 @@
                                 <a href="/" class="btn-icon"><i class="fas fa-home pr-2"></i>Home </a>
                             </div>
                             <div class="px-3">
-                                <a href="/owner" class="btn-icon"><i class="far fa-user pr-2"></i>Tôi bán </a>
+                                <a href="/owner" class="btn-icon"><i class="far fa-user pr-2"></i>Quản lí </a>
                             </div>
                             <div class="px-3">
-                                <a href="" class="btn-icon"><i class="far fa-comments pr-2"></i>Chat </a>
+                                <a href="/chat" class="btn-icon"><i class="far fa-comments pr-2"></i>Chat </a>
                             </div>
                             <div class="px-3">
                                 <a href="/post" class="btn-icon"><i class="far fa-edit pr-2"></i>Đăng tin</a>
@@ -261,10 +261,17 @@
                                             <div class="top-right links d-flex">
                                                 @auth
                                                     <div class="profile">
-                                                        <div class="wrap">
+                                                        <button class="wrap btn-admin dropdown-toggle ml-3 p-2 text-font" data-toggle="dropdown" href="#">
                                                             <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" alt="" class="online">
-                                                            Owner
-                                                        </div>
+                                                                Owner
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li class="dropdown-menu-title">
+                                                                <span class="pl-3">Cài đặt tài khoản</span>
+                                                            </li>
+                                                            <li><a class="pl-3 text-dark" href="/logout"><i class="halflings-icon off"></i>Đăng xuất</a></li>
+                                                        </ul>
                                                     </div>
                                                 @else
                                                     <a href="{{ route('login') }}"><h2 class="px-2">Login</h2></a>

@@ -7,25 +7,27 @@
             <div class="row">
               <div class="position-relative mx-5 w-100">
                   <div v-for="i in [currentIndex]" :key="i">
-                    <img :src="currentImg" />
+                    <img :src="motel.images" />
                   </div>
-                <a class="prev" @click="prev" href="#">&#10094; </a>
-                <a class="next" @click="next" href="#">&#10095; </a>
+                <a class="prev" @click="prev" >&#10094; </a>
+                <a class="next" @click="next">&#10095; </a>
               </div>
             </div>
-            <h3 class="card-title text-left ml-5 mt-4">{{title}}</h3>
+            <h3 class="card-title text-left ml-5 mt-4">{{motel.title}}</h3>
             <div class=" text-left mx-5 ">
               <div class="d-flex position-relative">
-                <h5 class="text-danger mr-2">{{giatien}}  </h5>
+                <h5 class="text-danger mr-2">{{motel.price}}  VND </h5>
                 <span> - </span>
-                <h5 class="ml-2">  {{dientich}}m<sup>2</sup></h5>
-                <div class="position-absolute btn-rating">Rating: <span v-for="item in rating" :key="item.id"><i class="fas fa-star text-warning"></i></span></div>
-                <button class="position-absolute btn-like text-primary" @click="countLike()"><i class="far fa-thumbs-up text-primary btn-i-like"></i>{{like}}</button>
+                <h5 class="ml-2">  {{motel.area}} M<sup>2</sup></h5>
+                <div class="position-absolute btn-rating">Rating: <span v-for="item in motel.rating" :key="item.id"><i class="fas fa-star text-warning"></i></span></div>
+                <button class="position-absolute btn-like text-primary" @click="countLike()"><i class="far fa-thumbs-up text-primary btn-i-like"></i>{{motel.like}}</button>
               </div>
               <div>
-                <p>Vị trí địa lý: {{des.vitri}}</p>
-                <p>Nhà trọ gần trường đại học: {{des.ganTruongDH}}</p>
-                <p>Điều kiện cơ sở vật chất: {{des.csvc}}</p>
+                <p>Địa chỉ: {{motel.address}}</p>
+                <p>
+                  Mô tả: <br>
+                  {{motel.description}}
+                </p>
               </div><br>
               <div>
                 <comment-wrapper></comment-wrapper>
@@ -47,31 +49,22 @@ export default {
   name: "viewMotel",
   data() {
     return {
-      images: [
-        "/images/nhatro1.jpg",
-        "/images/nhatro2.jpg",
-        "/images/nhatro3.jpg",
-      ],
-      timer: null,
-      currentIndex: 0,
-      title: "Hoàng Anh Dương",
-      name: "Tuấn Hùng",
-      date: "01/07/2000",
-      status: true,
-      like: 40,
-      rating: 4,
-      giatien: "10Triệu",
-      dientich: "50",
-      des: {
-        vitri: "Cầu giấy",
-        ganTruongDH: "Trường Đại học Công nghệ",
-        csvc: "Có máy nóng lạnh, điều hòa"
-      }
+      slug: '',
+      motel: {},
     }
   },
 
   mounted: function() {
     this.startSlide();
+    let url = window.location.href;
+    this.slug = url.substring(url.search('/viewMotel/') + 11)
+    axios.post('/api/getviewmotel', {
+          slug: this.slug
+        }).then((response) => {
+    console.log(response.data[0])
+    // console.log(this.owners)
+    this.motel = response.data[0];
+  })
   },
 
   methods: {
@@ -86,7 +79,7 @@ export default {
       this.currentIndex -= 1;
     },
     countLike: function() {
-      this.like += 1;
+      this.motel.like += 1;
     }
   },
 

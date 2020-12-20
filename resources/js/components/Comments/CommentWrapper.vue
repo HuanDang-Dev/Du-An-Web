@@ -11,7 +11,7 @@
       </div>
     </div>
     <div v-else>
-      <div>các bình luận gần đây:</div>
+      <div>Các bình luận gần đây:</div>
     </div>
     <div v-for="comment in comments" v-bind:key="comment.id">
     <comment :comment="comment"></comment>

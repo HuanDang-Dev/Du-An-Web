@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -46,6 +48,15 @@ class HomeController extends Controller
     // }
     public function indexOwner()
     {
-        return view('owner');
+        $user = User::find(Auth::id());
+        if($user->role == 0){
+            return view('owner');
+        }
+        return redirect('/admin');
+    }
+
+    public function logout(){
+        Auth::logout();
+      return redirect('home');
     }
 }

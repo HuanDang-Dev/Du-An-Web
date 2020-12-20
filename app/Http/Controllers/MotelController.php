@@ -4,30 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Motel;
 use App\District;
+use App\Events\Comment\CommentCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Intervention\Image\Facades\Image;
 class MotelController extends Controller
 {
+    
     public function storeMotel(Request $request){
-        if($request->get('image'))
-       {
-          $image = $request->get('image');
-          $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-          \Image::make($request->get('image'))->save(public_path('images/').$name);
-        }
-        // $motel = new Motel();
-        // $motel->tilte = $request->get('title');
-        // $motel->description = $request->get('description');
-        // $motel->price = (int)$request->get('price');
-        // $motel->area = (int)$request->get('area');
-        // $motel->address = $request->get('address');
-        // $motel->phone = (int)$request->get('phone');
-        // $motel->images = "hell";
-        // $motel->user_id = $request->get('user_id');
-        // $motel->district_id = (int)$request->get('district_id');
-        // $motel->save();
-        return response()->json(['success' => $name], 200);
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('images'), $imageName);
+        $motel = new Motel();
+        $motel->title = $request->title;
+        $motel->description = $request->description;
+        $motel->price = $request->price;
+        $motel->area = $request->area;
+        $motel->address = $request->address;
+        $motel->phone = $request->phone;
+        $motel->images = "/images/" . $imageName;
+        $motel->user_id = auth()->user()->id;
+        $motel->district_id = $request->district_id;
+        $motel->save();
+        return response($request, 200);
     }
 
     public function deleteMotel(Request $request){
@@ -37,16 +36,31 @@ class MotelController extends Controller
     }
 
     public function getMotel(Request $request){
-        $district = $request->get('district');
+        $district = $request->districtId;
         $listMotel = DB::table('motels')
-                    // ->where('district_id', $)
-                    // ->orderByRaw('created_at DESC')
+                    ->where('district_id', $district)
+                    ->orderByRaw('created_at DESC')
                     ->get();
-        return $listMotel;   
+        foreach($listMotel as $key => $item){
+            $item->src = '/viewMotel/' . $item->slug;
+        }
+        return $listMotel;
     } 
     
     public function getDistrict(){
         $districts = District::all();
         return $districts;
     }
+
+    public function getViewMotel(Request $request){
+        $slug = $request->slug;
+        $listMotel = DB::table('motels')
+                    ->where('slug', $slug)
+                    // ->orderByRaw('created_at DESC')
+                    ->get();
+        foreach($listMotel as $key => $item){
+            $item->src = '/viewMotel/' . $item->slug;
+        }
+        return $listMotel;
+    } 
 }

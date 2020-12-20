@@ -9,6 +9,7 @@ class Motel extends Model
 {
     use Sluggable;
     protected $table = "motels";
+    protected $fillable = ['title'];
 
     public function user(){
     	return $this->belongsTo('App\User','user_id','id');
