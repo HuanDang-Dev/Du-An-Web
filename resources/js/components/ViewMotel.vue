@@ -26,6 +26,9 @@
                 <p>Vị trí địa lý: {{des.vitri}}</p>
                 <p>Nhà trọ gần trường đại học: {{des.ganTruongDH}}</p>
                 <p>Điều kiện cơ sở vật chất: {{des.csvc}}</p>
+              </div><br>
+              <div>
+                <comment-wrapper></comment-wrapper>
               </div>
             </div>
           </div>
@@ -37,8 +40,10 @@
 </template>
 
 <script>
-
+import CommentWrapper from './Comments/CommentWrapper';
 export default {
+  components: { CommentWrapper },
+  
   name: "viewMotel",
   data() {
     return {

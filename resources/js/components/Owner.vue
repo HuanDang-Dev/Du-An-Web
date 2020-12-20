@@ -1,24 +1,7 @@
 <template>
   <div class="admin">
-    <div class="navbar-side px-2">
-        <h2 class="pl-3">Chủ cho thuê nhà trọ</h2>
-
-        <div class="nav-no-collapse header-nav">
-            <ul class="nav pull-right">
-                <li class="dropdown p-2">
-                    <button class="btn-admin dropdown-toggle ml-3 p-2 text-font" data-toggle="dropdown" href="#">
-                        Huan Dang
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-menu-title">
-                            <span class="pl-3">Cài đặt tài khoản</span>
-                        </li>
-                        <li><a class="pl-3 text-dark" href="/login"><i class="halflings-icon off"></i>Đăng xuất</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <div class="navbar-side px-2 justify-content-center">
+        <h1>Chủ cho thuê nhà trọ</h1>
     </div>
     <div class="container-fluid-full px-3 pt-3">
         <div class="row-fluid">
@@ -46,13 +29,13 @@
                                         <td class="center">{{owner.name}}</td>
                                         <td class="center">
                                             <div class=" d-flex flex-wrap w-auto" v-if="owner.status">
-                                                <div class="label label-success m-1">Like: {{owner.like}}</div>
-                                                <div class="label label-success m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
+                                                <div class="label d-flex align-items-center label-success m-1">Like: <h2 class="m-0 d-flex align-items-center">{{owner.like}}</h2></div>
+                                                <div class="label d-flex align-items-center label-success m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
                                             </div>
                                             <div class=" d-flex flex-wrap w-auto" v-else>
-                                                <div class="label label-important  m-1">Like: {{owner.like}}</div>
-                                                <div class="label label-important m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
-                                                <div class="label label-important m-1">Đã thuê</div>
+                                                <div class="label d-flex align-items-center label-important  m-1">Like:  <h2 class="m-0 d-flex align-items-center">{{owner.like}}</h2></div>
+                                                <div class="label d-flex align-items-center label-important m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
+                                                <div class="label d-flex align-items-center label-important m-1">Đã thuê</div>
                                             </div>
                                         </td>
                                         <td class="center">

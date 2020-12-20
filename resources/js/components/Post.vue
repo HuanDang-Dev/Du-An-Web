@@ -1,24 +1,7 @@
 <template>
     <div class="admin">
-        <div class="navbar-side px-2">
-            <h2 class="pl-3">Đăng tin</h2>
-
-            <div class="nav-no-collapse header-nav">
-                <ul class="nav pull-right">
-                    <li class="dropdown p-2">
-                        <button class="btn-admin dropdown-toggle ml-3 p-2 text-font" data-toggle="dropdown" href="#">
-                            Huan Dang
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu-title">
-                                <span class="pl-3">Cài đặt tài khoản</span>
-                            </li>
-                            <li><a class="pl-3 text-dark" href="/login"><i class="halflings-icon off"></i>Đăng xuất</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        <div class="navbar-side px-2 justify-content-center">
+            <h1>Đăng Tin</h1>
         </div>
         
         <div class="container-fluid-full mx-5 my-3 align-center">

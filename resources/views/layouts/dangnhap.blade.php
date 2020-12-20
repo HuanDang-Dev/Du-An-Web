@@ -307,15 +307,15 @@
                         <div class="col-md-6 col-sm-12 px-5">
                             <h5>Liên hệ</h5>
                             <div class="text-left list-nostyle d-flex flex-row">
-                                <div><a href="#"><img  class="w-50" src="./images/facebook.png" alt=""></a></div>    
-                                <div><a href="#"><img class="w-50" src="./images/google.png" alt=""></a></div>
-                                <div><a href="#"><img class="w-50" src="./images/skype.png" alt=""></a></div>   
+                                <div><a href="#"><img  class="w-50" src="/images/facebook.png" alt=""></a></div>    
+                                <div><a href="#"><img class="w-50" src="/images/google.png" alt=""></a></div>
+                                <div><a href="#"><img class="w-50" src="/images/skype.png" alt=""></a></div>   
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 px-5">
                             <h5>Chứng nhận</h5>
                             <div class="text-left d-flex flex-row py-2">
-                                <div class="mt-1 ml-1"><img  class="w-100" src="./images/cerfiticate.png" alt=""></div>
+                                <div class="mt-1 ml-1"><img  class="w-100" src="/images/cerfiticate.png" alt=""></div>
                             </div>
                         </div>
                     </div>
