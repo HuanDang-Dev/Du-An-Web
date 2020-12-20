@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/storemotel', 'MotelController@storeMotel');
+Route::get('/getmotel', 'MotelController@getMotel');
+Route::get('getdistrict', 'MotelController@getDistrict');

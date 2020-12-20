@@ -90,7 +90,13 @@ export default {
         }
       ]
     }
-  }
+  },
+mounted() {
+  axios.get('/api/getmotel').then((response) => {
+    console.log(response.data[0]['id'])
+    console.log(this.owners)
+  })
+}
 };
 </script>
 <style scoped>

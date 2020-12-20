@@ -14,19 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/post', function () {
-    return view('post');
-});
-
-Route::get('/admin', function () {
-    return view('admin');
-});
-Route::get('/owner', function () {
-    return view('owner');
-});
-Route::get('/rule', function () {
-    return view('rule');
-});
+Route::get('/post', 'HomeController@indexPost');
+Route::get('/admin', 'HomeController@indexAdmin');
+Route::get('/owner', 'HomeController@indexOwner');
+Route::get('/rule', 'HomeController@indexRule');
 Route::get('/viewMotel', function () {
     return view('viewMotel');
 });
