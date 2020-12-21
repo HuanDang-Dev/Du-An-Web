@@ -3113,6 +3113,88 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Search.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Search",
+  data: function data() {
+    return {
+      key: this.$route.params.search,
+      districtId: 11,
+      posts: [],
+      districts: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/index').then(function (response) {
+      _this.truyenNgonTinh = response.data['truyenngontinh'];
+      _this.truyenTienHiep = response.data['truyentienhiep'];
+      _this.truyenTeen = response.data['truyenteen'];
+    });
+    axios.get('/api/search/?search=' + this.key).then(function (response) {
+      _this.search = response.data['search'];
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewMotel.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewMotel.vue?vue&type=script&lang=js& ***!
@@ -7672,7 +7754,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#app {\n    background-color: initial;\n    text-align: left;\n    font-size: 16px;\n}\n.navbar-side {\n    display: flex;\n    position: relative;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: space-between;\n    background-color: #e3e3e3;\n    padding: .5rem 1rem;\n}\n.nav.pull-right {\n    float: right;\n    margin-right: 0;\n}\n.box {\n    border: 2px solid #578EBE;\n    background: #fff !important;\n    margin-bottom: 28px;\n}\n.box-header {\n    line-height: 16px;\n    padding: 10px;\n    background: #578EBE;\n    box-shadow: none;\n    overflow: hidden;\n}\n.dropdown-menu {\n    border-top: 5px solid transparent;\n    border-radius: 2px !important;\n    position: absolute;\n    top: 100%;\n    left: -10px !important;\n    z-index: 1000;\n    display: none;\n    float: left;\n    min-width: 160px;\n    max-width: 300px;\n    padding: 0px 0;\n    margin: 0px 0 0 0;\n    list-style: none;\n    text-shadow: none;\n    -webkit-border-radius: 2px;\n    -moz-border-radius: 2px;\n    box-shadow: none;\n}\n.dropdown-menu:before {\n    position: absolute;\n    top: -7px;\n    left: 9px;\n    display: inline-block;\n    border-right: 7px solid transparent;\n    border-bottom: 7px solid #ccc;\n    border-left: 7px solid transparent;\n    border-bottom-color: #313131;\n    content: '';\n    right: 15px;\n    left: auto;\n}\n.dropdown-menu-title {\n    background: rgb(49, 49, 49);\n    color: #fff;\n    padding: 8px 0px;\n    position: relative;\n}\n.label, .badge {\n    text-shadow: none;\n    font-family: 'Open Sans', sans-serif;\n    font-weight: 600;\n    font-size: 12px;\n    padding: 3px 6px;\n    width: auto;\n}\n.label-success{\n    background: #43B5AD !important;\n    border-color: #43B5AD !important;\n    color: #fff;\n}\n.label-important{\n    background: #E25A59 !important;\n    border-color: #E25A59 !important;\n    color: #fff;\n}\n.btn-admin {\n    border: none;\n    background-color: initial;\n    font-size: 16px;\n}\n.btn-admin:not(:disabled):not(.disabled) {\n    cursor: pointer;\n}\n.btn-admin.focus, .btn-admin:focus {\n    outline: 0;\n}\n.btn-admin:hover {\n    color: #212529;\n    text-decoration: none;\n}\n.text-font {\n    font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n#app {\r\n    background-color: initial;\r\n    text-align: left;\r\n    font-size: 16px;\n}\n.navbar-side {\r\n    display: flex;\r\n    position: relative;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    background-color: #e3e3e3;\r\n    padding: .5rem 1rem;\n}\n.nav.pull-right {\r\n    float: right;\r\n    margin-right: 0;\n}\n.box {\r\n    border: 2px solid #578EBE;\r\n    background: #fff !important;\r\n    margin-bottom: 28px;\n}\n.box-header {\r\n    line-height: 16px;\r\n    padding: 10px;\r\n    background: #578EBE;\r\n    box-shadow: none;\r\n    overflow: hidden;\n}\n.dropdown-menu {\r\n    border-top: 5px solid transparent;\r\n    border-radius: 2px !important;\r\n    position: absolute;\r\n    top: 100%;\r\n    left: -10px !important;\r\n    z-index: 1000;\r\n    display: none;\r\n    float: left;\r\n    min-width: 160px;\r\n    max-width: 300px;\r\n    padding: 0px 0;\r\n    margin: 0px 0 0 0;\r\n    list-style: none;\r\n    text-shadow: none;\r\n    -webkit-border-radius: 2px;\r\n    -moz-border-radius: 2px;\r\n    box-shadow: none;\n}\n.dropdown-menu:before {\r\n    position: absolute;\r\n    top: -7px;\r\n    left: 9px;\r\n    display: inline-block;\r\n    border-right: 7px solid transparent;\r\n    border-bottom: 7px solid #ccc;\r\n    border-left: 7px solid transparent;\r\n    border-bottom-color: #313131;\r\n    content: '';\r\n    right: 15px;\r\n    left: auto;\n}\n.dropdown-menu-title {\r\n    background: rgb(49, 49, 49);\r\n    color: #fff;\r\n    padding: 8px 0px;\r\n    position: relative;\n}\n.label, .badge {\r\n    text-shadow: none;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 600;\r\n    font-size: 12px;\r\n    padding: 3px 6px;\r\n    width: auto;\n}\n.label-success{\r\n    background: #43B5AD !important;\r\n    border-color: #43B5AD !important;\r\n    color: #fff;\n}\n.label-important{\r\n    background: #E25A59 !important;\r\n    border-color: #E25A59 !important;\r\n    color: #fff;\n}\n.btn-admin {\r\n    border: none;\r\n    background-color: initial;\r\n    font-size: 16px;\n}\n.btn-admin:not(:disabled):not(.disabled) {\r\n    cursor: pointer;\n}\n.btn-admin.focus, .btn-admin:focus {\r\n    outline: 0;\n}\n.btn-admin:hover {\r\n    color: #212529;\r\n    text-decoration: none;\n}\n.text-font {\r\n    font-size: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -7710,7 +7792,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#app {\n    background-color: initial;\n    text-align: left;\n    font-size: 16px;\n}\n.navbar-side {\n    display: flex;\n    position: relative;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: space-between;\n    background-color: #e3e3e3;\n    padding: .5rem 1rem;\n}\n.nav.pull-right {\n    float: right;\n    margin-right: 0;\n}\n.box {\n    border: 2px solid #578EBE;\n    background: #fff !important;\n    margin-bottom: 28px;\n}\n.box-header {\n    line-height: 16px;\n    padding: 10px;\n    background: #578EBE;\n    box-shadow: none;\n    overflow: hidden;\n}\n.dropdown-menu {\n    border-top: 5px solid transparent;\n    border-radius: 2px !important;\n    position: absolute;\n    top: 100%;\n    left: -10px !important;\n    z-index: 1000;\n    display: none;\n    float: left;\n    min-width: 160px;\n    max-width: 300px;\n    padding: 0px 0;\n    margin: 0px 0 0 0;\n    list-style: none;\n    text-shadow: none;\n    -webkit-border-radius: 2px;\n    -moz-border-radius: 2px;\n    box-shadow: none;\n}\n.dropdown-menu:before {\n    position: absolute;\n    top: -7px;\n    left: 9px;\n    display: inline-block;\n    border-right: 7px solid transparent;\n    border-bottom: 7px solid #ccc;\n    border-left: 7px solid transparent;\n    border-bottom-color: #313131;\n    content: '';\n    right: 15px;\n    left: auto;\n}\n.dropdown-menu-title {\n    background: rgb(49, 49, 49);\n    color: #fff;\n    padding: 8px 0px;\n    position: relative;\n}\n.label, .badge {\n    text-shadow: none;\n    font-family: 'Open Sans', sans-serif;\n    font-weight: 600;\n    font-size: 12px;\n    padding: 3px 6px;\n    width: auto;\n}\n.label-success{\n    background: #43B5AD !important;\n    border-color: #43B5AD !important;\n    color: #fff;\n}\n.label-important{\n    background: #E25A59 !important;\n    border-color: #E25A59 !important;\n    color: #fff;\n}\n.btn-admin {\n    border: none;\n    background-color: initial;\n    font-size: 16px;\n}\n.btn-admin:not(:disabled):not(.disabled) {\n    cursor: pointer;\n}\n.btn-admin.focus, .btn-admin:focus {\n    outline: 0;\n}\n.btn-admin:hover {\n    color: #212529;\n    text-decoration: none;\n}\n.text-font {\n    font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n#app {\r\n    background-color: initial;\r\n    text-align: left;\r\n    font-size: 16px;\n}\n.navbar-side {\r\n    display: flex;\r\n    position: relative;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    background-color: #e3e3e3;\r\n    padding: .5rem 1rem;\n}\n.nav.pull-right {\r\n    float: right;\r\n    margin-right: 0;\n}\n.box {\r\n    border: 2px solid #578EBE;\r\n    background: #fff !important;\r\n    margin-bottom: 28px;\n}\n.box-header {\r\n    line-height: 16px;\r\n    padding: 10px;\r\n    background: #578EBE;\r\n    box-shadow: none;\r\n    overflow: hidden;\n}\n.dropdown-menu {\r\n    border-top: 5px solid transparent;\r\n    border-radius: 2px !important;\r\n    position: absolute;\r\n    top: 100%;\r\n    left: -10px !important;\r\n    z-index: 1000;\r\n    display: none;\r\n    float: left;\r\n    min-width: 160px;\r\n    max-width: 300px;\r\n    padding: 0px 0;\r\n    margin: 0px 0 0 0;\r\n    list-style: none;\r\n    text-shadow: none;\r\n    -webkit-border-radius: 2px;\r\n    -moz-border-radius: 2px;\r\n    box-shadow: none;\n}\n.dropdown-menu:before {\r\n    position: absolute;\r\n    top: -7px;\r\n    left: 9px;\r\n    display: inline-block;\r\n    border-right: 7px solid transparent;\r\n    border-bottom: 7px solid #ccc;\r\n    border-left: 7px solid transparent;\r\n    border-bottom-color: #313131;\r\n    content: '';\r\n    right: 15px;\r\n    left: auto;\n}\n.dropdown-menu-title {\r\n    background: rgb(49, 49, 49);\r\n    color: #fff;\r\n    padding: 8px 0px;\r\n    position: relative;\n}\n.label, .badge {\r\n    text-shadow: none;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 600;\r\n    font-size: 12px;\r\n    padding: 3px 6px;\r\n    width: auto;\n}\n.label-success{\r\n    background: #43B5AD !important;\r\n    border-color: #43B5AD !important;\r\n    color: #fff;\n}\n.label-important{\r\n    background: #E25A59 !important;\r\n    border-color: #E25A59 !important;\r\n    color: #fff;\n}\n.btn-admin {\r\n    border: none;\r\n    background-color: initial;\r\n    font-size: 16px;\n}\n.btn-admin:not(:disabled):not(.disabled) {\r\n    cursor: pointer;\n}\n.btn-admin.focus, .btn-admin:focus {\r\n    outline: 0;\n}\n.btn-admin:hover {\r\n    color: #212529;\r\n    text-decoration: none;\n}\n.text-font {\r\n    font-size: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -7729,7 +7811,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#app {\n    background-color: initial;\n    text-align: left;\n    font-size: 18px;\n}\n.navbar-side {\n    display: flex;\n    position: relative;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: space-between;\n    background-color: #e3e3e3;\n    padding: .5rem 1rem;\n}\n.nav.pull-right {\n    float: right;\n    margin-right: 0;\n}\n.box {\n    border: 2px solid #578EBE;\n    background: #fff !important;\n    margin-bottom: 28px;\n}\n.box-header {\n    line-height: 16px;\n    padding: 10px;\n    background: #578EBE;\n    box-shadow: none;\n    overflow: hidden;\n}\n.dropdown-menu {\n    border-top: 5px solid transparent;\n    border-radius: 2px !important;\n    position: absolute;\n    top: 100%;\n    left: -10px !important;\n    z-index: 1000;\n    display: none;\n    float: left;\n    min-width: 160px;\n    max-width: 300px;\n    padding: 0px 0;\n    margin: 0px 0 0 0;\n    list-style: none;\n    text-shadow: none;\n    -webkit-border-radius: 2px;\n    -moz-border-radius: 2px;\n    box-shadow: none;\n}\n.dropdown-menu:before {\n    position: absolute;\n    top: -7px;\n    left: 9px;\n    display: inline-block;\n    border-right: 7px solid transparent;\n    border-bottom: 7px solid #ccc;\n    border-left: 7px solid transparent;\n    border-bottom-color: #313131;\n    content: '';\n    right: 15px;\n    left: auto;\n}\n.dropdown-menu-title {\n    background: rgb(49, 49, 49);\n    color: #fff;\n    padding: 8px 0px;\n    position: relative;\n}\n.label, .badge {\n    text-shadow: none;\n    font-family: 'Open Sans', sans-serif;\n    font-weight: 600;\n    font-size: 12px;\n    padding: 3px 6px;\n    width: auto;\n}\n.label-success{\n    background: #43B5AD !important;\n    border-color: #43B5AD !important;\n    color: #fff;\n}\n.label-important{\n    background: #E25A59 !important;\n    border-color: #E25A59 !important;\n    color: #fff;\n}\n.btn-admin {\n    border: none;\n    background-color: initial;\n    font-size: 16px;\n}\n.btn-admin:not(:disabled):not(.disabled) {\n    cursor: pointer;\n}\n.btn-admin.focus, .btn-admin:focus {\n    outline: 0;\n}\n.btn-admin:hover {\n    color: #212529;\n    text-decoration: none;\n}\n.login__btn{\n    background: linear-gradient(to right, #6190e9, #4236f0);\n    box-shadow: 0px 11px 34px -10px #6190e9;\n     padding:1rem;\n     border:none;\n     outline:none;\n     border-radius: 100px;\n     color:white;\n     font-weight: bold;\n     display:flex;\n     justify-content: center;\n     align-items: center;\n     cursor: pointer;\n}\n.btn-register {\n      color: inherit;\n      text-decoration: none;\n}\nbutton:focus {\n      outline: none;\n}\na:hover {\n      color: inherit !important;\n      text-decoration: none !important;\n}\nlabel {\n        font-size: 20px;\n}\ninput, textarea {\n        border: 0.5px solid #cccccc;\n        border-radius: 10px;\n}\n.text-font {\n    font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n#app {\r\n    background-color: initial;\r\n    text-align: left;\r\n    font-size: 18px;\n}\n.navbar-side {\r\n    display: flex;\r\n    position: relative;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    background-color: #e3e3e3;\r\n    padding: .5rem 1rem;\n}\n.nav.pull-right {\r\n    float: right;\r\n    margin-right: 0;\n}\n.box {\r\n    border: 2px solid #578EBE;\r\n    background: #fff !important;\r\n    margin-bottom: 28px;\n}\n.box-header {\r\n    line-height: 16px;\r\n    padding: 10px;\r\n    background: #578EBE;\r\n    box-shadow: none;\r\n    overflow: hidden;\n}\n.dropdown-menu {\r\n    border-top: 5px solid transparent;\r\n    border-radius: 2px !important;\r\n    position: absolute;\r\n    top: 100%;\r\n    left: -10px !important;\r\n    z-index: 1000;\r\n    display: none;\r\n    float: left;\r\n    min-width: 160px;\r\n    max-width: 300px;\r\n    padding: 0px 0;\r\n    margin: 0px 0 0 0;\r\n    list-style: none;\r\n    text-shadow: none;\r\n    -webkit-border-radius: 2px;\r\n    -moz-border-radius: 2px;\r\n    box-shadow: none;\n}\n.dropdown-menu:before {\r\n    position: absolute;\r\n    top: -7px;\r\n    left: 9px;\r\n    display: inline-block;\r\n    border-right: 7px solid transparent;\r\n    border-bottom: 7px solid #ccc;\r\n    border-left: 7px solid transparent;\r\n    border-bottom-color: #313131;\r\n    content: '';\r\n    right: 15px;\r\n    left: auto;\n}\n.dropdown-menu-title {\r\n    background: rgb(49, 49, 49);\r\n    color: #fff;\r\n    padding: 8px 0px;\r\n    position: relative;\n}\n.label, .badge {\r\n    text-shadow: none;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 600;\r\n    font-size: 12px;\r\n    padding: 3px 6px;\r\n    width: auto;\n}\n.label-success{\r\n    background: #43B5AD !important;\r\n    border-color: #43B5AD !important;\r\n    color: #fff;\n}\n.label-important{\r\n    background: #E25A59 !important;\r\n    border-color: #E25A59 !important;\r\n    color: #fff;\n}\n.btn-admin {\r\n    border: none;\r\n    background-color: initial;\r\n    font-size: 16px;\n}\n.btn-admin:not(:disabled):not(.disabled) {\r\n    cursor: pointer;\n}\n.btn-admin.focus, .btn-admin:focus {\r\n    outline: 0;\n}\n.btn-admin:hover {\r\n    color: #212529;\r\n    text-decoration: none;\n}\n.login__btn{\r\n    background: linear-gradient(to right, #6190e9, #4236f0);\r\n    box-shadow: 0px 11px 34px -10px #6190e9;\r\n     padding:1rem;\r\n     border:none;\r\n     outline:none;\r\n     border-radius: 100px;\r\n     color:white;\r\n     font-weight: bold;\r\n     display:flex;\r\n     justify-content: center;\r\n     align-items: center;\r\n     cursor: pointer;\n}\n.btn-register {\r\n      color: inherit;\r\n      text-decoration: none;\n}\nbutton:focus {\r\n      outline: none;\n}\na:hover {\r\n      color: inherit !important;\r\n      text-decoration: none !important;\n}\nlabel {\r\n        font-size: 20px;\n}\ninput, textarea {\r\n        border: 0.5px solid #cccccc;\r\n        border-radius: 10px;\n}\n.text-font {\r\n    font-size: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -7748,7 +7830,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#app[data-v-5dbda032] {\n  background-color: #e3e3e3;\n}\nul li[data-v-5dbda032] {\n  list-style: none;\n}\n", ""]);
+exports.push([module.i, "\n#app[data-v-5dbda032] {\r\n  background-color: #e3e3e3;\n}\nul li[data-v-5dbda032] {\r\n  list-style: none;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nul > li[data-v-5026ffd3] {\r\n  list-style: none;\n}\n.border-item[data-v-5026ffd3] {\r\n  border-top: 2px dashed #cfcfcf;\n}\na[data-v-5026ffd3] {\r\n  color: #2c3e50;\r\n  text-decoration: none;\n}\n.image-item[data-v-5026ffd3] {\r\n  display: block;\r\n  width: 35px;\r\n  flex-shrink: 0;\n}\n.image-item img[data-v-5026ffd3] {\r\n  max-width: 100%;\r\n  vertical-align: middle;\n}\nh1[data-v-5026ffd3], h5[data-v-5026ffd3], select[data-v-5026ffd3] {\r\n  font-family: 'Noto Serif', serif;\n}\nh4[data-v-5026ffd3] {\r\n  font-size: 26px;\n}\r\n", ""]);
 
 // exports
 
@@ -7767,7 +7868,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nul li[data-v-3f4ea88e] {\n  list-style: none;\n}\nimg[data-v-3f4ea88e] {\n  height:600px;\n  width:100%\n}\n.prev[data-v-3f4ea88e], .next[data-v-3f4ea88e] {\n  cursor: pointer;\n  position: absolute;\n  top: 40%;\n  width: auto;\n  padding: 16px;\n  color: white;\n  font-weight: bold;\n  font-size: 18px;\n  transition: 0.7s ease;\n  border-radius: 0 4px 4px 0;\n  text-decoration: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.next[data-v-3f4ea88e] {\n  right: 0;\n}\n.prev[data-v-3f4ea88e] {\n  left: 0;\n}\n.prev[data-v-3f4ea88e]:hover, .next[data-v-3f4ea88e]:hover {\n  background-color: rgba(0,0,0,0.9);\n}\n.btn-like[data-v-3f4ea88e] {\n    right: 0;\n    border: none;\n    background-color: initial;\n    top: -5px;\n}\n.btn-rating[data-v-3f4ea88e] {\n    left: 40%;\n    border: none;\n    background-color: initial;\n}\ni[data-v-3f4ea88e] {\n  font-size: 20px;\n}\n.btn-i-like[data-v-3f4ea88e] {\n    font-size: 30px;\n}\nbutton[data-v-3f4ea88e]:focus{\n  outline: none;\n}\n", ""]);
+exports.push([module.i, "\nul li[data-v-3f4ea88e] {\r\n  list-style: none;\n}\nimg[data-v-3f4ea88e] {\r\n  height:600px;\r\n  width:100%\n}\n.prev[data-v-3f4ea88e], .next[data-v-3f4ea88e] {\r\n  cursor: pointer;\r\n  position: absolute;\r\n  top: 40%;\r\n  width: auto;\r\n  padding: 16px;\r\n  color: white;\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  transition: 0.7s ease;\r\n  border-radius: 0 4px 4px 0;\r\n  text-decoration: none;\r\n  -webkit-user-select: none;\r\n     -moz-user-select: none;\r\n      -ms-user-select: none;\r\n          user-select: none;\n}\n.next[data-v-3f4ea88e] {\r\n  right: 0;\n}\n.prev[data-v-3f4ea88e] {\r\n  left: 0;\n}\n.prev[data-v-3f4ea88e]:hover, .next[data-v-3f4ea88e]:hover {\r\n  background-color: rgba(0,0,0,0.9);\n}\n.btn-like[data-v-3f4ea88e] {\r\n    right: 0;\r\n    border: none;\r\n    background-color: initial;\r\n    top: -5px;\n}\n.btn-rating[data-v-3f4ea88e] {\r\n    left: 40%;\r\n    border: none;\r\n    background-color: initial;\n}\ni[data-v-3f4ea88e] {\r\n  font-size: 20px;\n}\n.btn-i-like[data-v-3f4ea88e] {\r\n    font-size: 30px;\n}\nbutton[data-v-3f4ea88e]:focus{\r\n  outline: none;\n}\r\n", ""]);
 
 // exports
 
@@ -7786,7 +7887,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "#main-compo[data-v-80d584ac] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    min-height: 60vh;\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\n    font-size: 1em;\n    letter-spacing: 0.1px;\n    color: #32465a;\n    text-rendering: optimizeLegibility;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\n    -webkit-font-smoothing: antialiased;\n}\nul[data-v-80d584ac] {\n    list-style: none;\n    -webkit-padding-start: 0px;\n            padding-inline-start: 0px;\n}\n.meta-sep[data-v-80d584ac] {\n    display: flex;\n}\n.name-typing[data-v-80d584ac] {\n    padding-left: 0.5em;\n    color: #00fff7;\n    font-size: unset;\n}\n.count-badge[data-v-80d584ac] {\n    color: #fff;\n    background-color: #e3342f;\n    font-size: inherit;\n    margin-left: auto;\n    align-self: center;\n}\n.name-style[data-v-80d584ac] {\n    font-size: medium;\n    font-weight: bold;\n    text-transform: capitalize;\n}\n#frame[data-v-80d584ac] {\n    width: 95%;\n    min-width: 360px;\n    max-width: 95%;\n    height: 92vh;\n    min-height: 300px;\n    max-height: 720px;\n    background: #E6EAEA;\n}\n@media screen and (max-width: 360px) {\n#frame[data-v-80d584ac] {\n        width: 100%;\n        height: 100vh;\n}\n}\n#frame #sidepanel[data-v-80d584ac] {\n    float: left;\n    min-width: 280px;\n    max-width: 340px;\n    width: 40%;\n    height: 100%;\n    background: #2c3e50;\n    color: #f5f5f5;\n    overflow: hidden;\n    position: relative;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel[data-v-80d584ac] {\n        width: 58px;\n        min-width: 58px;\n}\n}\n#frame #sidepanel #profile[data-v-80d584ac] {\n    width: 80%;\n    margin: 25px auto;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile[data-v-80d584ac] {\n        width: 100%;\n        margin: 0 auto;\n        padding: 5px 0 0 0;\n        background: #32465a;\n}\n}\n#frame #sidepanel #profile.expanded .wrap[data-v-80d584ac] {\n    height: 210px;\n    line-height: initial;\n}\n#frame #sidepanel #profile.expanded .wrap p[data-v-80d584ac] {\n    margin-top: 20px;\n}\n#frame #sidepanel #profile.expanded .wrap i.expand-button[data-v-80d584ac] {\n    transform: scaleY(-1);\n    filter: FlipH;\n    -ms-filter: \"FlipH\";\n}\n#frame #sidepanel #profile .wrap[data-v-80d584ac] {\n    height: 60px;\n    line-height: 60px;\n    overflow: hidden;\n    transition: 0.3s height ease;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap[data-v-80d584ac] {\n        height: 55px;\n}\n}\n#frame #sidepanel #profile .wrap img[data-v-80d584ac] {\n    width: 50px;\n    border-radius: 50%;\n    padding: 3px;\n    border: 2px solid #e74c3c;\n    height: auto;\n    float: left;\n    cursor: pointer;\n    transition: 0.3s border ease;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap img[data-v-80d584ac] {\n        width: 40px;\n        margin-left: 4px;\n}\n}\n#frame #sidepanel #profile .wrap img.online[data-v-80d584ac] {\n    border: 2px solid #2ecc71;\n}\n#frame #sidepanel #profile .wrap img.away[data-v-80d584ac] {\n    border: 2px solid #f1c40f;\n}\n#frame #sidepanel #profile .wrap img.busy[data-v-80d584ac] {\n    border: 2px solid #e74c3c;\n}\n#frame #sidepanel #profile .wrap img.offline[data-v-80d584ac] {\n    border: 2px solid #95a5a6;\n}\n#frame #sidepanel #profile .wrap p[data-v-80d584ac] {\n    float: left;\n    margin-left: 15px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap p[data-v-80d584ac] {\n        display: none;\n}\n}\n#frame #sidepanel #profile .wrap i.expand-button[data-v-80d584ac] {\n    float: right;\n    margin-top: 23px;\n    font-size: 0.8em;\n    cursor: pointer;\n    color: #435f7a;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap i.expand-button[data-v-80d584ac] {\n        display: none;\n}\n}\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac] {\n    position: absolute;\n    opacity: 0;\n    visibility: hidden;\n    width: 150px;\n    margin: 70px 0 0 0;\n    border-radius: 6px;\n    z-index: 99;\n    line-height: initial;\n    background: #435f7a;\n    transition: 0.3s all ease;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac] {\n        width: 58px;\n        margin-top: 57px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options.active[data-v-80d584ac] {\n    opacity: 1;\n    visibility: visible;\n    margin: 75px 0 0 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options.active[data-v-80d584ac] {\n        margin-top: 62px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac]:before {\n    content: '';\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: 8px solid #435f7a;\n    margin: -8px 0 0 24px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac]:before {\n        margin-left: 23px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul[data-v-80d584ac] {\n    overflow: hidden;\n    border-radius: 6px;\n}\n#frame #sidepanel #profile .wrap #status-options ul li[data-v-80d584ac] {\n    padding: 15px 0 30px 18px;\n    display: block;\n    cursor: pointer;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li[data-v-80d584ac] {\n        padding: 15px 0 35px 22px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li[data-v-80d584ac]:hover {\n    background: #496886;\n}\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac] {\n    position: absolute;\n    width: 10px;\n    height: 10px;\n    border-radius: 50%;\n    margin: 5px 0 0 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac] {\n        width: 14px;\n        height: 14px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac]:before {\n    content: '';\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    margin: -3px 0 0 -3px;\n    background: transparent;\n    border-radius: 50%;\n    z-index: 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac]:before {\n        height: 18px;\n        width: 18px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li p[data-v-80d584ac] {\n    padding-left: 12px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li p[data-v-80d584ac] {\n        display: none;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle[data-v-80d584ac] {\n    background: #2ecc71;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle[data-v-80d584ac]:before {\n    border: 1px solid #2ecc71;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle[data-v-80d584ac] {\n    background: #f1c40f;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle[data-v-80d584ac]:before {\n    border: 1px solid #f1c40f;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle[data-v-80d584ac] {\n    background: #e74c3c;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle[data-v-80d584ac]:before {\n    border: 1px solid #e74c3c;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle[data-v-80d584ac] {\n    background: #95a5a6;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle[data-v-80d584ac]:before {\n    border: 1px solid #95a5a6;\n}\n#frame #sidepanel #profile .wrap #expanded[data-v-80d584ac] {\n    padding: 100px 0 0 0;\n    display: block;\n    line-height: initial !important;\n}\n#frame #sidepanel #profile .wrap #expanded label[data-v-80d584ac] {\n    float: left;\n    clear: both;\n    margin: 0 8px 5px 0;\n    padding: 5px 0;\n}\n#frame #sidepanel #profile .wrap #expanded input[data-v-80d584ac] {\n    border: none;\n    margin-bottom: 6px;\n    background: #32465a;\n    border-radius: 3px;\n    color: #f5f5f5;\n    padding: 7px;\n    width: calc(100% - 43px);\n}\n#frame #sidepanel #profile .wrap #expanded input[data-v-80d584ac]:focus {\n    outline: none;\n    background: #435f7a;\n}\n#frame #sidepanel #search[data-v-80d584ac] {\n    border-top: 1px solid #32465a;\n    border-bottom: 1px solid #32465a;\n    font-weight: 300;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #search[data-v-80d584ac] {\n        display: none;\n}\n}\n#frame #sidepanel #search label[data-v-80d584ac] {\n    position: absolute;\n    margin: 10px 0 0 20px;\n}\n#frame #sidepanel #search input[data-v-80d584ac] {\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\n    padding: 10px 0 10px 46px;\n    width: calc(100% - 25px);\n    border: none;\n    background: #32465a;\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]:focus {\n    outline: none;\n    background: #435f7a;\n}\n#frame #sidepanel #search input[data-v-80d584ac]::-webkit-input-placeholder {\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]::-moz-placeholder {\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]:-ms-input-placeholder {\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]:-moz-placeholder {\n    color: #f5f5f5;\n}\n#frame #sidepanel #contacts[data-v-80d584ac] {\n    height: calc(100% - 177px);\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts[data-v-80d584ac] {\n        height: calc(100% - 149px);\n        overflow-y: scroll;\n        overflow-x: hidden;\n}\n#frame #sidepanel #contacts[data-v-80d584ac]::-webkit-scrollbar {\n        display: none;\n}\n}\n#frame #sidepanel #contacts.expanded[data-v-80d584ac] {\n    height: calc(100% - 334px);\n}\n#frame #sidepanel #contacts[data-v-80d584ac]::-webkit-scrollbar {\n    width: 8px;\n    background: #2c3e50;\n}\n#frame #sidepanel #contacts[data-v-80d584ac]::-webkit-scrollbar-thumb {\n    background-color: #243140;\n}\n#frame #sidepanel #contacts ul li.contact[data-v-80d584ac] {\n    position: relative;\n    padding: 10px 0 15px 0;\n    font-size: 0.9em;\n    cursor: pointer;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact[data-v-80d584ac] {\n        padding: 6px 0 46px 8px;\n}\n}\n#frame #sidepanel #contacts ul li.contact[data-v-80d584ac]:hover {\n    background: #32465a;\n}\n#frame #sidepanel #contacts ul li.contact.active[data-v-80d584ac] {\n    background: #32465a;\n    border-right: 5px solid #435f7a;\n}\n#frame #sidepanel #contacts ul li.contact.active span.contact-status[data-v-80d584ac] {\n    border: 2px solid #32465a !important;\n}\n#frame #sidepanel #contacts ul li.contact .wrap[data-v-80d584ac] {\n    width: 88%;\n    margin: 0 auto;\n    position: relative;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact .wrap[data-v-80d584ac] {\n        width: 100%;\n}\n}\n#frame #sidepanel #contacts ul li.contact .wrap span[data-v-80d584ac] {\n    position: absolute;\n    left: 0;\n    margin: -2px 0 0 -2px;\n    width: 15px;\n    height: 15px;\n    border-radius: 50%;\n    border: 2px solid #2c3e50;\n    background: #95a5a6;\n}\n#frame #sidepanel #contacts ul li.contact .wrap span.online[data-v-80d584ac] {\n    background: #2ecc71;\n}\n#frame #sidepanel #contacts ul li.contact .wrap span.away[data-v-80d584ac] {\n    background: #f1c40f;\n}\n#frame #sidepanel #contacts ul li.contact .wrap span.busy[data-v-80d584ac] {\n    background: #e74c3c;\n}\n#frame #sidepanel #contacts ul li.contact .wrap img[data-v-80d584ac] {\n    width: 40px;\n    border-radius: 50%;\n    float: left;\n    margin-right: 10px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact .wrap img[data-v-80d584ac] {\n        margin-right: 0px;\n}\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta[data-v-80d584ac] {\n    padding: 5px 0 0 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact .wrap .meta[data-v-80d584ac] {\n        display: none;\n}\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta .name[data-v-80d584ac] {\n    font-weight: 600;\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta .preview[data-v-80d584ac] {\n    margin: 5px 0 0 0;\n    padding: 0 0 1px;\n    font-weight: 400;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    transition: 1s all ease;\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta .preview span[data-v-80d584ac] {\n    position: initial;\n    border-radius: initial;\n    background: none;\n    border: none;\n    padding: 0 2px 0 0;\n    margin: 0 0 0 1px;\n    opacity: .5;\n}\n#frame #sidepanel #bottom-bar[data-v-80d584ac] {\n    position: absolute;\n    width: 100%;\n    bottom: 0;\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac] {\n    float: left;\n    border: none;\n    width: 50%;\n    padding: 10px 0;\n    background: #32465a;\n    color: #f5f5f5;\n    cursor: pointer;\n    font-size: 0.85em;\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button[data-v-80d584ac] {\n        float: none;\n        width: 100%;\n        padding: 15px 0;\n}\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:focus {\n    outline: none;\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:nth-child(1) {\n    border-right: 1px solid #2c3e50;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:nth-child(1) {\n        border-right: none;\n        border-bottom: 1px solid #2c3e50;\n}\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:hover {\n    background: #435f7a;\n}\n#frame #sidepanel #bottom-bar button i[data-v-80d584ac] {\n    margin-right: 3px;\n    font-size: 1em;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button i[data-v-80d584ac] {\n        font-size: 1.3em;\n}\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button span[data-v-80d584ac] {\n        display: none;\n}\n}\n#frame .content[data-v-80d584ac] {\n    float: right;\n    width: 60%;\n    height: 100%;\n    overflow: hidden;\n    position: relative;\n}\n@media screen and (max-width: 735px) {\n#frame .content[data-v-80d584ac] {\n        width: calc(100% - 58px);\n        min-width: 300px !important;\n}\n}\n@media screen and (min-width: 900px) {\n#frame .content[data-v-80d584ac] {\n        width: calc(100% - 340px);\n}\n}\n#frame .content .contact-profile[data-v-80d584ac] {\n    width: 100%;\n    height: 60px;\n    line-height: 60px;\n    background: #f5f5f5;\n}\n#frame .content .contact-profile img[data-v-80d584ac] {\n    width: 40px;\n    border-radius: 50%;\n    float: left;\n    margin: 9px 12px 0 9px;\n}\n#frame .content .contact-profile p[data-v-80d584ac] {\n    float: left;\n}\n#frame .content .contact-profile .social-media[data-v-80d584ac] {\n    float: right;\n}\n#frame .content .contact-profile .social-media i[data-v-80d584ac] {\n    margin-left: 14px;\n    cursor: pointer;\n}\n#frame .content .contact-profile .social-media i[data-v-80d584ac]:nth-last-child(1) {\n    margin-right: 20px;\n}\n#frame .content .contact-profile .social-media i[data-v-80d584ac]:hover {\n    color: #435f7a;\n}\n#frame .content .messages[data-v-80d584ac] {\n    height: auto;\n    min-height: calc(100% - 93px);\n    max-height: calc(100% - 93px);\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n@media screen and (max-width: 735px) {\n#frame .content .messages[data-v-80d584ac] {\n        max-height: calc(100% - 105px);\n}\n}\n#frame .content .messages[data-v-80d584ac]::-webkit-scrollbar {\n    width: 8px;\n    background: transparent;\n}\n#frame .content .messages[data-v-80d584ac]::-webkit-scrollbar-thumb {\n    background-color: rgba(0, 0, 0, 0.3);\n}\n#frame .content .messages ul li[data-v-80d584ac] {\n    display: inline-block;\n    clear: both;\n    float: left;\n    margin: 15px 15px 5px 15px;\n    width: calc(100% - 25px);\n    font-size: 0.9em;\n}\n#frame .content .messages ul li[data-v-80d584ac]:nth-last-child(1) {\n    margin-bottom: 20px;\n}\n#frame .content .messages ul li.sent img[data-v-80d584ac] {\n    margin: 6px 8px 0 0;\n}\n#frame .content .messages ul li.sent p[data-v-80d584ac] {\n    background: #435f7a;\n    color: #f5f5f5;\n}\n#frame .content .messages ul li.replies img[data-v-80d584ac] {\n    float: right;\n    margin: 6px 0 0 8px;\n}\n#frame .content .messages ul li.replies p[data-v-80d584ac] {\n    background: #f5f5f5;\n    float: right;\n}\n#frame .content .messages ul li img[data-v-80d584ac] {\n    width: 22px;\n    border-radius: 50%;\n    float: left;\n}\n#frame .content .messages ul li p[data-v-80d584ac] {\n    display: inline-block;\n    padding: 10px 15px;\n    border-radius: 20px;\n    max-width: 205px;\n    line-height: 130%;\n}\n@media screen and (min-width: 735px) {\n#frame .content .messages ul li p[data-v-80d584ac] {\n        max-width: 300px;\n}\n}\n#frame .content .message-input[data-v-80d584ac] {\n    position: absolute;\n    bottom: 0;\n    width: 100%;\n    z-index: 99;\n}\n#frame .content .message-input .wrap[data-v-80d584ac] {\n    position: relative;\n}\n#frame .content .message-input .wrap input[data-v-80d584ac] {\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\n    float: left;\n    border: none;\n    width: calc(100% - 90px);\n    padding: 11px 32px 10px 8px;\n    font-size: 0.8em;\n    color: #32465a;\n}\n@media screen and (max-width: 735px) {\n#frame .content .message-input .wrap input[data-v-80d584ac] {\n        padding: 15px 32px 16px 8px;\n}\n}\n#frame .content .message-input .wrap input[data-v-80d584ac]:focus {\n    outline: none;\n}\n#frame .content .message-input .wrap .attachment[data-v-80d584ac] {\n    position: absolute;\n    right: 60px;\n    z-index: 4;\n    margin-top: 10px;\n    font-size: 1.1em;\n    color: #435f7a;\n    opacity: .5;\n    cursor: pointer;\n}\n@media screen and (max-width: 735px) {\n#frame .content .message-input .wrap .attachment[data-v-80d584ac] {\n        margin-top: 17px;\n        right: 65px;\n}\n}\n#frame .content .message-input .wrap .attachment[data-v-80d584ac]:hover {\n    opacity: 1;\n}\n#frame .content .message-input .wrap button[data-v-80d584ac] {\n    float: right;\n    border: none;\n    width: 50px;\n    padding: 12px 0;\n    cursor: pointer;\n    background: #32465a;\n    color: #f5f5f5;\n}\n@media screen and (max-width: 735px) {\n#frame .content .message-input .wrap button[data-v-80d584ac] {\n        padding: 16px 0;\n}\n}\n#frame .content .message-input .wrap button[data-v-80d584ac]:hover {\n    background: #435f7a;\n}\n#frame .content .message-input .wrap button[data-v-80d584ac]:focus {\n    outline: none;\n}", ""]);
+exports.push([module.i, "#main-compo[data-v-80d584ac] {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    min-height: 60vh;\r\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\r\n    font-size: 1em;\r\n    letter-spacing: 0.1px;\r\n    color: #32465a;\r\n    text-rendering: optimizeLegibility;\r\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);\r\n    -webkit-font-smoothing: antialiased;\n}\nul[data-v-80d584ac] {\r\n    list-style: none;\r\n    -webkit-padding-start: 0px;\r\n            padding-inline-start: 0px;\n}\n.meta-sep[data-v-80d584ac] {\r\n    display: flex;\n}\n.name-typing[data-v-80d584ac] {\r\n    padding-left: 0.5em;\r\n    color: #00fff7;\r\n    font-size: unset;\n}\n.count-badge[data-v-80d584ac] {\r\n    color: #fff;\r\n    background-color: #e3342f;\r\n    font-size: inherit;\r\n    margin-left: auto;\r\n    align-self: center;\n}\n.name-style[data-v-80d584ac] {\r\n    font-size: medium;\r\n    font-weight: bold;\r\n    text-transform: capitalize;\n}\n#frame[data-v-80d584ac] {\r\n    width: 95%;\r\n    min-width: 360px;\r\n    max-width: 95%;\r\n    height: 92vh;\r\n    min-height: 300px;\r\n    max-height: 720px;\r\n    background: #E6EAEA;\n}\n@media screen and (max-width: 360px) {\n#frame[data-v-80d584ac] {\r\n        width: 100%;\r\n        height: 100vh;\n}\n}\n#frame #sidepanel[data-v-80d584ac] {\r\n    float: left;\r\n    min-width: 280px;\r\n    max-width: 340px;\r\n    width: 40%;\r\n    height: 100%;\r\n    background: #2c3e50;\r\n    color: #f5f5f5;\r\n    overflow: hidden;\r\n    position: relative;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel[data-v-80d584ac] {\r\n        width: 58px;\r\n        min-width: 58px;\n}\n}\n#frame #sidepanel #profile[data-v-80d584ac] {\r\n    width: 80%;\r\n    margin: 25px auto;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile[data-v-80d584ac] {\r\n        width: 100%;\r\n        margin: 0 auto;\r\n        padding: 5px 0 0 0;\r\n        background: #32465a;\n}\n}\n#frame #sidepanel #profile.expanded .wrap[data-v-80d584ac] {\r\n    height: 210px;\r\n    line-height: initial;\n}\n#frame #sidepanel #profile.expanded .wrap p[data-v-80d584ac] {\r\n    margin-top: 20px;\n}\n#frame #sidepanel #profile.expanded .wrap i.expand-button[data-v-80d584ac] {\r\n    transform: scaleY(-1);\r\n    filter: FlipH;\r\n    -ms-filter: \"FlipH\";\n}\n#frame #sidepanel #profile .wrap[data-v-80d584ac] {\r\n    height: 60px;\r\n    line-height: 60px;\r\n    overflow: hidden;\r\n    transition: 0.3s height ease;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap[data-v-80d584ac] {\r\n        height: 55px;\n}\n}\n#frame #sidepanel #profile .wrap img[data-v-80d584ac] {\r\n    width: 50px;\r\n    border-radius: 50%;\r\n    padding: 3px;\r\n    border: 2px solid #e74c3c;\r\n    height: auto;\r\n    float: left;\r\n    cursor: pointer;\r\n    transition: 0.3s border ease;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap img[data-v-80d584ac] {\r\n        width: 40px;\r\n        margin-left: 4px;\n}\n}\n#frame #sidepanel #profile .wrap img.online[data-v-80d584ac] {\r\n    border: 2px solid #2ecc71;\n}\n#frame #sidepanel #profile .wrap img.away[data-v-80d584ac] {\r\n    border: 2px solid #f1c40f;\n}\n#frame #sidepanel #profile .wrap img.busy[data-v-80d584ac] {\r\n    border: 2px solid #e74c3c;\n}\n#frame #sidepanel #profile .wrap img.offline[data-v-80d584ac] {\r\n    border: 2px solid #95a5a6;\n}\n#frame #sidepanel #profile .wrap p[data-v-80d584ac] {\r\n    float: left;\r\n    margin-left: 15px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap p[data-v-80d584ac] {\r\n        display: none;\n}\n}\n#frame #sidepanel #profile .wrap i.expand-button[data-v-80d584ac] {\r\n    float: right;\r\n    margin-top: 23px;\r\n    font-size: 0.8em;\r\n    cursor: pointer;\r\n    color: #435f7a;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap i.expand-button[data-v-80d584ac] {\r\n        display: none;\n}\n}\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac] {\r\n    position: absolute;\r\n    opacity: 0;\r\n    visibility: hidden;\r\n    width: 150px;\r\n    margin: 70px 0 0 0;\r\n    border-radius: 6px;\r\n    z-index: 99;\r\n    line-height: initial;\r\n    background: #435f7a;\r\n    transition: 0.3s all ease;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac] {\r\n        width: 58px;\r\n        margin-top: 57px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options.active[data-v-80d584ac] {\r\n    opacity: 1;\r\n    visibility: visible;\r\n    margin: 75px 0 0 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options.active[data-v-80d584ac] {\r\n        margin-top: 62px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac]:before {\r\n    content: '';\r\n    position: absolute;\r\n    width: 0;\r\n    height: 0;\r\n    border-left: 6px solid transparent;\r\n    border-right: 6px solid transparent;\r\n    border-bottom: 8px solid #435f7a;\r\n    margin: -8px 0 0 24px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options[data-v-80d584ac]:before {\r\n        margin-left: 23px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul[data-v-80d584ac] {\r\n    overflow: hidden;\r\n    border-radius: 6px;\n}\n#frame #sidepanel #profile .wrap #status-options ul li[data-v-80d584ac] {\r\n    padding: 15px 0 30px 18px;\r\n    display: block;\r\n    cursor: pointer;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li[data-v-80d584ac] {\r\n        padding: 15px 0 35px 22px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li[data-v-80d584ac]:hover {\r\n    background: #496886;\n}\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac] {\r\n    position: absolute;\r\n    width: 10px;\r\n    height: 10px;\r\n    border-radius: 50%;\r\n    margin: 5px 0 0 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac] {\r\n        width: 14px;\r\n        height: 14px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac]:before {\r\n    content: '';\r\n    position: absolute;\r\n    width: 14px;\r\n    height: 14px;\r\n    margin: -3px 0 0 -3px;\r\n    background: transparent;\r\n    border-radius: 50%;\r\n    z-index: 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li span.status-circle[data-v-80d584ac]:before {\r\n        height: 18px;\r\n        width: 18px;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li p[data-v-80d584ac] {\r\n    padding-left: 12px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #profile .wrap #status-options ul li p[data-v-80d584ac] {\r\n        display: none;\n}\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle[data-v-80d584ac] {\r\n    background: #2ecc71;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle[data-v-80d584ac]:before {\r\n    border: 1px solid #2ecc71;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle[data-v-80d584ac] {\r\n    background: #f1c40f;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle[data-v-80d584ac]:before {\r\n    border: 1px solid #f1c40f;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle[data-v-80d584ac] {\r\n    background: #e74c3c;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle[data-v-80d584ac]:before {\r\n    border: 1px solid #e74c3c;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle[data-v-80d584ac] {\r\n    background: #95a5a6;\n}\n#frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle[data-v-80d584ac]:before {\r\n    border: 1px solid #95a5a6;\n}\n#frame #sidepanel #profile .wrap #expanded[data-v-80d584ac] {\r\n    padding: 100px 0 0 0;\r\n    display: block;\r\n    line-height: initial !important;\n}\n#frame #sidepanel #profile .wrap #expanded label[data-v-80d584ac] {\r\n    float: left;\r\n    clear: both;\r\n    margin: 0 8px 5px 0;\r\n    padding: 5px 0;\n}\n#frame #sidepanel #profile .wrap #expanded input[data-v-80d584ac] {\r\n    border: none;\r\n    margin-bottom: 6px;\r\n    background: #32465a;\r\n    border-radius: 3px;\r\n    color: #f5f5f5;\r\n    padding: 7px;\r\n    width: calc(100% - 43px);\n}\n#frame #sidepanel #profile .wrap #expanded input[data-v-80d584ac]:focus {\r\n    outline: none;\r\n    background: #435f7a;\n}\n#frame #sidepanel #search[data-v-80d584ac] {\r\n    border-top: 1px solid #32465a;\r\n    border-bottom: 1px solid #32465a;\r\n    font-weight: 300;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #search[data-v-80d584ac] {\r\n        display: none;\n}\n}\n#frame #sidepanel #search label[data-v-80d584ac] {\r\n    position: absolute;\r\n    margin: 10px 0 0 20px;\n}\n#frame #sidepanel #search input[data-v-80d584ac] {\r\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\r\n    padding: 10px 0 10px 46px;\r\n    width: calc(100% - 25px);\r\n    border: none;\r\n    background: #32465a;\r\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]:focus {\r\n    outline: none;\r\n    background: #435f7a;\n}\n#frame #sidepanel #search input[data-v-80d584ac]::-webkit-input-placeholder {\r\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]::-moz-placeholder {\r\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]:-ms-input-placeholder {\r\n    color: #f5f5f5;\n}\n#frame #sidepanel #search input[data-v-80d584ac]:-moz-placeholder {\r\n    color: #f5f5f5;\n}\n#frame #sidepanel #contacts[data-v-80d584ac] {\r\n    height: calc(100% - 177px);\r\n    overflow-y: scroll;\r\n    overflow-x: hidden;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts[data-v-80d584ac] {\r\n        height: calc(100% - 149px);\r\n        overflow-y: scroll;\r\n        overflow-x: hidden;\n}\n#frame #sidepanel #contacts[data-v-80d584ac]::-webkit-scrollbar {\r\n        display: none;\n}\n}\n#frame #sidepanel #contacts.expanded[data-v-80d584ac] {\r\n    height: calc(100% - 334px);\n}\n#frame #sidepanel #contacts[data-v-80d584ac]::-webkit-scrollbar {\r\n    width: 8px;\r\n    background: #2c3e50;\n}\n#frame #sidepanel #contacts[data-v-80d584ac]::-webkit-scrollbar-thumb {\r\n    background-color: #243140;\n}\n#frame #sidepanel #contacts ul li.contact[data-v-80d584ac] {\r\n    position: relative;\r\n    padding: 10px 0 15px 0;\r\n    font-size: 0.9em;\r\n    cursor: pointer;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact[data-v-80d584ac] {\r\n        padding: 6px 0 46px 8px;\n}\n}\n#frame #sidepanel #contacts ul li.contact[data-v-80d584ac]:hover {\r\n    background: #32465a;\n}\n#frame #sidepanel #contacts ul li.contact.active[data-v-80d584ac] {\r\n    background: #32465a;\r\n    border-right: 5px solid #435f7a;\n}\n#frame #sidepanel #contacts ul li.contact.active span.contact-status[data-v-80d584ac] {\r\n    border: 2px solid #32465a !important;\n}\n#frame #sidepanel #contacts ul li.contact .wrap[data-v-80d584ac] {\r\n    width: 88%;\r\n    margin: 0 auto;\r\n    position: relative;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact .wrap[data-v-80d584ac] {\r\n        width: 100%;\n}\n}\n#frame #sidepanel #contacts ul li.contact .wrap span[data-v-80d584ac] {\r\n    position: absolute;\r\n    left: 0;\r\n    margin: -2px 0 0 -2px;\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    border: 2px solid #2c3e50;\r\n    background: #95a5a6;\n}\n#frame #sidepanel #contacts ul li.contact .wrap span.online[data-v-80d584ac] {\r\n    background: #2ecc71;\n}\n#frame #sidepanel #contacts ul li.contact .wrap span.away[data-v-80d584ac] {\r\n    background: #f1c40f;\n}\n#frame #sidepanel #contacts ul li.contact .wrap span.busy[data-v-80d584ac] {\r\n    background: #e74c3c;\n}\n#frame #sidepanel #contacts ul li.contact .wrap img[data-v-80d584ac] {\r\n    width: 40px;\r\n    border-radius: 50%;\r\n    float: left;\r\n    margin-right: 10px;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact .wrap img[data-v-80d584ac] {\r\n        margin-right: 0px;\n}\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta[data-v-80d584ac] {\r\n    padding: 5px 0 0 0;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #contacts ul li.contact .wrap .meta[data-v-80d584ac] {\r\n        display: none;\n}\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta .name[data-v-80d584ac] {\r\n    font-weight: 600;\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta .preview[data-v-80d584ac] {\r\n    margin: 5px 0 0 0;\r\n    padding: 0 0 1px;\r\n    font-weight: 400;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    transition: 1s all ease;\n}\n#frame #sidepanel #contacts ul li.contact .wrap .meta .preview span[data-v-80d584ac] {\r\n    position: initial;\r\n    border-radius: initial;\r\n    background: none;\r\n    border: none;\r\n    padding: 0 2px 0 0;\r\n    margin: 0 0 0 1px;\r\n    opacity: .5;\n}\n#frame #sidepanel #bottom-bar[data-v-80d584ac] {\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 0;\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac] {\r\n    float: left;\r\n    border: none;\r\n    width: 50%;\r\n    padding: 10px 0;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n    cursor: pointer;\r\n    font-size: 0.85em;\r\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button[data-v-80d584ac] {\r\n        float: none;\r\n        width: 100%;\r\n        padding: 15px 0;\n}\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:focus {\r\n    outline: none;\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:nth-child(1) {\r\n    border-right: 1px solid #2c3e50;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:nth-child(1) {\r\n        border-right: none;\r\n        border-bottom: 1px solid #2c3e50;\n}\n}\n#frame #sidepanel #bottom-bar button[data-v-80d584ac]:hover {\r\n    background: #435f7a;\n}\n#frame #sidepanel #bottom-bar button i[data-v-80d584ac] {\r\n    margin-right: 3px;\r\n    font-size: 1em;\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button i[data-v-80d584ac] {\r\n        font-size: 1.3em;\n}\n}\n@media screen and (max-width: 735px) {\n#frame #sidepanel #bottom-bar button span[data-v-80d584ac] {\r\n        display: none;\n}\n}\n#frame .content[data-v-80d584ac] {\r\n    float: right;\r\n    width: 60%;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    position: relative;\n}\n@media screen and (max-width: 735px) {\n#frame .content[data-v-80d584ac] {\r\n        width: calc(100% - 58px);\r\n        min-width: 300px !important;\n}\n}\n@media screen and (min-width: 900px) {\n#frame .content[data-v-80d584ac] {\r\n        width: calc(100% - 340px);\n}\n}\n#frame .content .contact-profile[data-v-80d584ac] {\r\n    width: 100%;\r\n    height: 60px;\r\n    line-height: 60px;\r\n    background: #f5f5f5;\n}\n#frame .content .contact-profile img[data-v-80d584ac] {\r\n    width: 40px;\r\n    border-radius: 50%;\r\n    float: left;\r\n    margin: 9px 12px 0 9px;\n}\n#frame .content .contact-profile p[data-v-80d584ac] {\r\n    float: left;\n}\n#frame .content .contact-profile .social-media[data-v-80d584ac] {\r\n    float: right;\n}\n#frame .content .contact-profile .social-media i[data-v-80d584ac] {\r\n    margin-left: 14px;\r\n    cursor: pointer;\n}\n#frame .content .contact-profile .social-media i[data-v-80d584ac]:nth-last-child(1) {\r\n    margin-right: 20px;\n}\n#frame .content .contact-profile .social-media i[data-v-80d584ac]:hover {\r\n    color: #435f7a;\n}\n#frame .content .messages[data-v-80d584ac] {\r\n    height: auto;\r\n    min-height: calc(100% - 93px);\r\n    max-height: calc(100% - 93px);\r\n    overflow-y: scroll;\r\n    overflow-x: hidden;\n}\n@media screen and (max-width: 735px) {\n#frame .content .messages[data-v-80d584ac] {\r\n        max-height: calc(100% - 105px);\n}\n}\n#frame .content .messages[data-v-80d584ac]::-webkit-scrollbar {\r\n    width: 8px;\r\n    background: transparent;\n}\n#frame .content .messages[data-v-80d584ac]::-webkit-scrollbar-thumb {\r\n    background-color: rgba(0, 0, 0, 0.3);\n}\n#frame .content .messages ul li[data-v-80d584ac] {\r\n    display: inline-block;\r\n    clear: both;\r\n    float: left;\r\n    margin: 15px 15px 5px 15px;\r\n    width: calc(100% - 25px);\r\n    font-size: 0.9em;\n}\n#frame .content .messages ul li[data-v-80d584ac]:nth-last-child(1) {\r\n    margin-bottom: 20px;\n}\n#frame .content .messages ul li.sent img[data-v-80d584ac] {\r\n    margin: 6px 8px 0 0;\n}\n#frame .content .messages ul li.sent p[data-v-80d584ac] {\r\n    background: #435f7a;\r\n    color: #f5f5f5;\n}\n#frame .content .messages ul li.replies img[data-v-80d584ac] {\r\n    float: right;\r\n    margin: 6px 0 0 8px;\n}\n#frame .content .messages ul li.replies p[data-v-80d584ac] {\r\n    background: #f5f5f5;\r\n    float: right;\n}\n#frame .content .messages ul li img[data-v-80d584ac] {\r\n    width: 22px;\r\n    border-radius: 50%;\r\n    float: left;\n}\n#frame .content .messages ul li p[data-v-80d584ac] {\r\n    display: inline-block;\r\n    padding: 10px 15px;\r\n    border-radius: 20px;\r\n    max-width: 205px;\r\n    line-height: 130%;\n}\n@media screen and (min-width: 735px) {\n#frame .content .messages ul li p[data-v-80d584ac] {\r\n        max-width: 300px;\n}\n}\n#frame .content .message-input[data-v-80d584ac] {\r\n    position: absolute;\r\n    bottom: 0;\r\n    width: 100%;\r\n    z-index: 99;\n}\n#frame .content .message-input .wrap[data-v-80d584ac] {\r\n    position: relative;\n}\n#frame .content .message-input .wrap input[data-v-80d584ac] {\r\n    font-family: \"proxima-nova\", \"Source Sans Pro\", sans-serif;\r\n    float: left;\r\n    border: none;\r\n    width: calc(100% - 90px);\r\n    padding: 11px 32px 10px 8px;\r\n    font-size: 0.8em;\r\n    color: #32465a;\n}\n@media screen and (max-width: 735px) {\n#frame .content .message-input .wrap input[data-v-80d584ac] {\r\n        padding: 15px 32px 16px 8px;\n}\n}\n#frame .content .message-input .wrap input[data-v-80d584ac]:focus {\r\n    outline: none;\n}\n#frame .content .message-input .wrap .attachment[data-v-80d584ac] {\r\n    position: absolute;\r\n    right: 60px;\r\n    z-index: 4;\r\n    margin-top: 10px;\r\n    font-size: 1.1em;\r\n    color: #435f7a;\r\n    opacity: .5;\r\n    cursor: pointer;\n}\n@media screen and (max-width: 735px) {\n#frame .content .message-input .wrap .attachment[data-v-80d584ac] {\r\n        margin-top: 17px;\r\n        right: 65px;\n}\n}\n#frame .content .message-input .wrap .attachment[data-v-80d584ac]:hover {\r\n    opacity: 1;\n}\n#frame .content .message-input .wrap button[data-v-80d584ac] {\r\n    float: right;\r\n    border: none;\r\n    width: 50px;\r\n    padding: 12px 0;\r\n    cursor: pointer;\r\n    background: #32465a;\r\n    color: #f5f5f5;\n}\n@media screen and (max-width: 735px) {\n#frame .content .message-input .wrap button[data-v-80d584ac] {\r\n        padding: 16px 0;\n}\n}\n#frame .content .message-input .wrap button[data-v-80d584ac]:hover {\r\n    background: #435f7a;\n}\n#frame .content .message-input .wrap button[data-v-80d584ac]:focus {\r\n    outline: none;\n}", ""]);
 
 // exports
 
@@ -71093,6 +71194,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewMotel.vue?vue&type=style&index=0&id=3f4ea88e&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewMotel.vue?vue&type=style&index=0&id=3f4ea88e&scoped=true&lang=css& ***!
@@ -75068,6 +75199,191 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "search" } }, [
+    _c("div", { staticClass: "main-body pt-4 text-dark" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row m-0 p-0  bg-white" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "d-flex flex-row m-4" }, [
+              _c("h1", { staticClass: "pr-2", attrs: { for: "" } }, [
+                _vm._v("Quận")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.districtId,
+                      expression: "districtId"
+                    }
+                  ],
+                  staticClass: "p-2 w-50",
+                  attrs: { "aria-placeholder": "Chọn Quận" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.districtId = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.districts, function(option) {
+                  return _c("option", { domProps: { value: option.id } }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(option.name) +
+                        "\n                        "
+                    )
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title text-left ml-4" }, [
+              _vm._v("Kết quả tìm kiếm truyện: "),
+              _c("strong", [_vm._v(_vm._s(_vm.key))])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row" },
+              _vm._l(_vm.posts, function(post, i) {
+                return _c(
+                  "div",
+                  { key: i, staticClass: "item-component col-md-3 text-left" },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: " border-primary",
+                        attrs: { href: post.src }
+                      },
+                      [
+                        _c("div", { staticClass: "item" }, [
+                          _c("div", [
+                            _c("img", {
+                              staticClass: "w-100",
+                              attrs: { src: post.images, alt: "" }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "my-2 ml-2" }, [
+                            _c("h4", { staticClass: "m-0" }, [
+                              _vm._v(_vm._s(post.title))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "position-relative my-2" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "position-absolute btn-rating"
+                                  },
+                                  [
+                                    _vm._v("Rating: "),
+                                    _vm._l(post.rating, function(item) {
+                                      return _c("span", { key: item.id }, [
+                                        _c("i", {
+                                          staticClass:
+                                            "fas fa-star text-warning"
+                                        })
+                                      ])
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "position-absolute btn-like text-primary"
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "far fa-thumbs-up text-primary btn-i-like"
+                                    }),
+                                    _vm._v(_vm._s(post.like))
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "d-flex p-1" }, [
+                              _c(
+                                "h6",
+                                { staticClass: "text-danger mr-2 mb-0" },
+                                [_vm._v(_vm._s(post.price) + "  ")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(" - ")]),
+                              _vm._v(" "),
+                              _c("h6", { staticClass: "ml-2 mb-0" }, [
+                                _vm._v("  " + _vm._s(post.area) + "m"),
+                                _c("sup", [_vm._v("2")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("small", { staticClass: "text-muted" }, [
+                              _c("i", {
+                                staticClass: "fas fa-angle-right pr-1"
+                              }),
+                              _vm._v(_vm._s(post.description))
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -88671,6 +88987,7 @@ Vue.component('welcome', __webpack_require__(/*! ./components/Home.vue */ "./res
 Vue.component('admin', __webpack_require__(/*! ./components/Admin.vue */ "./resources/js/components/Admin.vue")["default"]);
 Vue.component('owner', __webpack_require__(/*! ./components/Owner.vue */ "./resources/js/components/Owner.vue")["default"]);
 Vue.component('post', __webpack_require__(/*! ./components/Post.vue */ "./resources/js/components/Post.vue")["default"]);
+Vue.component('search', __webpack_require__(/*! ./components/Search.vue */ "./resources/js/components/Search.vue")["default"]);
 var app = new Vue({
   el: '#app',
   store: store
@@ -89543,6 +89860,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Search.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Search.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Search_vue_vue_type_template_id_5026ffd3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Search.vue?vue&type=template&id=5026ffd3&scoped=true& */ "./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&scoped=true&");
+/* harmony import */ var _Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Search.vue?vue&type=script&lang=js& */ "./resources/js/components/Search.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Search_vue_vue_type_style_index_0_id_5026ffd3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css& */ "./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Search_vue_vue_type_template_id_5026ffd3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Search_vue_vue_type_template_id_5026ffd3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5026ffd3",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Search.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Search.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Search.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Search.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_style_index_0_id_5026ffd3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=style&index=0&id=5026ffd3&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_style_index_0_id_5026ffd3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_style_index_0_id_5026ffd3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_style_index_0_id_5026ffd3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_style_index_0_id_5026ffd3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&scoped=true&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&scoped=true& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_template_id_5026ffd3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Search.vue?vue&type=template&id=5026ffd3&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_template_id_5026ffd3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_template_id_5026ffd3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ViewMotel.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/ViewMotel.vue ***!
@@ -89712,8 +90116,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Du-An-Web/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Du-An-Web/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\5.Huan\Nam3\Web\btl\Du-An-Web\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\5.Huan\Nam3\Web\btl\Du-An-Web\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

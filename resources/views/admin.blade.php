@@ -1,4 +1,4 @@
-@extends('layouts.dangnhap')
+@extends('layouts.manage')
 
 @section('content')
 <admin></admin>
