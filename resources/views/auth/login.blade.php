@@ -314,6 +314,12 @@
                         </a> @endif
                     </div>
                 </div>
+
+                <div class="mt-4">
+                    @if (Route::has('register'))
+                        <a class="forgot-pass" href="{{ route('register') }}">Sign up for a new account</a>
+                    @endif
+                </div>
             </form>
         </div>
     </div>
