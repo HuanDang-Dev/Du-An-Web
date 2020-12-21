@@ -15,6 +15,7 @@ Vue.component('welcome', require('./components/Home.vue').default);
 Vue.component('admin', require('./components/Admin.vue').default);
 Vue.component('owner', require('./components/Owner.vue').default);
 Vue.component('post', require('./components/Post.vue').default);
+Vue.component('search', require('./components/Search.vue').default);
 
 const app = new Vue({
     el: '#app',

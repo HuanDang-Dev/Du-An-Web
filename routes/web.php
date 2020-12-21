@@ -19,6 +19,12 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('welcome');
 });
+Route::get('/search', function () {
+    return view('search');
+});
+Route::get('/notFound', function () {
+    return view('404');
+});
 Route::get('/post', 'HomeController@indexPost');
 Route::get('/admin', 'HomeController@indexAdmin');
 Route::get('/owner', 'HomeController@indexOwner');
