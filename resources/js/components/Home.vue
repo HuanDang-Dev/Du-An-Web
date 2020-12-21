@@ -6,7 +6,7 @@
             <div class="card-body">
                 <div class="d-flex flex-column m-4">
                         <label class="" for="">Quận</label>
-                        <select v-model="districtId" class="p-2" aria-placeholder="Chọn Quận">
+                        <select v-model="districtId" class="p-2" aria-placeholder="Chọn Quận" v-on:change="onSelectChange">
                         <option v-for="option in districts" v-bind:value="option.id">
                         {{ option.name }}
                         </option>
@@ -53,67 +53,27 @@ export default {
       districtId: 11,
       posts: [],
       districts: [],
-    //   owners: [
-    //     {
-    //       images: [
-    //         "/images/nhatro.jpg",
-    //       ],
-    //       title: "Hoàng Anh Dương",
-    //       like: 40,
-    //       rating: 4,
-    //       giatien: "10Triệu",
-    //       dientich: "50",
-    //       csvc: "Có máy nóng lạnh, điều hòa"
-    //     },
-    //     {
-    //       images: [
-    //         "/images/nhatro.jpg",
-    //       ],
-    //       title: "Hoàng Anh Dương",
-    //       like: 40,
-    //       rating: 4,
-    //       giatien: "10Triệu",
-    //       dientich: "50",
-    //       csvc: "Có máy nóng lạnh, điều hòa"
-    //     },
-    //     {
-    //       images: [
-    //         "/images/nhatro.jpg",
-    //       ],
-    //       title: "Hoàng Anh Dương",
-    //       like: 40,
-    //       rating: 4,
-    //       giatien: "10Triệu",
-    //       dientich: "50",
-    //       csvc: "Có máy nóng lạnh, điều hòa"
-    //     },
-    //     {
-    //       images: [
-    //         "/images/nhatro.jpg",
-    //       ],
-    //       title: "Hoàng Anh Dương",
-    //       like: 40,
-    //       rating: 4,
-    //       giatien: "10Triệu",
-    //       dientich: "50",
-    //       csvc: "Có máy nóng lạnh, điều hòa"
-    //     }
-    //   ]
     }
   },
-mounted() {
-  axios.post('/api/getmotel', {
-          districtId: this.districtId
-        }).then((response) => {
-    console.log(response.data[0])
-    // console.log(this.owners)
-    this.posts = response.data;
-  })
-  axios.get('/api/getdistrict').then((response) => {
-            this.districts = response.data
-            // console.log(response.data)
-  })
-}
+  mounted() {
+    axios.post('/api/getmotel', {
+            districtId: this.districtId
+          }).then((response) => {
+      this.posts = response.data;
+    })
+    axios.get('/api/getdistrict').then((response) => {
+              this.districts = response.data
+    })
+  },
+    methods: {
+        onSelectChange(event){
+            axios.post('/api/getmotel', {
+                    districtId: this.districtId
+                  }).then((response) => {
+              this.posts = response.data;
+            })
+        }
+    },
 };
 </script>
 <style scoped>

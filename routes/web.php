@@ -1,4 +1,6 @@
 <?php
+use App\User;
+use App\Motel;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,24 @@ Route::get('/post', 'HomeController@indexPost');
 Route::get('/admin', 'HomeController@indexAdmin');
 Route::get('/owner', 'HomeController@indexOwner');
 Route::get('/rule', 'HomeController@indexRule');
-Route::get('/viewMotel/{slug}/', function () {
-    return view('viewMotel');
+Route::get('/viewMotel/{slug}/', function ($slug) {
+    $motel = Motel::where('slug', $slug)->first();  
+    if($motel){
+        if($motel->user_id == auth()->user()->id){
+            return view('viewMotel');
+        }
+        $user = User::where('id', auth()->user()->id)->first();
+        if($user->role == 1){
+            return view('viewMotel');
+        }
+        if($motel->approve == 1){
+            $motel->count_view += 1;
+            $motel->save();
+            return view('viewMotel');
+        }
+    }
 });
+Route::get('/admin/getindex', 'AdminController@indexAdmin');
 Route::post('/storemotel', 'MotelController@storeMotel');
 Route::get('/logout', 'HomeController@logout');
 Route::post('/login', 'Controller@login');

@@ -1719,6 +1719,7 @@ module.exports = function isBuffer (obj) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_slim_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-slim-tabs */ "./node_modules/vue-slim-tabs/dist/vue-slim-tabs.esm.js");
 //
 //
 //
@@ -1843,66 +1844,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Tabs: vue_slim_tabs__WEBPACK_IMPORTED_MODULE_0__["Tabs"],
+    Tab: vue_slim_tabs__WEBPACK_IMPORTED_MODULE_0__["Tab"]
+  },
   name: "admin",
   data: function data() {
     return {
-      admin: [{
-        title: "Hoàng Anh Dương",
-        name: "Tuấn Hùng",
-        date: "01/07/2000",
-        status: true,
-        like: 50,
-        rating: 5,
-        linkZoomIn: "/",
-        linkEdit: "/"
-      }, {
-        title: "Hoàng Anh Dương",
-        name: "Tuấn Hùng",
-        date: "01/07/2000",
-        status: false,
-        like: 50,
-        rating: 5,
-        linkZoomIn: "/",
-        linkEdit: "/"
-      }],
-      owners: [{
-        title: "Hoàng Anh Dương",
-        name: "Tuấn Hùng",
-        date: "01/07/2000",
-        status: true,
-        like: 40,
-        rating: 4,
-        linkZoomIn: "/",
-        linkEdit: "/"
-      }, {
-        title: "Hoàng Anh Dương",
-        name: "Tuấn Hùng",
-        date: "01/07/2000",
-        status: false,
-        like: 50,
-        rating: 4,
-        linkZoomIn: "/",
-        linkEdit: "/"
-      }, {
-        title: "Hoàng Anh Dương",
-        name: "Tuấn Hùng",
-        date: "01/07/2000",
-        status: true,
-        like: 50,
-        rating: 5,
-        linkZoomIn: "/",
-        linkEdit: "/"
-      }, {
-        title: "Hoàng Anh Dương",
-        name: "Tuấn Hùng",
-        date: "01/07/2000",
-        status: false,
-        like: 50,
-        rating: 5,
-        linkZoomIn: "/",
-        linkEdit: "/"
-      }]
+      motel: [],
+      approve: [],
+      unapprove: []
     };
   },
   methods: {
@@ -1912,6 +1899,20 @@ __webpack_require__.r(__webpack_exports__);
     removeElementAdmin: function removeElementAdmin(index) {
       this.$delete(this.admin, index);
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/admin/getindex').then(function (response) {
+      // this.districts = response.data
+      console.log(response.data);
+      _this.motel = response.data.list;
+      _this.approve = response.data.approve;
+      _this.unapprove = response.data.unapprove;
+    }); // axios.get('/api/getuser').then((response) => {
+    //     // thi = response.data
+    //     console.log(response.data)
+    // })
   }
 });
 
@@ -2360,53 +2361,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       districtId: 11,
       posts: [],
-      districts: [] //   owners: [
-      //     {
-      //       images: [
-      //         "/images/nhatro.jpg",
-      //       ],
-      //       title: "Hoàng Anh Dương",
-      //       like: 40,
-      //       rating: 4,
-      //       giatien: "10Triệu",
-      //       dientich: "50",
-      //       csvc: "Có máy nóng lạnh, điều hòa"
-      //     },
-      //     {
-      //       images: [
-      //         "/images/nhatro.jpg",
-      //       ],
-      //       title: "Hoàng Anh Dương",
-      //       like: 40,
-      //       rating: 4,
-      //       giatien: "10Triệu",
-      //       dientich: "50",
-      //       csvc: "Có máy nóng lạnh, điều hòa"
-      //     },
-      //     {
-      //       images: [
-      //         "/images/nhatro.jpg",
-      //       ],
-      //       title: "Hoàng Anh Dương",
-      //       like: 40,
-      //       rating: 4,
-      //       giatien: "10Triệu",
-      //       dientich: "50",
-      //       csvc: "Có máy nóng lạnh, điều hòa"
-      //     },
-      //     {
-      //       images: [
-      //         "/images/nhatro.jpg",
-      //       ],
-      //       title: "Hoàng Anh Dương",
-      //       like: 40,
-      //       rating: 4,
-      //       giatien: "10Triệu",
-      //       dientich: "50",
-      //       csvc: "Có máy nóng lạnh, điều hòa"
-      //     }
-      //   ]
-
+      districts: []
     };
   },
   mounted: function mounted() {
@@ -2415,13 +2370,22 @@ __webpack_require__.r(__webpack_exports__);
     axios.post('/api/getmotel', {
       districtId: this.districtId
     }).then(function (response) {
-      console.log(response.data[0]); // console.log(this.owners)
-
       _this.posts = response.data;
     });
     axios.get('/api/getdistrict').then(function (response) {
-      _this.districts = response.data; // console.log(response.data)
+      _this.districts = response.data;
     });
+  },
+  methods: {
+    onSelectChange: function onSelectChange(event) {
+      var _this2 = this;
+
+      axios.post('/api/getmotel', {
+        districtId: this.districtId
+      }).then(function (response) {
+        _this2.posts = response.data;
+      });
+    }
   }
 });
 
@@ -7660,9 +7624,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css&":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7768,6 +7732,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\nul li[data-v-3f4ea88e] {\n  list-style: none;\n}\nimg[data-v-3f4ea88e] {\n  height:600px;\n  width:100%\n}\n.prev[data-v-3f4ea88e], .next[data-v-3f4ea88e] {\n  cursor: pointer;\n  position: absolute;\n  top: 40%;\n  width: auto;\n  padding: 16px;\n  color: white;\n  font-weight: bold;\n  font-size: 18px;\n  transition: 0.7s ease;\n  border-radius: 0 4px 4px 0;\n  text-decoration: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.next[data-v-3f4ea88e] {\n  right: 0;\n}\n.prev[data-v-3f4ea88e] {\n  left: 0;\n}\n.prev[data-v-3f4ea88e]:hover, .next[data-v-3f4ea88e]:hover {\n  background-color: rgba(0,0,0,0.9);\n}\n.btn-like[data-v-3f4ea88e] {\n    right: 0;\n    border: none;\n    background-color: initial;\n    top: -5px;\n}\n.btn-rating[data-v-3f4ea88e] {\n    left: 40%;\n    border: none;\n    background-color: initial;\n}\ni[data-v-3f4ea88e] {\n  font-size: 20px;\n}\n.btn-i-like[data-v-3f4ea88e] {\n    font-size: 30px;\n}\nbutton[data-v-3f4ea88e]:focus{\n  outline: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".vue-tablist {\n  list-style: none;\n  display: flex;\n  padding-left: 0;\n  border-bottom: 1px solid #e2e2e2;\n}\n.vue-tab {\n  padding: 5px 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border: 1px solid transparent;\n  border-bottom-color: #e2e2e2;\n  border-radius: 3px 3px 0 0;\n  background-color: white;\n  position: relative;\n  bottom: -1px;\n}\n.vue-tab[aria-selected=\"true\"] {\n  border-color: #e2e2e2;\n  border-bottom-color: transparent;\n}\n.vue-tab[aria-disabled=\"true\"] {\n  cursor: not-allowed;\n  color: #999;\n}\n", ""]);
 
 // exports
 
@@ -70943,15 +70926,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css&":
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css& ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Admin.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Admin.vue?vue&type=style&index=1&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -71116,6 +71099,36 @@ options.transform = transform
 options.insertInto = undefined;
 
 var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../vue-loader/lib/loaders/stylePostLoader.js!../../postcss-loader/src??ref--6-2!./default.css?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -71759,338 +71772,623 @@ var render = function() {
       _c("div", { staticClass: "row-fluid" }, [
         _c("div", { staticClass: "span10", attrs: { id: "content" } }, [
           _c("div", { staticClass: "row-fluid sortable" }, [
-            _c("div", { staticClass: "box span12" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-content" }, [
+            _c(
+              "div",
+              { staticClass: "box span12" },
+              [
                 _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-striped table-bordered bootstrap-datatable datatable"
-                  },
+                  "tabs",
+                  { staticClass: "my-tabs", attrs: { width: "50%" } },
                   [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _vm._l(_vm.admin, function(ad, i) {
-                      return _c("tbody", { key: i }, [
-                        _c("tr", [
-                          _c("td", [_vm._v(_vm._s(ad.title))]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            _vm._v(_vm._s(ad.date))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            _vm._v(_vm._s(ad.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            ad.status
-                              ? _c(
-                                  "div",
-                                  { staticClass: " d-flex flex-wrap w-auto" },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-success m-1"
-                                      },
-                                      [
-                                        _vm._v("Like:  "),
-                                        _c(
-                                          "h2",
+                    _c("tab", { attrs: { title: "Bài Đăng" } }, [
+                      _c("div", { staticClass: "box-content" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-striped table-bordered bootstrap-datatable datatable"
+                          },
+                          [
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", [_vm._v("Tên bài đăng")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Ngày đăng")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Chủ trọ")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Trạng thái")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Chỉnh sửa")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.motel, function(ad, i) {
+                              return _c("tbody", { key: i }, [
+                                _c("tr", [
+                                  _c("td", [_vm._v(_vm._s(ad.title))]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _vm._v(_vm._s(ad.created_at))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _vm._v(_vm._s(ad.name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    ad.status
+                                      ? _c(
+                                          "div",
                                           {
                                             staticClass:
-                                              "m-0 d-flex align-items-center"
+                                              " d-flex flex-wrap w-auto"
                                           },
-                                          [_vm._v(_vm._s(ad.like))]
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-success m-1"
+                                              },
+                                              [
+                                                _vm._v("Like:  "),
+                                                _c(
+                                                  "h2",
+                                                  {
+                                                    staticClass:
+                                                      "m-0 d-flex align-items-center"
+                                                  },
+                                                  [_vm._v(_vm._s(ad.like))]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-success m-1"
+                                              },
+                                              [
+                                                _vm._v("Rating: "),
+                                                _vm._l(ad.rating, function(
+                                                  item
+                                                ) {
+                                                  return _c(
+                                                    "span",
+                                                    { key: item.id },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-star"
+                                                      })
+                                                    ]
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            )
+                                          ]
                                         )
+                                      : _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              " d-flex flex-wrap w-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important  m-1"
+                                              },
+                                              [
+                                                _vm._v("Like:  "),
+                                                _c(
+                                                  "h2",
+                                                  {
+                                                    staticClass:
+                                                      "m-0 d-flex align-items-center"
+                                                  },
+                                                  [_vm._v(_vm._s(ad.like))]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important m-1"
+                                              },
+                                              [
+                                                _vm._v("Rating: "),
+                                                _vm._l(ad.rating, function(
+                                                  item
+                                                ) {
+                                                  return _c(
+                                                    "span",
+                                                    { key: item.id },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-star"
+                                                      })
+                                                    ]
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important m-1"
+                                              },
+                                              [_vm._v("Đã thuê")]
+                                            )
+                                          ]
+                                        )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-success py-1 px-2 my-1",
+                                        attrs: { href: ad.linkZoomIn }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-search-plus"
+                                        })
                                       ]
                                     ),
                                     _vm._v(" "),
                                     _c(
-                                      "div",
+                                      "a",
                                       {
                                         staticClass:
-                                          "label d-flex align-items-center label-success m-1"
+                                          "btn btn-info py-1 pl-2 pr-1 my-1",
+                                        attrs: { href: ad.linkEdit }
                                       },
-                                      [
-                                        _vm._v("Rating: "),
-                                        _vm._l(ad.rating, function(item) {
-                                          return _c("span", { key: item.id }, [
-                                            _c("i", {
-                                              staticClass: "fas fa-star"
-                                            })
-                                          ])
-                                        })
-                                      ],
-                                      2
-                                    )
-                                  ]
-                                )
-                              : _c(
-                                  "div",
-                                  { staticClass: " d-flex flex-wrap w-auto" },
-                                  [
+                                      [_c("i", { staticClass: "fas fa-edit" })]
+                                    ),
+                                    _vm._v(" "),
                                     _c(
-                                      "div",
+                                      "button",
                                       {
                                         staticClass:
-                                          "label d-flex align-items-center label-important  m-1"
+                                          "btn btn-danger py-1 px-2 my-1",
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.removeElementAdmin(i)
+                                          }
+                                        }
                                       },
                                       [
-                                        _vm._v("Like:  "),
-                                        _c(
-                                          "h2",
-                                          {
-                                            staticClass:
-                                              "m-0 d-flex align-items-center"
-                                          },
-                                          [_vm._v(_vm._s(ad.like))]
-                                        )
+                                        _c("i", {
+                                          staticClass: "fas fa-trash-alt"
+                                        })
                                       ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-important m-1"
-                                      },
-                                      [
-                                        _vm._v("Rating: "),
-                                        _vm._l(ad.rating, function(item) {
-                                          return _c("span", { key: item.id }, [
-                                            _c("i", {
-                                              staticClass: "fas fa-star"
-                                            })
-                                          ])
-                                        })
-                                      ],
-                                      2
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-important m-1"
-                                      },
-                                      [_vm._v("Đã thuê")]
                                     )
-                                  ]
-                                )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-success py-1 px-2 my-1",
-                                attrs: { href: ad.linkZoomIn }
-                              },
-                              [_c("i", { staticClass: "fas fa-search-plus" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-info py-1 pl-2 pr-1 my-1",
-                                attrs: { href: ad.linkEdit }
-                              },
-                              [_c("i", { staticClass: "fas fa-edit" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger py-1 px-2 my-1",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.removeElementAdmin(i)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fas fa-trash-alt" })]
-                            )
-                          ])
-                        ])
+                                  ])
+                                ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
                       ])
-                    })
-                  ],
-                  2
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container-fluid-full px-3" }, [
-      _c("div", { staticClass: "row-fluid" }, [
-        _c("div", { staticClass: "span10", attrs: { id: "content" } }, [
-          _c("div", { staticClass: "row-fluid sortable" }, [
-            _c("div", { staticClass: "box span12" }, [
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-content" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-striped table-bordered bootstrap-datatable datatable"
-                  },
-                  [
-                    _vm._m(4),
+                    ]),
                     _vm._v(" "),
-                    _vm._l(_vm.owners, function(owner, i) {
-                      return _c("tbody", { key: i }, [
-                        _c("tr", [
-                          _c("td", [_vm._v(_vm._s(owner.title))]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            _vm._v(_vm._s(owner.date))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            _vm._v(_vm._s(owner.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            owner.status
-                              ? _c(
-                                  "div",
-                                  { staticClass: " d-flex flex-wrap w-auto" },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-success m-1"
-                                      },
-                                      [
-                                        _vm._v("Like:  "),
-                                        _c(
-                                          "h2",
-                                          {
-                                            staticClass:
-                                              "m-0 d-flex align-items-center"
-                                          },
-                                          [_vm._v(_vm._s(owner.like))]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-success m-1"
-                                      },
-                                      [
-                                        _vm._v("Rating: "),
-                                        _vm._l(owner.rating, function(item) {
-                                          return _c("span", { key: item.id }, [
-                                            _c("i", {
-                                              staticClass: "fas fa-star"
-                                            })
-                                          ])
-                                        })
-                                      ],
-                                      2
-                                    )
-                                  ]
-                                )
-                              : _c(
-                                  "div",
-                                  { staticClass: " d-flex flex-wrap w-auto" },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-important  m-1"
-                                      },
-                                      [
-                                        _vm._v("Like:  "),
-                                        _c(
-                                          "h2",
-                                          {
-                                            staticClass:
-                                              "m-0 d-flex align-items-center"
-                                          },
-                                          [_vm._v(_vm._s(owner.like))]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-important m-1"
-                                      },
-                                      [
-                                        _vm._v("Rating: "),
-                                        _vm._l(owner.rating, function(item) {
-                                          return _c("span", { key: item.id }, [
-                                            _c("i", {
-                                              staticClass: "fas fa-star"
-                                            })
-                                          ])
-                                        })
-                                      ],
-                                      2
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "label d-flex align-items-center label-important m-1"
-                                      },
-                                      [_vm._v("Đã thuê")]
-                                    )
-                                  ]
-                                )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "center" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-success py-1 px-2 my-1",
-                                attrs: { href: owner.linkZoomIn }
-                              },
-                              [_c("i", { staticClass: "fas fa-search-plus" })]
-                            ),
+                    _c("tab", { attrs: { title: "Đã phê duyệt" } }, [
+                      _c("div", { staticClass: "box-content" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-striped table-bordered bootstrap-datatable datatable"
+                          },
+                          [
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", [_vm._v("Tên bài đăng")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Ngày đăng")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Chủ trọ")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Trạng thái")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Chỉnh sửa")])
+                              ])
+                            ]),
                             _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger py-1 px-2 my-1",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.removeElementOwner(i)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fas fa-trash-alt" })]
-                            )
-                          ])
-                        ])
+                            _vm._l(_vm.approve, function(owner, i) {
+                              return _c("tbody", { key: i }, [
+                                _c("tr", [
+                                  _c("td", [_vm._v(_vm._s(owner.title))]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _vm._v(_vm._s(owner.created_at))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _vm._v(_vm._s(owner.name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    owner.status
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              " d-flex flex-wrap w-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-success m-1"
+                                              },
+                                              [
+                                                _vm._v("Like:  "),
+                                                _c(
+                                                  "h2",
+                                                  {
+                                                    staticClass:
+                                                      "m-0 d-flex align-items-center"
+                                                  },
+                                                  [_vm._v(_vm._s(owner.like))]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-success m-1"
+                                              },
+                                              [
+                                                _vm._v("Rating: "),
+                                                _vm._l(owner.rating, function(
+                                                  item
+                                                ) {
+                                                  return _c(
+                                                    "span",
+                                                    { key: item.id },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-star"
+                                                      })
+                                                    ]
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            )
+                                          ]
+                                        )
+                                      : _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              " d-flex flex-wrap w-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important  m-1"
+                                              },
+                                              [
+                                                _vm._v("Like:  "),
+                                                _c(
+                                                  "h2",
+                                                  {
+                                                    staticClass:
+                                                      "m-0 d-flex align-items-center"
+                                                  },
+                                                  [_vm._v(_vm._s(owner.like))]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important m-1"
+                                              },
+                                              [
+                                                _vm._v("Rating: "),
+                                                _vm._l(owner.rating, function(
+                                                  item
+                                                ) {
+                                                  return _c(
+                                                    "span",
+                                                    { key: item.id },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-star"
+                                                      })
+                                                    ]
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important m-1"
+                                              },
+                                              [_vm._v("Đã thuê")]
+                                            )
+                                          ]
+                                        )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-success py-1 px-2 my-1",
+                                        attrs: { href: owner.linkZoomIn }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-search-plus"
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger py-1 px-2 my-1",
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.removeElementOwner(i)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-trash-alt"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
                       ])
-                    })
+                    ]),
+                    _vm._v(" "),
+                    _c("tab", { attrs: { title: "Chờ phê duyệt" } }, [
+                      _c("div", { staticClass: "box-content" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-striped table-bordered bootstrap-datatable datatable"
+                          },
+                          [
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", [_vm._v("Tên bài đăng")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Ngày đăng")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Chủ trọ")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Trạng thái")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Chỉnh sửa")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.owners, function(owner, i) {
+                              return _c("tbody", { key: i }, [
+                                _c("tr", [
+                                  _c("td", [_vm._v(_vm._s(owner.title))]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _vm._v(_vm._s(owner.date))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _vm._v(_vm._s(owner.name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    owner.status
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              " d-flex flex-wrap w-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-success m-1"
+                                              },
+                                              [
+                                                _vm._v("Like:  "),
+                                                _c(
+                                                  "h2",
+                                                  {
+                                                    staticClass:
+                                                      "m-0 d-flex align-items-center"
+                                                  },
+                                                  [_vm._v(_vm._s(owner.like))]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-success m-1"
+                                              },
+                                              [
+                                                _vm._v("Rating: "),
+                                                _vm._l(owner.rating, function(
+                                                  item
+                                                ) {
+                                                  return _c(
+                                                    "span",
+                                                    { key: item.id },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-star"
+                                                      })
+                                                    ]
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            )
+                                          ]
+                                        )
+                                      : _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              " d-flex flex-wrap w-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important  m-1"
+                                              },
+                                              [
+                                                _vm._v("Like:  "),
+                                                _c(
+                                                  "h2",
+                                                  {
+                                                    staticClass:
+                                                      "m-0 d-flex align-items-center"
+                                                  },
+                                                  [_vm._v(_vm._s(owner.like))]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important m-1"
+                                              },
+                                              [
+                                                _vm._v("Rating: "),
+                                                _vm._l(owner.rating, function(
+                                                  item
+                                                ) {
+                                                  return _c(
+                                                    "span",
+                                                    { key: item.id },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-star"
+                                                      })
+                                                    ]
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "label d-flex align-items-center label-important m-1"
+                                              },
+                                              [_vm._v("Đã thuê")]
+                                            )
+                                          ]
+                                        )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "center" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-success py-1 px-2 my-1",
+                                        attrs: { href: owner.linkZoomIn }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-search-plus"
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger py-1 px-2 my-1",
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.removeElementOwner(i)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-trash-alt"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ])
                   ],
-                  2
+                  1
                 )
-              ])
-            ])
+              ],
+              1
+            )
           ])
         ])
       ])
@@ -72098,7 +72396,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "clearfix" }),
     _vm._v(" "),
-    _vm._m(5)
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -72111,74 +72409,6 @@ var staticRenderFns = [
       { staticClass: "navbar-side px-2 justify-content-center" },
       [_c("h1", [_vm._v("ADMIN")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "box-header", attrs: { "data-original-title": "" } },
-      [
-        _c("h4", [
-          _c("i", { staticClass: "halflings-icon white user" }),
-          _c("span", { staticClass: "break" }),
-          _vm._v("Bài đăng")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Tên bài đăng")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Ngày đăng")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Chủ trọ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Trạng thái")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Chỉnh sửa")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "box-header", attrs: { "data-original-title": "" } },
-      [
-        _c("h4", [
-          _c("i", { staticClass: "halflings-icon white user" }),
-          _c("span", { staticClass: "break" }),
-          _vm._v("Bài quản lý")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Tên bài đăng")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Ngày đăng")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Chủ trọ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Trạng thái")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Chỉnh sửa")])
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -72709,19 +72939,22 @@ var render = function() {
                   staticClass: "p-2",
                   attrs: { "aria-placeholder": "Chọn Quận" },
                   on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.districtId = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.districtId = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.onSelectChange
+                    ]
                   }
                 },
                 _vm._l(_vm.districts, function(option) {
@@ -75305,6 +75538,128 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-slim-tabs/dist/vue-slim-tabs.esm.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vue-slim-tabs/dist/vue-slim-tabs.esm.js ***!
+  \**************************************************************/
+/*! exports provided: Tab, Tabs, install */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tab", function() { return Tab; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tabs", function() { return Tabs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/*!
+ * vue-slim-tabs v0.4.0
+ * (c) egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+var Tabs = {
+  name: "tabs",
+  props: {
+    defaultIndex: {
+      default: 0,
+      type: Number
+    },
+    onSelect: {
+      type: Function
+    }
+  },
+  data: function data() {
+    return {
+      selectedIndex: this.defaultIndex
+    };
+  },
+  methods: {
+    switchTab: function switchTab(e, index, isDisabled) {
+      if (!isDisabled) {
+        this.selectedIndex = index;
+        this.onSelect && this.onSelect(e, index);
+      }
+    }
+  },
+  render: function render() {
+    var _this = this;
+
+    var h = arguments[0];
+    var tabs = this.$slots.default.filter(function (component) {
+      return component.componentOptions;
+    });
+    var tabList = [];
+    tabs.forEach(function (child, index) {
+      var _child$componentOptio = child.componentOptions.propsData,
+          title = _child$componentOptio.title,
+          titleSlot = _child$componentOptio.titleSlot,
+          disabled = _child$componentOptio.disabled;
+      var content = titleSlot ? _this.$slots[titleSlot] : title;
+      var isDisabled = disabled === true || disabled === "";
+      tabList.push(h("li", {
+        "class": "vue-tab",
+        attrs: {
+          role: "tab",
+          "aria-selected": _this.selectedIndex === index ? "true" : "false",
+          "aria-disabled": isDisabled ? "true" : "false"
+        },
+        on: {
+          "click": function click(e) {
+            return _this.switchTab(e, index, isDisabled);
+          }
+        }
+      }, [content]));
+    });
+    return h("div", {
+      "class": "vue-tabs",
+      attrs: {
+        role: "tabs"
+      }
+    }, [h("ul", {
+      "class": "vue-tablist",
+      attrs: {
+        role: "tablist"
+      }
+    }, [this.$slots.left, tabList, this.$slots.right]), tabs[this.selectedIndex]]);
+  }
+};
+var Tab = {
+  name: "tab",
+  props: ["title", "titleSlot", "disabled"],
+  render: function render() {
+    var h = arguments[0];
+    return h("div", {
+      "class": "vue-tabpanel",
+      attrs: {
+        role: "tabpanel"
+      }
+    }, [this.$slots.default]);
+  }
+};
+function install(Vue) {
+  Vue.component(Tabs.name, Tabs);
+  Vue.component(Tab.name, Tab);
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_default_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../style-loader!../../css-loader??ref--6-1!../../vue-loader/lib/loaders/stylePostLoader.js!../../postcss-loader/src??ref--6-2!./default.css?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_default_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_default_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_default_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_default_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
@@ -88755,8 +89110,10 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Admin_vue_vue_type_template_id_58b78718___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Admin.vue?vue&type=template&id=58b78718& */ "./resources/js/components/Admin.vue?vue&type=template&id=58b78718&");
 /* harmony import */ var _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Admin.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Admin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Admin.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var vue_slim_tabs_themes_default_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css& */ "./node_modules/vue-slim-tabs/themes/default.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _Admin_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Admin.vue?vue&type=style&index=1&lang=css& */ "./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -88765,7 +89122,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Admin_vue_vue_type_template_id_58b78718___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Admin_vue_vue_type_template_id_58b78718___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -88797,18 +89154,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css&":
+/***/ "./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css&":
 /*!****************************************************************************!*\
-  !*** ./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css& ***!
   \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Admin.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Admin.vue?vue&type=style&index=1&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Admin_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),

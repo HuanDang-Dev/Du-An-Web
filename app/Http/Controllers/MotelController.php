@@ -39,6 +39,7 @@ class MotelController extends Controller
         $district = $request->districtId;
         $listMotel = DB::table('motels')
                     ->where('district_id', $district)
+                    ->where('approve', 1)
                     ->orderByRaw('created_at DESC')
                     ->get();
         foreach($listMotel as $key => $item){
