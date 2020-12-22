@@ -1,17 +1,17 @@
 <template>
   <div class="Comment__wrapper">
     <div>Bình luận:</div>
-    <comment-add></comment-add>
+    <comment-add v-bind:motel_id=this.motel_id></comment-add>
     <div v-if="max > 4" >
       <div v-if="!is_more">
         <button type="button" @click="changeAmountComment">Xem nhiều bình luận hơn</button>
       </div>
-    <div v-else>
+      <div v-else>
       <button type="button" @click="changeAmountComment">Xem ít bình luận hơn</button>
       </div>
     </div>
-    <div v-else>
-      <div>Các bình luận gần đây:</div>
+    <div v-if="max === 0">
+      <button type="button" @click="loadComments">Xem bình luận</button>
     </div>
     <div v-for="comment in comments" v-bind:key="comment.id">
     <comment :comment="comment"></comment>
@@ -27,6 +27,9 @@
     components: {
       CommentAdd, Comment
     },
+    props:[
+      'motel_id',
+    ],
     created() {
       this.loadComments();
       EventBus.$on('commentAddedEvent', (data) => {
@@ -48,8 +51,8 @@
         this.comments.unshift(comment);
       },
       loadComments() {
-        axios.post('motel/comment', {
-          motelId: 1,
+       axios.post('/motel/comment', {
+          motelId: this.motel_id,
         }).then(response => {
           this.comments = response.data.comments;
           this.moreComments = response.data.moreComments;

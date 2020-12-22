@@ -29,6 +29,7 @@ Route::get('/post', 'HomeController@indexPost');
 Route::get('/admin', 'HomeController@indexAdmin');
 Route::get('/owner', 'HomeController@indexOwner');
 Route::get('/rule', 'HomeController@indexRule');
+Route::get('/commentIndex', 'CommentController@indexComment');
 Route::get('/viewMotel/{slug}/', function ($slug) {
     $motel = Motel::where('slug', $slug)->first();  
     if($motel){
@@ -51,7 +52,7 @@ Route::get('/viewMotel/{slug}/', function ($slug) {
 Route::get('/admin/getindex', 'AdminController@indexAdmin');
 Route::post('/storemotel', 'MotelController@storeMotel');
 Route::get('/logout', 'HomeController@logout');
-Route::post('/login', 'Controller@login');
+Route::post('/login', 'HomeController@login');
 Auth::routes();
 // Route::post('readUpdate', 'MessageController@updateUnread')->name('read');
 Route::get('/chat', 'HomeController@index')->name('chat');

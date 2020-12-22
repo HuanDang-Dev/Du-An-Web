@@ -9,11 +9,14 @@
           placeholder="Viết bình luận, đánh giá của bạn về nhà trọ này vào đây. ...">
         </textarea>
       </div>
-
       <div class="form-group">
-        <button class="btn btn-primary" @click="saveNewComment">Bình luận</button>
+        <div v-if="status">
+            <button class="btn btn-primary" @click="saveNewComment">Bình luận</button>
+        </div>
+        <div v-else>
+            <a href="/commentIndex" class="btn btn-primary">Bình luận </a>
+        </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -24,20 +27,35 @@
   export default {
     data() {
       return {
-        comment: ''
+        comment: '',
+        status: true,
       }
     },
+    mounted: function(){
+      axios.post('/comment', {
+          comment: this.comment,
+          motelId: this.motel_id,
+        }).then(response => {
+          this.status = true;
+        }).catch(error => {
+          if(error.response.data.message === 'Unauthenticated.'){
+            this.status = false;
+          }
+        })
+    },
+    props:[
+      'motel_id'
+    ],
     methods: {
       saveNewComment() {
         axios.post('/comment', {
           comment: this.comment,
-          userId: 1,
-          motelId:1,
+          motelId: this.motel_id,
         }).then(response => {
           this.comment = '';
           EventBus.$emit('commentAddedEvent', response.data.comment);
         }).catch(error => {
-          // this.errors = error.response.data.comment
+          this.errors = error.response.data.message;
         })
       }
     }

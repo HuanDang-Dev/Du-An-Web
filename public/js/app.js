@@ -2259,6 +2259,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['comment']
 });
@@ -2297,26 +2298,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      comment: ''
+      comment: '',
+      status: true
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/comment', {
+      comment: this.comment,
+      motelId: this.motel_id
+    }).then(function (response) {
+      _this.status = true;
+    })["catch"](function (error) {
+      if (error.response.data.message === 'Unauthenticated.') {
+        _this.status = false;
+      }
+    });
+  },
+  props: ['motel_id'],
   methods: {
     saveNewComment: function saveNewComment() {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/comment', {
         comment: this.comment,
-        userId: 1,
-        motelId: 1
+        motelId: this.motel_id
       }).then(function (response) {
-        _this.comment = '';
+        _this2.comment = '';
         _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('commentAddedEvent', response.data.comment);
-      })["catch"](function (error) {// this.errors = error.response.data.comment
+      })["catch"](function (error) {
+        _this2.errors = error.response.data.message;
       });
     }
   }
@@ -2365,6 +2385,7 @@ __webpack_require__.r(__webpack_exports__);
     CommentAdd: _CommentAdd_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Comment: _Comment_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: ['motel_id'],
   created: function created() {
     var _this = this;
 
@@ -2390,8 +2411,8 @@ __webpack_require__.r(__webpack_exports__);
     loadComments: function loadComments() {
       var _this2 = this;
 
-      axios.post('motel/comment', {
-        motelId: 1
+      axios.post('/motel/comment', {
+        motelId: this.motel_id
       }).then(function (response) {
         _this2.comments = response.data.comments;
         _this2.moreComments = response.data.moreComments;
@@ -3316,6 +3337,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Comments_CommentWrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comments/CommentWrapper */ "./resources/js/components/Comments/CommentWrapper.vue");
+/* harmony import */ var _Comments_event_bus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Comments/event-bus */ "./resources/js/components/Comments/event-bus.js");
 //
 //
 //
@@ -3359,6 +3381,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3380,8 +3403,6 @@ __webpack_require__.r(__webpack_exports__);
     axios.post('/api/getviewmotel', {
       slug: this.slug
     }).then(function (response) {
-      console.log(response.data[0]); // console.log(this.owners)
-
       _this.motel = response.data[0];
     });
   },
@@ -7884,7 +7905,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#created_at{\n  display: inline; \n  color: #797979;\n  font-size: 14px;\n  padding-top: 10px;\n  padding-left: 800px;\n}\n#name{\n  display: inline; \n  font-size: 19px;\n  font-weight: bold;\n  color: #000FFF;\n}\n#body{\n  display: inline; \n  font-size: 24px;\n  color: #000FFF;\n}\n", ""]);
+exports.push([module.i, "\n#time{\n  display: inline;\n}\n", ""]);
 
 // exports
 
@@ -80295,21 +80316,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card pb-1" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _c("div", { attrs: { id: "name" } }, [
-        _vm._v(" " + _vm._s(_vm.comment.user.name) + ": ")
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "created_at" } }, [
-        _vm._v(_vm._s(_vm.comment.created_at))
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "body" } }, [
-        _vm._v(" " + _vm._s(_vm.comment.body) + " ")
+  return _c("div", { staticClass: "card" }, [
+    _c("h5", { staticClass: "card-header" }, [
+      _vm._v(_vm._s(_vm.comment.user.name) + " "),
+      _c("h6", { attrs: { id: "time" } }, [
+        _vm._v(" " + _vm._s(_vm.comment.created_at))
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v(_vm._s(_vm.comment.body) + ".")
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Thích")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.addCommentReply } },
+        [_vm._v("Trả lời")]
+      )
     ])
   ])
 }
@@ -80366,11 +80392,27 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", on: { click: _vm.saveNewComment } },
-          [_vm._v("Bình luận")]
-        )
+        _vm.status
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: { click: _vm.saveNewComment }
+                },
+                [_vm._v("Bình luận")]
+              )
+            ])
+          : _c("div", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { href: "/commentIndex" }
+                },
+                [_vm._v("Bình luận ")]
+              )
+            ])
       ])
     ])
   ])
@@ -80403,7 +80445,7 @@ var render = function() {
     [
       _c("div", [_vm._v("Bình luận:")]),
       _vm._v(" "),
-      _c("comment-add"),
+      _c("comment-add", { attrs: { motel_id: this.motel_id } }),
       _vm._v(" "),
       _vm.max > 4
         ? _c("div", [
@@ -80429,7 +80471,17 @@ var render = function() {
                   )
                 ])
           ])
-        : _c("div", [_c("div", [_vm._v("Các bình luận gần đây:")])]),
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.max === 0
+        ? _c("div", [
+            _c(
+              "button",
+              { attrs: { type: "button" }, on: { click: _vm.loadComments } },
+              [_vm._v("Xem bình luận")]
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.comments, function(comment) {
         return _c(
@@ -83168,7 +83220,11 @@ var render = function() {
               ]),
               _c("br"),
               _vm._v(" "),
-              _c("div", [_c("comment-wrapper")], 1)
+              _c(
+                "div",
+                [_c("comment-wrapper", { attrs: { motel_id: this.motel.id } })],
+                1
+              )
             ])
           ])
         ])

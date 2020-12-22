@@ -275,10 +275,10 @@
                                                     </ul>
                                                 </div>
                                             @else
-                                                <a href="{{ route('login') }}"><h2 class="px-2">Login</h2></a>
+                                                <a href="/commentIndex"><h2 class="px-2">{{ __('Login') }}</h2></a>
 
                                                 @if (Route::has('register'))
-                                                    <a href="{{ route('register') }}"><h2 class="px-4">Register</h2></a>
+                                                    <a href="{{ route('register') }}"><h2 class="px-4">{{ __('Register') }}</h2></a>
                                                 @endif
                                             @endauth
                                         </div>
