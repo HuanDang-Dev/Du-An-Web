@@ -4,7 +4,9 @@ import Vuex from 'vuex'
 import bootstrap from 'bootstrap'
 import storeVuex from './store/index'
 import filter from './filter'
-Vue.use(Vuex, bootstrap)
+import VueSweetalert2 from 'vue-sweetalert2';
+
+Vue.use(Vuex, bootstrap, VueSweetalert2)
 
 const store = new Vuex.Store(storeVuex)
 

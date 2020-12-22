@@ -17,18 +17,16 @@
                                             <tr>
                                                 <th>Tên bài đăng</th>
                                                 <th>Ngày đăng</th>
-                                                <th>Chủ trọ</th>
                                                 <th>Trạng thái</th>
                                                 <th>Chỉnh sửa</th>
                                             </tr>
                                         </thead>
-                                        <tbody v-for="(ad, i) in motel" :key="i">
+                                        <tbody v-for="(ad, i) in motelAdmin" :key="i">
                                             <tr>
                                                 <td>{{ad.title}}</td>
                                                 <td class="center">{{ad.created_at}}</td>
-                                                <td class="center">{{ad.name}}</td>
                                                 <td class="center">
-                                                    <div class=" d-flex flex-wrap w-auto" v-if="ad.status">
+                                                    <div class=" d-flex flex-wrap w-auto" v-if="ad.activy == 0">
                                                         <div class="label d-flex align-items-center label-success m-1">Like:  <h2 class="m-0 d-flex align-items-center">{{ad.like}}</h2></div>
                                                         <div class="label d-flex align-items-center label-success m-1">Rating: <span v-for="item in ad.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
                                                     </div>
@@ -39,13 +37,13 @@
                                                     </div>
                                                 </td>
                                                 <td class="center">
-                                                    <a class="btn btn-success py-1 px-2 my-1" :href="ad.linkZoomIn">
+                                                    <a class="btn btn-success py-1 px-2 my-1" :href="ad.src">
                                                         <i class="fas fa-search-plus"></i>
                                                     </a>
                                                     <a class="btn btn-info py-1 pl-2 pr-1 my-1" :href="ad.linkEdit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementAdmin(i)">
+                                                    <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementAdmin(ad.slug,i)">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </td>
@@ -73,7 +71,7 @@
                                                 <td class="center">{{owner.created_at}}</td>
                                                 <td class="center">{{owner.name}}</td>
                                                 <td class="center">
-                                                    <div class=" d-flex flex-wrap w-auto" v-if="owner.status">
+                                                    <div class=" d-flex flex-wrap w-auto" v-if="owner.activy == 0">
                                                         <div class="label d-flex align-items-center label-success m-1">Like:  <h2 class="m-0 d-flex align-items-center">{{owner.like}}</h2></div>
                                                         <div class="label d-flex align-items-center label-success m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
                                                     </div>
@@ -84,10 +82,10 @@
                                                     </div>
                                                 </td>
                                                 <td class="center">
-                                                    <a class="btn btn-success py-1 px-2 my-1" :href="owner.linkZoomIn">
+                                                    <a class="btn btn-success py-1 px-2 my-1" :href="owner.src">
                                                         <i class="fas fa-search-plus"></i>
                                                     </a>
-                                                    <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementOwner(i)">
+                                                    <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementApprove(owner.slug, i)">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </td>
@@ -105,31 +103,25 @@
                                                 <th>Tên bài đăng</th>
                                                 <th>Ngày đăng</th>
                                                 <th>Chủ trọ</th>
-                                                <th>Trạng thái</th>
+                                                <th>Phê duyệt</th>
                                                 <th>Chỉnh sửa</th>
                                             </tr>
                                         </thead>
-                                        <tbody v-for="(owner, i) in owners" :key="i">
+                                        <tbody v-for="(owner, i) in unapprove" :key="i">
                                             <tr>
                                                 <td>{{owner.title}}</td>
-                                                <td class="center">{{owner.date}}</td>
+                                                <td class="center">{{owner.created_at}}</td>
                                                 <td class="center">{{owner.name}}</td>
                                                 <td class="center">
-                                                    <div class=" d-flex flex-wrap w-auto" v-if="owner.status">
-                                                        <div class="label d-flex align-items-center label-success m-1">Like:  <h2 class="m-0 d-flex align-items-center">{{owner.like}}</h2></div>
-                                                        <div class="label d-flex align-items-center label-success m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
-                                                    </div>
-                                                    <div class=" d-flex flex-wrap w-auto" v-else>
-                                                        <div class="label d-flex align-items-center label-important  m-1">Like:  <h2 class="m-0 d-flex align-items-center">{{owner.like}}</h2></div>
-                                                        <div class="label d-flex align-items-center label-important m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
-                                                        <div class="label d-flex align-items-center label-important m-1">Đã thuê</div>
-                                                    </div>
+                                                    <button class="btn btn-success py-1 px-2 my-1" v-on:click="approveItem(owner.slug, i)">
+                                                        <i class="fas fa-check-square"></i>
+                                                    </button>
                                                 </td>
                                                 <td class="center">
-                                                    <a class="btn btn-success py-1 px-2 my-1" :href="owner.linkZoomIn">
+                                                    <a class="btn btn-success py-1 px-2 my-1" :href="owner.src">
                                                         <i class="fas fa-search-plus"></i>
                                                     </a>
-                                                    <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementOwner(i)">
+                                                    <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementUnapprove(owner.slug, i)">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </td>
@@ -138,14 +130,60 @@
                                     </table>
                                 </div>
                             </tab>
-
+                            <tab title="Báo Cáo">
+                                 <div class="box-content">
+                                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Tên bài đăng</th>
+                                                <th>Ngày đăng</th>
+                                                <th>Chủ trọ</th>
+                                                <th>Trạng thái</th>
+                                                <th>Chỉnh sửa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody v-for="(owner, i) in report" :key="i">
+                                            <tr>
+                                                <td>{{owner.title}}</td>
+                                                <td class="center">{{owner.created_at}}</td>
+                                                <td class="center">{{owner.name}}</td>
+                                                <td class="center">
+                                                    
+                                                </td>
+                                                <td class="center">
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </tab>
+                            <tab title="Chủ trọ">
+                                 <div class="box-content">
+                                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Tên</th>
+                                                <th>Email</th>
+                                                <th>Số bài đăng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody v-for="(owner, i) in user" :key="i">
+                                            <tr>
+                                                <td>{{owner.name}}</td>
+                                                <td class="center">{{owner.email}}</td>
+                                                <td class="center">{{owner.count}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </tab>
                         </tabs>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="clearfix"></div>
 
     <footer>
@@ -165,31 +203,109 @@ export default {
     name: "admin",
     data() {
         return {
-            motel: [],
+            motelAdmin: [],
             approve: [],
-            unapprove: []
+            unapprove: [],
+            report: [],
+            user: []
         }
     },
     methods: {
-        removeElementOwner: function (index) {
-            this.$delete(this.owners, index)
+        removeElementApprove: function (slugMotel, index) {
+            // this.$delete(this.approve, index)
+            Swal.fire({
+                title: 'Bạn chắc là muốn xóa chứ?',
+                text: "Bài đăng sẽ không thể được tìm thấy bởi bất kỳ ai nữa!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+                }).then(function() {
+                    this.$delete(this.approve, index);
+                    this.deleteItem(slugMotel, approve);
+                    
+                }
+            );
         },
-        removeElementAdmin: function (index) {
-            this.$delete(this.admin, index)
-        }
+        removeElementAdmin: function (slugMotel, index) {
+            // this.$delete(this.motelAdmin, index)
+            Swal.fire({
+                title: 'Bạn chắc là muốn xóa chứ?',
+                text: "Bài đăng sẽ không thể được tìm thấy bởi bất kỳ ai nữa!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+                }).then(function() {
+                    // this.$delete(this.motelAdmin, index);
+                    this.deleteItem(slugMotel, motelAdmin);
+                    
+                }
+            );
+        },
+        removeElementUnapprove: function (slugMotel, index) {
+                var x = this.approve
+               Swal.fire({
+                title: 'Bạn chắc là muốn xóa chứ?',
+                text: "Bài đăng sẽ không thể được tìm thấy bởi bất kỳ ai nữa!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+                }).then(function() {
+                    // $delete(this.unapprove, index);
+                    // TouchList.slugMotel
+                    // console.log(window.)
+                    // globalThis.deleteItem(TouchList.slugMotel, globalThis.unapprove);
+                    
+                }
+            );
+        },
+        approveItem: function (slugMotel, index) {
+            axios.post('/admin/approve',  {
+                    slug: slugMotel
+                  }).then((response) => {
+                if(response.data.success){
+                    Swal.fire("Phê duyệt thành công", "Bầy giờ bài viết đã có thể  được nhìn thầy công khai!", "success");
+                    this.$delete(this.unapprove, index)
+                    this.reload();
+                }
+            })
+        },
+        deleteItem(slugMotel, list){
+            this.$delete(list, index);
+            axios.post('/admin/delete',  {
+                    slug: slugMotel
+                  }).then((response) => {
+                if(response.data.success){
+                    Swal.fire(
+                        'Đã xóa!',
+                        'Bài đăng đã bị xóa',
+                        'success'
+                    );
+                    this.reload();
+                }
+            })
+        }, 
+        reload(){
+            axios.get('/admin/getindex').then((response) => {
+                this.motelAdmin = response.data.list;
+                this.approve = response.data.approve;
+                this.unapprove = response.data.unapprove;
+                this.user = response.data.users;
+            })
+        }                
     },
     mounted() {
         axios.get('/admin/getindex').then((response) => {
-            // this.districts = response.data
-            console.log(response.data)
-            this.motel = response.data.list;
+            this.motelAdmin = response.data.list;
             this.approve = response.data.approve;
             this.unapprove = response.data.unapprove;
+            this.user = response.data.users;
         })
-        // axios.get('/api/getuser').then((response) => {
-        //     // thi = response.data
-        //     console.log(response.data)
-        // })
     }
 }
 </script>

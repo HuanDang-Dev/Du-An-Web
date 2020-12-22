@@ -6,13 +6,13 @@
             <div class="card-body">
                 <div class="d-flex flex-row m-4">
                       <h1 class="pr-2" for="">Quận</h1>
-                      <select v-model="districtId" class="p-2 w-50" aria-placeholder="Chọn Quận">
+                      <select v-model="districtId" class="p-2 w-50" aria-placeholder="Chọn Quận" v-on:change="onSelectChange">
                         <option v-for="option in districts" v-bind:value="option.id">
                           {{ option.name }}
                           </option>
                       </select>
                   </div>
-                    <h4 class="card-title text-left ml-4" >Kết quả tìm kiếm truyện: <strong>{{key}}</strong></h4>
+                    <h4 class="card-title text-left ml-4" >Kết quả tìm kiếm truyện</h4>
                 <div class="row">
                 <div class="item-component col-md-3 text-left" v-for="(post, i) in posts" :key="i">
                     <a :href="post.src" class=" border-primary" >
@@ -51,22 +51,36 @@ export default {
   name: "Search",
   data() {
     return {
-      key: this.$route.params.search,
       districtId: 11,
       posts: [],
       districts: [],
+      slug: null
     }
   },
   mounted() {
-    axios.get('/api/index').then((response) => {
-      this.truyenNgonTinh = response.data['truyenngontinh']
-      this.truyenTienHiep = response.data['truyentienhiep']
-      this.truyenTeen = response.data['truyenteen']
+    let url = window.location.href;
+    this.slug = url.substring(url.search('/search/') + 8)
+    axios.get('/api/getdistrict').then((response) => {
+              this.districts = response.data
     })
-    axios.get('/api/search/?search='+ this.key).then((response) => {
-      this.search = response.data['search']
+    axios.post('/api/search',  {
+                    districtId: this.districtId,
+                    slug: this.lug
+                  }).then((response) => {
+              this.posts = response.data
     })
-  }
+  },
+    methods: {
+        onSelectChange(event){
+            axios.post('/api/search',  {
+                    districtId: this.districtId,
+                    slug: this.lug
+                  }).then((response) => {
+                    console.log(response.data)
+                    this.posts = response.data
+          })
+        }
+    },
 };
 </script>
 <style scoped>
@@ -89,10 +103,14 @@ a {
   max-width: 100%;
   vertical-align: middle;
 }
-h1, h5, select {
+h1, h5{
   font-family: 'Noto Serif', serif;
+    font-size: 26px;
+}
+select, option{
+    font-family: 'Noto Serif', serif;
 }
 h4 {
-  font-size: 26px;
+  font-size: 20px;
 }
 </style>

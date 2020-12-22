@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('welcome');
 });
-Route::get('/search', function () {
+Route::get('/search/{slug}', function () {
     return view('search');
 });
 Route::get('/notFound', function () {
@@ -44,7 +44,9 @@ Route::get('/viewMotel/{slug}/', function ($slug) {
             $motel->save();
             return view('viewMotel');
         }
+        return view('404');
     }
+    return view('404');
 });
 Route::get('/admin/getindex', 'AdminController@indexAdmin');
 Route::post('/storemotel', 'MotelController@storeMotel');
@@ -64,4 +66,5 @@ Route::get('deleteallmessage/{id}', 'MessageController@delete_all_message')->nam
 Route::post('/comment', 'CommentController@store')->name('comment');
 Route::post('motel/comment', 'CommentController@index')->name('motel.comment');
 
-
+Route::post('admin/approve', 'MotelController@approveMotel');
+Route::post('admin/delete', 'MotelController@approveMotel');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Motel;
+use App\User;
 use App\District;
 use App\Events\Comment\CommentCreated;
 use Illuminate\Http\Request;
@@ -25,8 +26,15 @@ class MotelController extends Controller
         $motel->images = "/images/" . $imageName;
         $motel->user_id = auth()->user()->id;
         $motel->district_id = $request->district_id;
+
+        $user = User::where('id', auth()->user()->id)->first();
+        if($user->role == 1){
+            $motel->approve = 1;
+        }
         $motel->save();
-        return response($request, 200);
+        return response()->json([
+            'success' => true
+        ], 200);
     }
 
     public function deleteMotel(Request $request){
@@ -64,4 +72,28 @@ class MotelController extends Controller
         }
         return $listMotel;
     } 
+
+    public function searchMotel(Request $request){
+        $slug = $request->slug;
+        $district = $request->districtId;
+        $listMotel = DB::table('motels')
+                    ->where('district_id', $district)
+                    ->where('slug','like', '%' . $slug . '%')
+                    ->where('approve', 1)
+                    ->orderByRaw('created_at DESC')
+                    ->get();
+        foreach($listMotel as $key => $item){
+            $item->src = '/viewMotel/' . $item->slug;
+        }
+        return $listMotel;
+    } 
+
+    public function approveMotel(Request $request){
+        $slug = $request->slug;
+        $motel = Motel::where('slug', $slug)
+            ->update(['approve' => 1]);
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
 }

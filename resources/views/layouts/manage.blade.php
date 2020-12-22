@@ -17,7 +17,11 @@
         <link href="https://fonts.googleapis.com/css?family=Electrolize&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
         <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/a81368914c.js"></script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
             html, body {
                 font-family: 'Roboto', sans-serif;
@@ -250,7 +254,7 @@
                         <div class="col-md-6 col-sm-12 text-left py-2 align-items-center justify-content-center">
                             <div class="d-flex pl-5">
                                 <button class="bg-search"><i class="fas fa-search pt-1 pl-2 pr-1"></i></button>
-                                <input placeholder="Bất động sản" id="__inputItemProps" type="text" class="input-search w-100">
+                                <input placeholder="Bất động sản" type="text" class="input-search w-100" id="keyword" onchange="change()" value="">
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-12 mx-4 px-5 d-flex align-items-center justify-content-center">
@@ -293,5 +297,38 @@
                 @yield('content')
             </main>
         </div>
+        <script>
+            function change(){
+                if(document.getElementById("keyword").value != null){
+                    $("#keyword").keyup(function(event){
+                        if(event.keyCode == 13){
+                            ChangeToSlug();
+                        }
+                    });
+                }
+            };
+            function ChangeToSlug()
+            {
+                var title, slug;
+                title = document.getElementById("keyword").value;
+                slug = title.toLowerCase();
+                slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                slug = slug.replace(/đ/gi, 'd');
+                slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                slug = slug.replace(/ /gi, "-");
+                slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-/gi, '-');
+                slug = '@' + slug + '@';
+                slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                window.location = '/search/' + slug;
+            }
+            </script>
     </body>
 </html>

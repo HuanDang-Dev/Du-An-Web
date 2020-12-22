@@ -23,3 +23,4 @@ Route::post('getmotel', 'MotelController@getMotel');
 Route::get('getdistrict', 'MotelController@getDistrict');
 Route::get('getuser', 'UserController@current_user');
 Route::post('getviewmotel', 'MotelController@getViewMotel');
+Route::post('search', 'MotelController@searchMotel');

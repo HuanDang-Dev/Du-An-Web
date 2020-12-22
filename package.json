@@ -29,6 +29,7 @@
     "moment": "^2.29.1",
     "pusher-js": "^4.4.0",
     "vue-slim-tabs": "^0.4.0",
+    "vue-sweetalert2": "^4.1.1",
     "vuex": "^3.6.0"
   }
 }

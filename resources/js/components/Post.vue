@@ -52,6 +52,17 @@
                         <textarea name="" id="" cols="30" rows="10" v-model="description">
                     </textarea>
                     </div>
+                    <div class="d-flex flex-column m-4">
+                        <div class="p-2 w-100 " v-if="success == 1">
+                            <div class="alert alert-success">Đăng tin thành công</div>
+                        </div>
+                        <div class="p-2 w-100 align-items-center" v-else>
+                            <div class="p-2 w-100 " v-if="success == 0">
+                                <div class="alert alert-danger">Đăng tin không thành công</div>
+                            </div>
+                        </div>
+                    </div>
+                     
                     <div class="d-flex px-4 py-3 mb-2">
                         <button class="login__btn mx-3 w-25"><a class="btn-register" @click="post">Đăng Tin</a></button>
                         <button class="login__btn mx-3 w-25"><a class="btn-register" href="/">Hủy</a></button>
@@ -80,6 +91,7 @@ export default {
             user_id: 12,
             imagePreview: null,
             showPreview: false,
+            success: null
         }
     },
     methods: {
@@ -117,7 +129,11 @@ export default {
             formData.append('district_id', this.district_id);
 
             axios.post('/storemotel', formData, config).then(response => {
-          console.log(response)
+                if(response.data.success){
+                    this.success = 1;
+                } else{
+                    this.success = 0;
+                }
         }).catch(error => {
           this.errors = error.response.data.comment
         })
