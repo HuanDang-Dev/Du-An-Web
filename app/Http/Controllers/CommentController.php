@@ -9,28 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 use App\Comment;
 use App\User;
+use App\Motel;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function indexComment()
+    {
+        return redirect('/home');
+    }
+    
     public function index(Request $request)
     {
-        $data = $request->validate([
-            'motelId' => 'required',
-        ]);
+        $maxIndex = Comment::select('id')->where('motel_id', $request->motelId)->count();
 
-        $maxIndex = DB::table('comments')->max('id');
-
-        $comments = Comment::where('motel_id', $data['motelId'])
-            ->orderBy('id')
-            ->skip($maxIndex - 4)
-            ->take($maxIndex)
+        $comments = Comment::where('motel_id', $request->motelId)
+            ->orderBy('id', 'desc')
+            ->limit(4)
             ->get();
 
-        $moreComments = Comment::where('motel_id', $data['motelId'])
-        ->orderBy('id')
-        ->skip($maxIndex - 14)
-        ->take($maxIndex)
-        ->get();    
+        $moreComments = Comment::where('motel_id', $request->motelId)
+        ->orderBy('id', 'desc')
+        ->limit(14)
+        ->get(); 
 
         return response()->json(['comments' => $comments,'moreComments' => $moreComments, 'max' => $maxIndex], 201);
     }

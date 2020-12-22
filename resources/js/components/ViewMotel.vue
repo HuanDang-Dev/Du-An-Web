@@ -30,7 +30,7 @@
                 </p>
               </div><br>
               <div>
-                <comment-wrapper></comment-wrapper>
+                <comment-wrapper v-bind:motel_id=this.motel.id></comment-wrapper>
               </div>
             </div>
           </div>
@@ -45,7 +45,6 @@
 import CommentWrapper from './Comments/CommentWrapper';
 export default {
   components: { CommentWrapper },
-  
   name: "viewMotel",
   data() {
     return {
@@ -53,7 +52,6 @@ export default {
       motel: {},
     }
   },
-
   mounted: function() {
     this.startSlide();
     let url = window.location.href;
@@ -61,8 +59,6 @@ export default {
     axios.post('/api/getviewmotel', {
           slug: this.slug
         }).then((response) => {
-    console.log(response.data[0])
-    // console.log(this.owners)
     this.motel = response.data[0];
   })
   },
