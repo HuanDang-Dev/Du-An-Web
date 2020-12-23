@@ -65,7 +65,10 @@ Route::get('deleteallmessage/{id}', 'MessageController@delete_all_message')->nam
 
 
 Route::post('/comment', 'CommentController@store')->name('comment');
-Route::post('motel/comment', 'CommentController@index')->name('motel.comment');
+Route::post('/motel/comment', 'CommentController@index')->name('motel.comment');
 
 Route::post('admin/approve', 'MotelController@approveMotel');
 Route::post('admin/delete', 'MotelController@approveMotel');
+
+Route::post('/reply', 'CommentReplyController@store')->name('reply');
+Route::post('/reply/comment', 'CommentReplyController@index')->name('reply.comment');
