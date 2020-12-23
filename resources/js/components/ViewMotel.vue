@@ -20,7 +20,17 @@
                 <span> - </span>
                 <h5 class="ml-2">  {{motel.area}} M<sup>2</sup></h5>
                 <div class="position-absolute btn-rating">Rating: <span v-for="item in motel.rating" :key="item.id"><i class="fas fa-star text-warning"></i></span></div>
-                <button class="position-absolute btn-like text-primary" @click="countLike()"><i class="far fa-thumbs-up text-primary btn-i-like"></i>{{motel.like}}</button>
+                <button class="position-absolute btn-like text-primary" @click="countLike()">
+                  <div v-if="is_like === 1">
+                    <i class="fas fa-thumbs-up text-primary btn-i-like"></i>{{likes}}
+                  </div>
+                  <div v-else-if="is_like === 0">
+                    <i class="far fa-thumbs-up text-primary btn-i-like"></i>{{likes}}
+                  </div>
+                </button>
+                  <div v-if="is_like === 2">
+                    <a class="position-absolute btn-like text-primary" href="/commentIndex"><i class="far fa-thumbs-up text-primary btn-i-like"></i>{{likes}}</a>
+                  </div>
               </div>
               <div>
                 <p>Địa chỉ: {{motel.address}}</p>
@@ -64,22 +74,23 @@ export default {
       motel: {},
       stars: 0,
       maxStars: 5,
+      likes: 0,
       countRating: '',
-      status: false
+      is_like: 1
     }
   },
   mounted: function() {
     this.startSlide();
     let url = window.location.href;
     this.slug = url.substring(url.search('/viewMotel/') + 11)
-    axios.post('/getviewmotel', {
-          slug: this.slug
-        }).then((response) => {
-          console.log(response.data)
-        this.motel = response.data.motel[0];
-        this.countRating = response.data.countRating;
-        this.stars = response.data.rate;
-        })
+    axios.post('/getviewmotel', {slug: this.slug})
+    .then((response) => {
+      this.motel = response.data.motel[0];
+      this.countRating = response.data.countRating;
+      this.stars = response.data.rate;
+      this.likes = this.motel.like;
+      this.checkLike();
+    })
   },
 
   methods: {
@@ -104,16 +115,31 @@ export default {
                     } else {
                       parent.stars = 0;
                     }
-                    
                 }
             );
         },
     startSlide: function() {
       this.timer = setInterval(this.next, 4000);
     },
+    checkLike: function(){
+      axios.post('/checkLike',{motelId: this.motel.id,})
+        .then((response) => {
+          this.is_like = response.data.is_like;
+        })
+    },
     countLike: function() {
-      this.motel.like += 1;
-    }, rating(star){
+      this.checkLike();
+      axios.post('/saveLike',{
+        motelId: this.motel.id,
+        motelLike: this.motel.like,
+        isLike: this.is_like,
+      })
+      .then((response) => {
+        this.is_like = 1 - response.data.is_like;
+        this.likes = response.data.likes[0].like;
+      })
+    }, 
+    rating(star){
       axios.post('/viewmotel/rating',  {
               motelId: this.motel.id,
               rating: star,

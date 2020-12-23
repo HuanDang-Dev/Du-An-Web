@@ -11,8 +11,8 @@
         </textarea>
       </div>
 
-      <div class="form-group" style="padding-left: 50rem">
-        <button class="btn btn-primary" @click="saveNewComment" >Save</button>
+      <div class="form-group" style="padding-left: 45rem">
+        <button class="btn btn-primary" @click="saveNewComment" >Trả lời</button>
       </div>
 
     </div>

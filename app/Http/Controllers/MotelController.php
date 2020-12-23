@@ -6,6 +6,7 @@ use App\Motel;
 use App\User;
 use App\District;
 use App\Rating;
+use App\Like;
 use App\Events\Comment\CommentCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,6 +93,52 @@ class MotelController extends Controller
             $item->src = '/viewMotel/' . $item->slug;
         }
         return $listMotel;
+    } 
+
+    public function saveLike(Request $request){
+        if(auth()->user()){
+            $check = Like::where('user_id', auth()->user()->id)
+            ->where('motel_id', $request->motelId)
+            ->count();
+
+            if($request->isLike === 0){
+                $like = new Like();
+                $like->user_id = auth()->user()->id;
+                $like->motel_id = $request->motelId;
+                $like->save();
+                DB::table('motels')
+                ->where('id', $request->motelId)
+                ->update(['like' => $request->motelLike+1]);
+            }
+            if($request->isLike === 1){
+                $like = Like::where('user_id', auth()->user()->id)
+                ->where('motel_id', $request->motelId)
+                ->delete();
+
+                DB::table('motels')
+                ->where('id', $request->motelId)
+                ->update(['like' => $request->motelLike - 1]);
+            }
+            $likes = DB::table('motels')
+            ->select('like')
+            ->where('id', $request->motelId)
+            ->get();
+
+            return response()->json(['is_like' => $check, 'likes' => $likes], 200);
+        }
+    }
+    
+    public function checkLike(Request $request){
+        if(auth()->user()){
+            $check = Like::where('user_id', auth()->user()->id)
+            ->where('motel_id', $request->motelId)
+            ->count();
+
+            return response()->json(['is_like' => $check], 200);
+        }
+        else{
+            return response()->json(['is_like' => 2], 200);
+        }
     } 
 
     public function rating(Request $request){
