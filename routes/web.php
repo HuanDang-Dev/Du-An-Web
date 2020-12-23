@@ -85,4 +85,6 @@ Route::post('/reply/comment', 'CommentReplyController@index')->name('reply.comme
 Route::post('/viewmotel/rating', 'MotelController@rating'); 
 // Route::get('/auth', "HomeController@indexAuth");
 Route::post('/getviewmotel', 'MotelController@getViewMotel');
+Route::post('/saveLike', 'MotelController@saveLike');
+Route::post('/checkLike', 'MotelController@checkLike');
 
