@@ -179,9 +179,12 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Xóa',
                 cancelButtonText: 'Hủy'
-                }).then(function() {
+                }).then(function(result) {
                     // parent.$delete(parent.approve, index);
-                    parent.deleteItem(slugMotel, parent.notrent, index);
+                     if (result.isConfirmed) {
+                        parent.deleteItem(slugMotel, parent.notrent, index);
+                    } else {
+                    }
                 }
             );
         },
@@ -196,10 +199,12 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Xóa',
                 cancelButtonText: 'Hủy'
-                }).then(function() {
+                }).then(function(result) {
                     // parent.$delete(parent.motelAdmin, index);
-                    parent.deleteItem(slugMotel, parent.rented, index);
-                    
+                    if (result.isConfirmed) {
+                        parent.deleteItem(slugMotel, parent.rented, index);
+                    } else {
+                    }
                 }
             );
         },
@@ -214,9 +219,12 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Xóa',
                 cancelButtonText: 'Hủy'
-                }).then(function() {
+                }).then(function(result) {
                     // parent.$delete(parent.unapprove, index)
-                    parent.deleteItem(slugMotel, parent.unapprove, index);
+                    if (result.isConfirmed) {
+                        parent.deleteItem(slugMotel, parent.unapprove, index);
+                    } else {
+                    }
                 }
             );
         },

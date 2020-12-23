@@ -1956,9 +1956,11 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.approve, index);
-        parent.deleteItem(slugMotel, parent.approve, index);
+        if (result.isConfirmed) {
+          parent.deleteItem(slugMotel, parent.approve, index);
+        } else {}
       });
     },
     removeElementAdmin: function removeElementAdmin(slugMotel, index) {
@@ -1972,9 +1974,11 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.motelAdmin, index);
-        parent.deleteItem(slugMotel, parent.motelAdmin, index);
+        if (result.isConfirmed) {
+          parent.deleteItem(slugMotel, parent.motelAdmin, index);
+        } else {}
       });
     },
     removeElementUnapprove: function removeElementUnapprove(slugMotel, index) {
@@ -1988,9 +1992,11 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.unapprove, index)
-        parent.deleteItem(slugMotel, parent.unapprove, index);
+        if (result.isConfirmed) {
+          parent.deleteItem(slugMotel, parent.unapprove, index);
+        } else {}
       });
     },
     approveItem: function approveItem(slugMotel, index) {
@@ -2969,9 +2975,11 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.approve, index);
-        parent.deleteItem(slugMotel, parent.notrent, index);
+        if (result.isConfirmed) {
+          parent.deleteItem(slugMotel, parent.notrent, index);
+        } else {}
       });
     },
     removeElementRented: function removeElementRented(slugMotel, index) {
@@ -2985,9 +2993,11 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.motelAdmin, index);
-        parent.deleteItem(slugMotel, parent.rented, index);
+        if (result.isConfirmed) {
+          parent.deleteItem(slugMotel, parent.rented, index);
+        } else {}
       });
     },
     removeElementUnapprove: function removeElementUnapprove(slugMotel, index) {
@@ -3001,9 +3011,11 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.unapprove, index)
-        parent.deleteItem(slugMotel, parent.unapprove, index);
+        if (result.isConfirmed) {
+          parent.deleteItem(slugMotel, parent.unapprove, index);
+        } else {}
       });
     },
     notrentItem: function notrentItem(slugMotel, index) {
