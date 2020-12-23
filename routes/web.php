@@ -83,4 +83,6 @@ Route::post('/reply', 'CommentReplyController@store')->name('reply');
 Route::post('/reply/comment', 'CommentReplyController@index')->name('reply.comment');
 
 Route::post('/viewmotel/rating', 'MotelController@rating'); 
-Route::get('/auth', "HomeController@indexAuth");
+// Route::get('/auth', "HomeController@indexAuth");
+Route::post('/getviewmotel', 'MotelController@getViewMotel');
+

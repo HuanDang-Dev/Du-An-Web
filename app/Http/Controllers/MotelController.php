@@ -62,13 +62,20 @@ class MotelController extends Controller
                     ->where('slug', $slug)
                     // ->orderByRaw('created_at DESC')
                     ->get();
+        $rate = 0;
         foreach($listMotel as $key => $item){
             $item->src = '/viewMotel/' . $item->slug;
             $countRating = Rating::where('motel_id', $item->id)->count();
+            if(auth()->user()){
+                if($new = Rating::where('motel_id', $item->id)->where('user_id', auth()->user()->id)->first()){
+                    $rate = $new->rating;
+                }
+            }
         }
         return response()->json([
             'motel' => $listMotel,
-            'countRating' => $countRating
+            'countRating' => $countRating,
+            'rate' => $rate,
         ], 200);
     } 
 
@@ -91,20 +98,39 @@ class MotelController extends Controller
         $motelId = $request->motelId;
         $rating = $request->rating;
         if(auth()->user()){
-            $rate = new Rating();
-            $rate->motel_id = $motelId;
-            $rate->rating = $rating;
-            $rate->user_id = auth()->user()->id;
-            $rate->save();
-            $avg = DB::table('ratings')
-                ->where('motel_id', $motelId)
-                ->avg('rating');
-            $motel = Motel::where('id', $motelId)
+            if(
+                $rate = Rating::where('motel_id', $motelId)
+                    ->where('user_id', auth()->user()->id)
+                    ->first()
+            ) {
+                $rate->rating = $rating;
+                $rate->save();
+                $avg = DB::table('ratings')
+                    ->where('motel_id', $motelId)
+                    ->avg('rating');
+                $avg = round($avg);
+                $motel = Motel::where('id', $motelId)
                     ->update(['rating' => $avg]);
+            } else {
+                $rate = new Rating();
+                $rate->motel_id = $motelId;
+                $rate->rating = $rating;
+                $rate->user_id = auth()->user()->id;
+                $rate->save();
+                $avg = DB::table('ratings')
+                    ->where('motel_id', $motelId)
+                    ->avg('rating');
+                $avg = round($avg);
+                $motel = Motel::where('id', $motelId)
+                    ->update(['rating' => $avg]);
+            }
+            
             return response()->json([
                 'success' => true
             ], 200);
         }
-        return redirect('/auth');
+        return response()->json([
+            'success' => false
+        ], 200);
     }
 }

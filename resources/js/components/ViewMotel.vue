@@ -46,6 +46,9 @@
         </div>
       </div>
     </div>
+    <!-- <button ref="auth"> -->
+    <a href="/commentIndex" id="auth"></a>
+    <!-- </button> -->
     
   </div>
 </template>
@@ -61,20 +64,22 @@ export default {
       motel: {},
       stars: 0,
       maxStars: 5,
-      countRating: ''
+      countRating: '',
+      status: false
     }
   },
   mounted: function() {
     this.startSlide();
     let url = window.location.href;
     this.slug = url.substring(url.search('/viewMotel/') + 11)
-    axios.post('/api/getviewmotel', {
+    axios.post('/getviewmotel', {
           slug: this.slug
         }).then((response) => {
-          // console.log(response.data)
+          console.log(response.data)
         this.motel = response.data.motel[0];
         this.countRating = response.data.countRating;
-  })
+        this.stars = response.data.rate;
+        })
   },
 
   methods: {
@@ -92,9 +97,13 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Xác nhận',
                 cancelButtonText: 'Hủy'
-                }).then(function() {
+                }).then(function(result) {
                     // parent.$delete(parent.approve, index);
-                    parent.rating(parent.stars,);
+                    if (result.isConfirmed) {
+                      parent.rating(parent.stars,);
+                    } else {
+                      parent.stars = 0;
+                    }
                     
                 }
             );
@@ -112,15 +121,38 @@ export default {
           if(response.data.success){
               Swal.fire("Đánh giá thành công", "", "success");
               this.reload();
+          } else{
+            var parent = this;
+            Swal.fire({
+                title: 'Vui lòng đăng nhập',
+                text: " ",
+                type: 'confirm',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'login',
+                cancelButtonText: 'Hủy'
+                }).then(function(result) {
+                    // parent.$delete(parent.approve, index);
+                    if (result.isConfirmed) {
+                      document.getElementById('auth').click();
+                    } else {
+                      parent.stars = 0;
+                    }
+                    
+                }
+            );
           }
       })
     },
     reload(){
-      axios.post('/api/getviewmotel', {
+      axios.post('/getviewmotel', {
               slug: this.slug
             }).then((response) => {
         this.motel = response.data.motel[0];
         this.countRating = response.data.countRating;
+                this.stars = response.data.rate;
+
       });
     }
   },

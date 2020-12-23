@@ -3779,6 +3779,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3791,7 +3794,8 @@ __webpack_require__.r(__webpack_exports__);
       motel: {},
       stars: 0,
       maxStars: 5,
-      countRating: ''
+      countRating: '',
+      status: false
     };
   },
   mounted: function mounted() {
@@ -3800,12 +3804,13 @@ __webpack_require__.r(__webpack_exports__);
     this.startSlide();
     var url = window.location.href;
     this.slug = url.substring(url.search('/viewMotel/') + 11);
-    axios.post('/api/getviewmotel', {
+    axios.post('/getviewmotel', {
       slug: this.slug
     }).then(function (response) {
-      // console.log(response.data)
+      console.log(response.data);
       _this.motel = response.data.motel[0];
       _this.countRating = response.data.countRating;
+      _this.stars = response.data.rate;
     });
   },
   methods: {
@@ -3824,9 +3829,13 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xác nhận',
         cancelButtonText: 'Hủy'
-      }).then(function () {
+      }).then(function (result) {
         // parent.$delete(parent.approve, index);
-        parent.rating(parent.stars);
+        if (result.isConfirmed) {
+          parent.rating(parent.stars);
+        } else {
+          parent.stars = 0;
+        }
       });
     },
     startSlide: function startSlide() {
@@ -3846,17 +3855,37 @@ __webpack_require__.r(__webpack_exports__);
           Swal.fire("Đánh giá thành công", "", "success");
 
           _this2.reload();
+        } else {
+          var parent = _this2;
+          Swal.fire({
+            title: 'Vui lòng đăng nhập',
+            text: " ",
+            type: 'confirm',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'login',
+            cancelButtonText: 'Hủy'
+          }).then(function (result) {
+            // parent.$delete(parent.approve, index);
+            if (result.isConfirmed) {
+              document.getElementById('auth').click();
+            } else {
+              parent.stars = 0;
+            }
+          });
         }
       });
     },
     reload: function reload() {
       var _this3 = this;
 
-      axios.post('/api/getviewmotel', {
+      axios.post('/getviewmotel', {
         slug: this.slug
       }).then(function (response) {
         _this3.motel = response.data.motel[0];
         _this3.countRating = response.data.countRating;
+        _this3.stars = response.data.rate;
       });
     }
   }
@@ -84207,7 +84236,9 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("a", { attrs: { href: "/commentIndex", id: "auth" } })
   ])
 }
 var staticRenderFns = []
