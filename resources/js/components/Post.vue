@@ -62,9 +62,21 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="d-flex flex-column m-4">
+                        <div class="p-2 w-100 " v-if="success == 2">
+                            <div class="alert alert-success">Cập nhật thành công</div>
+                        </div>
+                        <div class="p-2 w-100 align-items-center" v-else>
+                            <div class="p-2 w-100 " v-if="success == 3">
+                                <div class="alert alert-danger">Cập nhật không thành công</div>
+                            </div>
+                        </div>
+                    </div>
                      
                     <div class="d-flex px-4 py-3 mb-2">
-                        <button class="login__btn mx-3 w-25"><a class="btn-register" @click="post">Đăng Tin</a></button>
+                        <button class="login__btn mx-3 w-25" id="postMotel"><a class="btn-register" @click="post" >Đăng Tin</a></button>
+                        <button class="login__btn mx-3 w-25" id="updateMotel"><a class="btn-register" @click="update" >Cập nhật</a></button>
                         <button class="login__btn mx-3 w-25"><a class="btn-register" href="/">Hủy</a></button>
                     </div>
                 </div>
@@ -80,18 +92,20 @@ export default {
     data() {
         return {
             districts: [],
-            image: '',
-            district_id: 2,
-            title: '',
-            address: 'Ha noi',
-            area: 30,
-            phone: 123,
-            price: 2000000,
-            description: 'nhà đẹp',
-            user_id: 12,
+            image: null,
+            district_id: 1,
+            title: null,
+            address: null,
+            area: null,
+            phone: null,
+            price: null,
+            description: null,
+            user_id: null,
             imagePreview: null,
             showPreview: false,
-            success: null
+            success: null,
+            slug: null,
+            motelId: null,
         }
     },
     methods: {
@@ -107,7 +121,6 @@ export default {
 
             if( this.image ){
                 if ( /\.(jpe?g|png|gif)$/i.test( this.image.name ) ) {
-                    console.log("here");
                     reader.readAsDataURL( this.image );
                 }
             }
@@ -138,17 +151,61 @@ export default {
           this.errors = error.response.data.comment
         })
       },
-        
+        update(){
+            const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+ 
+            let formData = new FormData();
+            formData.append('motelId', this.motelId);
+            formData.append('image', this.image);
+            formData.append('title', this.title);
+            formData.append('description', this.description);
+            formData.append('price', this.price);
+            formData.append('area', this.area);
+            formData.append('address', this.address);
+            formData.append('phone', this.phone);
+            formData.append('user_id', this.user_id);
+            formData.append('district_id', this.district_id);
+
+            axios.post('/post/update', formData, config).then(response => {
+                if(response.data.success){
+                    this.success = 2;
+                } else{
+                    this.success = 3;
+                }
+        }).catch(error => {
+          this.errors = error.response.data.comment
+        })
+        }
     },
     mounted() {
+        let url = window.location.href;
+        this.slug = url.substring(url.search('/post/update/') + 13)
+        if(url.includes('/post/update/')){
+            document.getElementById('postMotel').style.display = "none";
+            axios.post('/post/get/motel',{
+                slug: this.slug
+            }).then((response) => {
+                console.log(response.data.motel[0])
+                var motel = response.data.motel[0];
+                this.title = motel.title;
+                this.district_id = motel.district_id;
+                this.address = motel.address;
+                this.area = motel.area;
+                this.phone = motel.phone;
+                this.price = motel.price;
+                this.description = motel.description;
+                this.motelId = motel.id
+                // console.log(this.title)
+            })
+        } else {
+            document.getElementById('updateMotel').style.display = "none";
+        }
         axios.get('/api/getdistrict').then((response) => {
             this.districts = response.data
-            // console.log(response.data)
         })
-        // axios.get('/api/getuser').then((response) => {
-        //     // thi = response.data
-        //     console.log(response.data)
-        // })
+        
     }
 }
 

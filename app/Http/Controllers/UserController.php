@@ -35,12 +35,15 @@ class UserController extends Controller
               ->get();
         foreach($notrent as $key => $item){
           $item->src = '/viewMotel/' . $item->slug;
+          $item->update = '/post/update/' . $item->slug;
         }
         foreach($rented as $key => $item){
           $item->src = '/viewMotel/' . $item->slug;
+          $item->update = '/post/update/' . $item->slug;
         }
         foreach($unapprove as $key => $item){
           $item->src = '/viewMotel/' . $item->slug;
+          $item->update = '/post/update/' . $item->slug;
         }
         return response()->json([
             'rented' => $rented,

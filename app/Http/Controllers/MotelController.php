@@ -39,6 +39,25 @@ class MotelController extends Controller
         ], 200);
     }
 
+    public function updateMotel(Request $request){
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('images'), $imageName);
+        $motel = Motel::where('id', $request->motelId)->first();
+        $motel->title = $request->title;
+        $motel->description = $request->description;
+        $motel->price = $request->price;
+        $motel->area = $request->area;
+        $motel->address = $request->address;
+        $motel->phone = $request->phone;
+        $motel->images = "/images/" . $imageName;
+        $motel->user_id = auth()->user()->id;
+        $motel->district_id = $request->district_id;
+        $motel->save();
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
     public function getMotel(Request $request){
         $district = $request->districtId;
         $listMotel = DB::table('motels')
@@ -178,6 +197,16 @@ class MotelController extends Controller
         }
         return response()->json([
             'success' => false
+        ], 200);
+    }
+
+    public function getPostMotel(Request $request){
+        $slug = $request->slug;
+        $listMotel = DB::table('motels')
+                    ->where('slug', $slug)
+                    ->get();
+        return response()->json([
+            'motel' => $listMotel,
         ], 200);
     }
 }

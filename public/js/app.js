@@ -2941,6 +2941,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3169,23 +3175,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "post",
   data: function data() {
     return {
       districts: [],
-      image: '',
-      district_id: 2,
-      title: '',
-      address: 'Ha noi',
-      area: 30,
-      phone: 123,
-      price: 2000000,
-      description: 'nhà đẹp',
-      user_id: 12,
+      image: null,
+      district_id: 1,
+      title: null,
+      address: null,
+      area: null,
+      phone: null,
+      price: null,
+      description: null,
+      user_id: null,
       imagePreview: null,
       showPreview: false,
-      success: null
+      success: null,
+      slug: null,
+      motelId: null
     };
   },
   methods: {
@@ -3199,7 +3219,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.image) {
         if (/\.(jpe?g|png|gif)$/i.test(this.image.name)) {
-          console.log("here");
           reader.readAsDataURL(this.image);
         }
       }
@@ -3231,17 +3250,66 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this.errors = error.response.data.comment;
       });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('motelId', this.motelId);
+      formData.append('image', this.image);
+      formData.append('title', this.title);
+      formData.append('description', this.description);
+      formData.append('price', this.price);
+      formData.append('area', this.area);
+      formData.append('address', this.address);
+      formData.append('phone', this.phone);
+      formData.append('user_id', this.user_id);
+      formData.append('district_id', this.district_id);
+      axios.post('/post/update', formData, config).then(function (response) {
+        if (response.data.success) {
+          _this2.success = 2;
+        } else {
+          _this2.success = 3;
+        }
+      })["catch"](function (error) {
+        _this2.errors = error.response.data.comment;
+      });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
+
+    var url = window.location.href;
+    this.slug = url.substring(url.search('/post/update/') + 13);
+
+    if (url.includes('/post/update/')) {
+      document.getElementById('postMotel').style.display = "none";
+      axios.post('/post/get/motel', {
+        slug: this.slug
+      }).then(function (response) {
+        console.log(response.data.motel[0]);
+        var motel = response.data.motel[0];
+        _this3.title = motel.title;
+        _this3.district_id = motel.district_id;
+        _this3.address = motel.address;
+        _this3.area = motel.area;
+        _this3.phone = motel.phone;
+        _this3.price = motel.price;
+        _this3.description = motel.description;
+        _this3.motelId = motel.id; // console.log(this.title)
+      });
+    } else {
+      document.getElementById('updateMotel').style.display = "none";
+    }
 
     axios.get('/api/getdistrict').then(function (response) {
-      _this2.districts = response.data; // console.log(response.data)
-    }); // axios.get('/api/getuser').then((response) => {
-    //     // thi = response.data
-    //     console.log(response.data)
-    // })
+      _this3.districts = response.data;
+    });
   }
 });
 
@@ -3794,6 +3862,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3806,8 +3884,9 @@ __webpack_require__.r(__webpack_exports__);
       motel: {},
       stars: 0,
       maxStars: 5,
+      likes: 0,
       countRating: '',
-      status: false
+      is_like: 1
     };
   },
   mounted: function mounted() {
@@ -3819,10 +3898,12 @@ __webpack_require__.r(__webpack_exports__);
     axios.post('/getviewmotel', {
       slug: this.slug
     }).then(function (response) {
-      console.log(response.data);
       _this.motel = response.data.motel[0];
       _this.countRating = response.data.countRating;
       _this.stars = response.data.rate;
+      _this.likes = _this.motel.like;
+
+      _this.checkLike();
     });
   },
   methods: {
@@ -3853,11 +3934,30 @@ __webpack_require__.r(__webpack_exports__);
     startSlide: function startSlide() {
       this.timer = setInterval(this.next, 4000);
     },
+    checkLike: function checkLike() {
+      var _this2 = this;
+
+      axios.post('/checkLike', {
+        motelId: this.motel.id
+      }).then(function (response) {
+        _this2.is_like = response.data.is_like;
+      });
+    },
     countLike: function countLike() {
-      this.motel.like += 1;
+      var _this3 = this;
+
+      this.checkLike();
+      axios.post('/saveLike', {
+        motelId: this.motel.id,
+        motelLike: this.motel.like,
+        isLike: this.is_like
+      }).then(function (response) {
+        _this3.is_like = 1 - response.data.is_like;
+        _this3.likes = response.data.likes[0].like;
+      });
     },
     rating: function rating(star) {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.post('/viewmotel/rating', {
         motelId: this.motel.id,
@@ -3866,9 +3966,9 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.success) {
           Swal.fire("Đánh giá thành công", "", "success");
 
-          _this2.reload();
+          _this4.reload();
         } else {
-          var parent = _this2;
+          var parent = _this4;
           Swal.fire({
             title: 'Vui lòng đăng nhập',
             text: " ",
@@ -3890,14 +3990,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     reload: function reload() {
-      var _this3 = this;
+      var _this5 = this;
 
       axios.post('/getviewmotel', {
         slug: this.slug
       }).then(function (response) {
-        _this3.motel = response.data.motel[0];
-        _this3.countRating = response.data.countRating;
-        _this3.stars = response.data.rate;
+        _this5.motel = response.data.motel[0];
+        _this5.countRating = response.data.countRating;
+        _this5.stars = response.data.rate;
       });
     }
   }
@@ -79999,7 +80099,7 @@ var render = function() {
                                       {
                                         staticClass:
                                           "btn btn-info py-1 pl-2 pr-1 my-1",
-                                        attrs: { href: ad.linkEdit }
+                                        attrs: { href: ad.update }
                                       },
                                       [_c("i", { staticClass: "fas fa-edit" })]
                                     ),
@@ -81177,7 +81277,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "form-group", staticStyle: { "padding-left": "50rem" } },
+        { staticClass: "form-group", staticStyle: { "padding-left": "45rem" } },
         [
           _c(
             "button",
@@ -81185,7 +81285,7 @@ var render = function() {
               staticClass: "btn btn-primary",
               on: { click: _vm.saveNewComment }
             },
-            [_vm._v("Save")]
+            [_vm._v("Trả lời")]
           )
         ]
       )
@@ -81635,7 +81735,7 @@ var render = function() {
                                       {
                                         staticClass:
                                           "btn btn-info py-1 pl-2 pr-1 my-1",
-                                        attrs: { href: ad.linkEdit }
+                                        attrs: { href: ad.update }
                                       },
                                       [_c("i", { staticClass: "fas fa-edit" })]
                                     ),
@@ -81793,6 +81893,16 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-info py-1 pl-2 pr-1 my-1",
+                                        attrs: { href: owner.update }
+                                      },
+                                      [_c("i", { staticClass: "fas fa-edit" })]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
                                       "button",
                                       {
                                         staticClass:
@@ -81889,6 +81999,16 @@ var render = function() {
                                           staticClass: "fas fa-search-plus"
                                         })
                                       ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-info py-1 pl-2 pr-1 my-1",
+                                        attrs: { href: owner.update }
+                                      },
+                                      [_c("i", { staticClass: "fas fa-edit" })]
                                     ),
                                     _vm._v(" "),
                                     _c(
@@ -82230,14 +82350,54 @@ var render = function() {
                 ])
           ]),
           _vm._v(" "),
+          _c("div", { staticClass: "d-flex flex-column m-4" }, [
+            _vm.success == 2
+              ? _c("div", { staticClass: "p-2 w-100 " }, [
+                  _c("div", { staticClass: "alert alert-success" }, [
+                    _vm._v("Cập nhật thành công")
+                  ])
+                ])
+              : _c("div", { staticClass: "p-2 w-100 align-items-center" }, [
+                  _vm.success == 3
+                    ? _c("div", { staticClass: "p-2 w-100 " }, [
+                        _c("div", { staticClass: "alert alert-danger" }, [
+                          _vm._v("Cập nhật không thành công")
+                        ])
+                      ])
+                    : _vm._e()
+                ])
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "d-flex px-4 py-3 mb-2" }, [
-            _c("button", { staticClass: "login__btn mx-3 w-25" }, [
-              _c(
-                "a",
-                { staticClass: "btn-register", on: { click: _vm.post } },
-                [_vm._v("Đăng Tin")]
-              )
-            ]),
+            _c(
+              "button",
+              {
+                staticClass: "login__btn mx-3 w-25",
+                attrs: { id: "postMotel" }
+              },
+              [
+                _c(
+                  "a",
+                  { staticClass: "btn-register", on: { click: _vm.post } },
+                  [_vm._v("Đăng Tin")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "login__btn mx-3 w-25",
+                attrs: { id: "updateMotel" }
+              },
+              [
+                _c(
+                  "a",
+                  { staticClass: "btn-register", on: { click: _vm.update } },
+                  [_vm._v("Cập nhật")]
+                )
+              ]
+            ),
             _vm._v(" "),
             _vm._m(3)
           ])
@@ -84182,12 +84342,45 @@ var render = function() {
                     }
                   },
                   [
-                    _c("i", {
-                      staticClass: "far fa-thumbs-up text-primary btn-i-like"
-                    }),
-                    _vm._v(_vm._s(_vm.motel.like))
+                    _vm.is_like === 1
+                      ? _c("div", [
+                          _c("i", {
+                            staticClass:
+                              "fas fa-thumbs-up text-primary btn-i-like"
+                          }),
+                          _vm._v(_vm._s(_vm.likes) + "\n                ")
+                        ])
+                      : _vm.is_like === 0
+                      ? _c("div", [
+                          _c("i", {
+                            staticClass:
+                              "far fa-thumbs-up text-primary btn-i-like"
+                          }),
+                          _vm._v(_vm._s(_vm.likes) + "\n                ")
+                        ])
+                      : _vm._e()
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.is_like === 2
+                  ? _c("div", [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "position-absolute btn-like text-primary",
+                          attrs: { href: "/commentIndex" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "far fa-thumbs-up text-primary btn-i-like"
+                          }),
+                          _vm._v(_vm._s(_vm.likes))
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", [

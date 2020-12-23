@@ -41,6 +41,7 @@ class AdminController extends Controller
                     ->get();
         foreach($list as $key => $item){
           $item->src = '/viewMotel/' . $item->slug;
+          $item->update = '/post/update/' . $item->slug;
         }
         foreach($user as $key => $item){
           $item->count = Motel::where('user_id', $item->id)->count();

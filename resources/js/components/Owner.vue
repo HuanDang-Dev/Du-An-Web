@@ -42,7 +42,7 @@
                                                     <a class="btn btn-success py-1 px-2 my-1" :href="ad.src">
                                                         <i class="fas fa-search-plus"></i>
                                                     </a>
-                                                    <a class="btn btn-info py-1 pl-2 pr-1 my-1" :href="ad.linkEdit">
+                                                    <a class="btn btn-info py-1 pl-2 pr-1 my-1" :href="ad.update">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementRented(ad.slug,i)">
@@ -86,6 +86,9 @@
                                                     <a class="btn btn-success py-1 px-2 my-1" :href="owner.src">
                                                         <i class="fas fa-search-plus"></i>
                                                     </a>
+                                                     <a class="btn btn-info py-1 pl-2 pr-1 my-1" :href="owner.update">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                     <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementNotRent(owner.slug, i)">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
@@ -119,6 +122,9 @@
                                                 <td class="center">
                                                     <a class="btn btn-success py-1 px-2 my-1" :href="owner.src">
                                                         <i class="fas fa-search-plus"></i>
+                                                    </a>
+                                                    <a class="btn btn-info py-1 pl-2 pr-1 my-1" :href="owner.update">
+                                                        <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-danger py-1 px-2 my-1" href="#" v-on:click="removeElementUnapprove(owner.slug, i)">
                                                         <i class="fas fa-trash-alt"></i>

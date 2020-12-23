@@ -51,6 +51,23 @@ Route::get('/viewMotel/{slug}/', function ($slug) {
     }
     return view('404');
 });
+
+Route::get('/post/update/{slug}', function($slug){
+    $motel = Motel::where('slug', $slug)->first();  
+    if($motel){
+       if(auth()->user()){
+            if($motel->user_id == auth()->user()->id){
+                return view('post');
+            }
+       }
+        return view('404');
+    }
+    return view('404');
+});
+
+Route::post('/post/get/motel', 'MotelController@getPostMotel');
+Route::post('/post/update', 'MotelController@updateMotel');
+
 Route::post('/storemotel', 'MotelController@storeMotel');
 Route::get('/logout', 'HomeController@logout');
 Route::post('/login', 'HomeController@login');
