@@ -33,13 +33,15 @@ Route::get('/commentIndex', 'CommentController@indexComment');
 Route::get('/viewMotel/{slug}/', function ($slug) {
     $motel = Motel::where('slug', $slug)->first();  
     if($motel){
-        if($motel->user_id == auth()->user()->id){
-            return view('viewMotel');
-        }
-        $user = User::where('id', auth()->user()->id)->first();
-        if($user->role == 1){
-            return view('viewMotel');
-        }
+       if(auth()->user()){
+            if($motel->user_id == auth()->user()->id){
+                return view('viewMotel');
+            }
+            $user = User::where('id', auth()->user()->id)->first();
+            if($user->role == 1){
+                return view('viewMotel');
+            }
+       }
         if($motel->approve == 1){
             $motel->count_view += 1;
             $motel->save();
@@ -49,7 +51,6 @@ Route::get('/viewMotel/{slug}/', function ($slug) {
     }
     return view('404');
 });
-Route::get('/admin/getindex', 'AdminController@indexAdmin');
 Route::post('/storemotel', 'MotelController@storeMotel');
 Route::get('/logout', 'HomeController@logout');
 Route::post('/login', 'HomeController@login');
@@ -67,8 +68,19 @@ Route::get('deleteallmessage/{id}', 'MessageController@delete_all_message')->nam
 Route::post('/comment', 'CommentController@store')->name('comment');
 Route::post('/motel/comment', 'CommentController@index')->name('motel.comment');
 
-Route::post('admin/approve', 'MotelController@approveMotel');
-Route::post('admin/delete', 'MotelController@approveMotel');
+Route::get('/admin/getindex', 'AdminController@indexAdmin');
+Route::post('admin/approve', 'AdminController@approveMotel');
+Route::post('admin/delete', 'AdminController@deleteMotel');
+Route::post('admin/report', 'AdminController@confirmReport');
+
+Route::get('/owner/getindex', 'UserController@indexOwner');
+Route::post('/owner/rent', 'UserController@rentMotel');
+Route::post('/owner/notrent', 'UserController@notrentMotel');
+
+Route::post('/report', 'ReportController@getReport');
 
 Route::post('/reply', 'CommentReplyController@store')->name('reply');
 Route::post('/reply/comment', 'CommentReplyController@index')->name('reply.comment');
+
+Route::post('/viewmotel/rating', 'MotelController@rating'); 
+Route::get('/auth', "HomeController@indexAuth");

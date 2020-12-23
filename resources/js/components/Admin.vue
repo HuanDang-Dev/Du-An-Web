@@ -73,6 +73,14 @@
                                                 <td class="center">
                                                     <div class=" d-flex flex-wrap w-auto" v-if="owner.activy == 0">
                                                         <div class="label d-flex align-items-center label-success m-1">Like:  <h2 class="m-0 d-flex align-items-center">{{owner.like}}</h2></div>
+                                                        <!-- <div class="rating"> -->
+                                                        <!-- <ul class="d-flex flex-row m-1">
+                                                            <li @click="rate(star, i)" v-for="star in maxStars" :class="{ 'active': star <= owner.rating }" :key="star" class="star">
+                                                                <i :class="star <= owner.rating ? 'fas fa-star' : 'far fa-star'"></i> 
+                                                            </li>
+                                                        </ul> -->
+                                                        
+                                                    <!-- </div> -->
                                                         <div class="label d-flex align-items-center label-success m-1">Rating: <span v-for="item in owner.rating" :key="item.id"><i class="fas fa-star"></i></span></div>
                                                     </div>
                                                     <div class=" d-flex flex-wrap w-auto" v-else>
@@ -135,24 +143,26 @@
                                     <table class="table table-striped table-bordered bootstrap-datatable datatable">
                                         <thead>
                                             <tr>
-                                                <th>Tên bài đăng</th>
-                                                <th>Ngày đăng</th>
-                                                <th>Chủ trọ</th>
-                                                <th>Trạng thái</th>
-                                                <th>Chỉnh sửa</th>
+                                                <th>Tên</th>
+                                                <th>Email</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Nội dung</th>
+                                                <th>Xử lý</th>
+                                                <th>Ngày khởi tạo</th>
                                             </tr>
                                         </thead>
                                         <tbody v-for="(owner, i) in report" :key="i">
                                             <tr>
-                                                <td>{{owner.title}}</td>
+                                                <td>{{owner.name}}</td>
+                                                <td class="center">{{owner.email}}</td>
+                                                <td class="center">{{owner.phone}}</td>
+                                                <td class="center">{{owner.mess}}</td>
+                                                <td class="center">
+                                                    <button class="btn btn-success py-1 px-2 my-1" v-on:click="confirmReport(owner.id, i)">
+                                                        <i class="fas fa-check-square"></i>
+                                                    </button>
+                                                </td>
                                                 <td class="center">{{owner.created_at}}</td>
-                                                <td class="center">{{owner.name}}</td>
-                                                <td class="center">
-                                                    
-                                                </td>
-                                                <td class="center">
-                                                    
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -185,7 +195,7 @@
         </div>
     </div>
     <div class="clearfix"></div>
-
+    
     <footer>
         <p>
             <span style="text-align:left;float:left"></span>
@@ -207,12 +217,14 @@ export default {
             approve: [],
             unapprove: [],
             report: [],
-            user: []
+            user: [],
+            stars: 3,
+            maxStars: 5,
         }
     },
     methods: {
         removeElementApprove: function (slugMotel, index) {
-            // this.$delete(this.approve, index)
+            var parent = this;
             Swal.fire({
                 title: 'Bạn chắc là muốn xóa chứ?',
                 text: "Bài đăng sẽ không thể được tìm thấy bởi bất kỳ ai nữa!",
@@ -220,16 +232,17 @@ export default {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Confirm'
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
                 }).then(function() {
-                    this.$delete(this.approve, index);
-                    this.deleteItem(slugMotel, approve);
+                    // parent.$delete(parent.approve, index);
+                    parent.deleteItem(slugMotel, parent.approve, index);
                     
                 }
             );
         },
         removeElementAdmin: function (slugMotel, index) {
-            // this.$delete(this.motelAdmin, index)
+            var parent = this;
             Swal.fire({
                 title: 'Bạn chắc là muốn xóa chứ?',
                 text: "Bài đăng sẽ không thể được tìm thấy bởi bất kỳ ai nữa!",
@@ -237,16 +250,17 @@ export default {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Confirm'
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
                 }).then(function() {
-                    // this.$delete(this.motelAdmin, index);
-                    this.deleteItem(slugMotel, motelAdmin);
+                    // parent.$delete(parent.motelAdmin, index);
+                    parent.deleteItem(slugMotel, parent.motelAdmin, index);
                     
                 }
             );
         },
         removeElementUnapprove: function (slugMotel, index) {
-                var x = this.approve
+                var parent = this;
                Swal.fire({
                 title: 'Bạn chắc là muốn xóa chứ?',
                 text: "Bài đăng sẽ không thể được tìm thấy bởi bất kỳ ai nữa!",
@@ -254,13 +268,11 @@ export default {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Confirm'
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
                 }).then(function() {
-                    // $delete(this.unapprove, index);
-                    // TouchList.slugMotel
-                    // console.log(window.)
-                    // globalThis.deleteItem(TouchList.slugMotel, globalThis.unapprove);
-                    
+                    // parent.$delete(parent.unapprove, index)
+                    parent.deleteItem(slugMotel, parent.unapprove, index);
                 }
             );
         },
@@ -275,7 +287,7 @@ export default {
                 }
             })
         },
-        deleteItem(slugMotel, list){
+        deleteItem(slugMotel, list, index){
             this.$delete(list, index);
             axios.post('/admin/delete',  {
                     slug: slugMotel
@@ -290,12 +302,24 @@ export default {
                 }
             })
         }, 
+        confirmReport: function (reportId, index) {
+            axios.post('/admin/report',  {
+                    id: reportId
+                  }).then((response) => {
+                if(response.data.success){
+                    Swal.fire("Phê duyệt thành công", "Bầy giờ bài viết đã có thể  được nhìn thầy công khai!", "success");
+                    this.$delete(this.report, index)
+                    this.reload();
+                }
+            })
+        },
         reload(){
             axios.get('/admin/getindex').then((response) => {
                 this.motelAdmin = response.data.list;
                 this.approve = response.data.approve;
                 this.unapprove = response.data.unapprove;
                 this.user = response.data.users;
+                this.report = response.data.report;
             })
         }                
     },
@@ -305,6 +329,8 @@ export default {
             this.approve = response.data.approve;
             this.unapprove = response.data.unapprove;
             this.user = response.data.users;
+            this.report = response.data.report;
+            // console.log(this.report)
         })
     }
 }

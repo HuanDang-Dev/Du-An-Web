@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Motel;
 use App\User;
 use App\District;
+use App\Rating;
 use App\Events\Comment\CommentCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,12 +38,6 @@ class MotelController extends Controller
         ], 200);
     }
 
-    public function deleteMotel(Request $request){
-        $id  = $request->get('id');
-        $motel = Motel::find($id);
-        $motel->delete();
-    }
-
     public function getMotel(Request $request){
         $district = $request->districtId;
         $listMotel = DB::table('motels')
@@ -69,8 +64,12 @@ class MotelController extends Controller
                     ->get();
         foreach($listMotel as $key => $item){
             $item->src = '/viewMotel/' . $item->slug;
+            $countRating = Rating::where('motel_id', $item->id)->count();
         }
-        return $listMotel;
+        return response()->json([
+            'motel' => $listMotel,
+            'countRating' => $countRating
+        ], 200);
     } 
 
     public function searchMotel(Request $request){
@@ -88,12 +87,24 @@ class MotelController extends Controller
         return $listMotel;
     } 
 
-    public function approveMotel(Request $request){
-        $slug = $request->slug;
-        $motel = Motel::where('slug', $slug)
-            ->update(['approve' => 1]);
-        return response()->json([
-            'success' => true
-        ], 200);
+    public function rating(Request $request){
+        $motelId = $request->motelId;
+        $rating = $request->rating;
+        if(auth()->user()){
+            $rate = new Rating();
+            $rate->motel_id = $motelId;
+            $rate->rating = $rating;
+            $rate->user_id = auth()->user()->id;
+            $rate->save();
+            $avg = DB::table('ratings')
+                ->where('motel_id', $motelId)
+                ->avg('rating');
+            $motel = Motel::where('id', $motelId)
+                    ->update(['rating' => $avg]);
+            return response()->json([
+                'success' => true
+            ], 200);
+        }
+        return redirect('/auth');
     }
 }

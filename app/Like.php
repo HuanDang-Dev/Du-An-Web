@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class Like extends Model
 {
-    protected $table = "reports";
-
+    protected $table = "likes";
 }

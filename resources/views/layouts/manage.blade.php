@@ -267,7 +267,7 @@
                                                     <div class="profile">
                                                         <button class="wrap btn-admin dropdown-toggle ml-3 p-2 text-font" data-toggle="dropdown" href="#">
                                                             <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" alt="" class="online">
-                                                                Owner
+                                                            {{ Auth::user()->name }}
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu">

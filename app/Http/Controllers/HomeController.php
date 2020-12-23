@@ -59,4 +59,8 @@ class HomeController extends Controller
         Auth::logout();
       return redirect('home');
     }
+
+    public function indexAuth(){
+        return view('welcome');
+    }
 }

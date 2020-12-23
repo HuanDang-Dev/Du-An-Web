@@ -6,11 +6,11 @@
           <div class="card-body">
             <div class="row">
               <div class="position-relative mx-5 w-100">
-                  <div v-for="i in [currentIndex]" :key="i">
+                  <!-- <div v-for="i in [currentIndex]" :key="i"> -->
                     <img :src="motel.images" />
-                  </div>
-                <a class="prev" @click="prev" >&#10094; </a>
-                <a class="next" @click="next">&#10095; </a>
+                  <!-- </div> -->
+                <a class="prev"  >&#10094; </a>
+                <a class="next" >&#10095; </a>
               </div>
             </div>
             <h3 class="card-title text-left ml-5 mt-4">{{motel.title}}</h3>
@@ -29,6 +29,15 @@
                   {{motel.description}}
                 </p>
               </div><br>
+              <div class="rating">
+                Đánh giá({{ countRating }}):
+                  <ul class="d-flex flex-row m-1">
+                      <li @click="rate(star)" v-for="star in maxStars" :class="{ 'active': star <= stars }" :key="star" class="star">
+                          <i :class="star <= stars ? 'fas fa-star' : 'far fa-star'"></i> 
+                      </li>
+                  </ul>
+                  
+              </div>
               <div>
                 <comment-wrapper v-bind:motel_id=this.motel.id></comment-wrapper>
               </div>
@@ -50,6 +59,9 @@ export default {
     return {
       slug: '',
       motel: {},
+      stars: 0,
+      maxStars: 5,
+      countRating: ''
     }
   },
   mounted: function() {
@@ -59,31 +71,60 @@ export default {
     axios.post('/api/getviewmotel', {
           slug: this.slug
         }).then((response) => {
-    this.motel = response.data[0];
+          // console.log(response.data)
+        this.motel = response.data.motel[0];
+        this.countRating = response.data.countRating;
   })
   },
 
   methods: {
+    rate(star) {
+            if (typeof star === 'number' && star <= this.maxStars && star >= 0) {
+                this.stars = this.stars === star ? star - 1 : star
+            }
+            var parent = this;
+            Swal.fire({
+                title: 'Xác nhận đánh giá',
+                text: "",
+                type: 'confirm',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy'
+                }).then(function() {
+                    // parent.$delete(parent.approve, index);
+                    parent.rating(parent.stars,);
+                    
+                }
+            );
+        },
     startSlide: function() {
       this.timer = setInterval(this.next, 4000);
     },
-
-    next: function() {
-      this.currentIndex += 1;
-    },
-    prev: function() {
-      this.currentIndex -= 1;
-    },
     countLike: function() {
       this.motel.like += 1;
+    }, rating(star){
+      axios.post('/viewmotel/rating',  {
+              motelId: this.motel.id,
+              rating: star,
+            }).then((response) => {
+          if(response.data.success){
+              Swal.fire("Đánh giá thành công", "", "success");
+              this.reload();
+          }
+      })
+    },
+    reload(){
+      axios.post('/api/getviewmotel', {
+              slug: this.slug
+            }).then((response) => {
+        this.motel = response.data.motel[0];
+        this.countRating = response.data.countRating;
+      });
     }
   },
 
-  computed: {
-    currentImg: function() {
-      return this.images[Math.abs(this.currentIndex) % this.images.length];
-    }
-  }
 };
 </script>
 <style scoped>

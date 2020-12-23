@@ -17,7 +17,9 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/a81368914c.js"></script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+       
         <style>
             html, body {
                 font-family: 'Roboto', sans-serif;
@@ -264,7 +266,7 @@
                                                 <div class="profile">
                                                     <button class="wrap btn-admin dropdown-toggle ml-3 p-2 text-font" data-toggle="dropdown" href="#">
                                                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" alt="" class="online">
-                                                            Owner
+                                                        {{ Auth::user()->name }}
                                                         <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu">
@@ -307,41 +309,44 @@
                                     <img class="logo-img" src="" alt />
                                     </div>
                                     <div  class="col-6 text-left p-2">
-                                        <div  class="row w-100">
-                                        <div  class="col-12 mb-3">
-                                            <div  class="  vs-con-input-label vs-input w-100">
-                                            <label for="" class="vs-input--label">Name</label>
-                                            <div class="vs-con-input">
-                                                <input type="text" class="vs-input--input normal" placeholder="John Wist">
+                                        <form action="/report" method="POST">
+                                            @csrf
+                                            <div  class="row w-100">
+                                                <div  class="col-12 mb-3">
+                                                    <div  class="  vs-con-input-label vs-input w-100">
+                                                    <label for="" class="vs-input--label">Tên</label>
+                                                    <div class="vs-con-input">
+                                                        <input type="text" class="vs-input--input normal" placeholder="John Wist" name="name">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="col-12 mb-3">
+                                                    <div  class="  vs-con-input-label vs-input w-100">
+                                                    <label for="" class="vs-input--label">Email</label>
+                                                    <div class="vs-con-input">
+                                                        <input type="text" class="vs-input--input normal" placeholder="youremail@email.com" name="email">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="col-12 mb-3">
+                                                    <div  class="  vs-con-input-label vs-input w-100">
+                                                    <label for="" class="vs-input--label">Số điện thoại</label>
+                                                    <div class="vs-con-input">
+                                                        <input type="text" class="vs-input--input normal" placeholder="+84 930.293.232" name="phone">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div  class="col-12 mb-3">
+                                                    <label class="mx-2">Nội dụng</label>
+                                                    <div  class="vs-con-textarea">
+                                                    <textarea placeholder="customer's feedback" class="vs-textarea" name="mess"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div  class="col-12 mb-3 text-right">
+                                                    <button type="submit" class="btn btn-warning">Send us</button>
+                                                </div>
                                             </div>
-                                            </div>
-                                        </div>
-                                        <div  class="col-12 mb-3">
-                                            <div  class="  vs-con-input-label vs-input w-100">
-                                            <label for="" class="vs-input--label">Email</label>
-                                            <div class="vs-con-input">
-                                                <input type="text" class="vs-input--input normal" placeholder="youremail@email.com">
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div  class="col-12 mb-3">
-                                            <div  class="  vs-con-input-label vs-input w-100">
-                                            <label for="" class="vs-input--label">Phone</label>
-                                            <div class="vs-con-input">
-                                                <input type="text" class="vs-input--input normal" placeholder="+84 930.293.232">
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div  class="col-12 mb-3">
-                                            <label class="mx-2">Mesage</label>
-                                            <div  class="vs-con-textarea">
-                                            <textarea placeholder="customer's feedback" class="vs-textarea"></textarea>
-                                            </div>
-                                        </div>
-                                        <div  class="col-12 mb-3 text-right">
-                                            <button type="button" class="btn btn-warning">Send us</button>
-                                        </div>
-                                        </div>
+                                        </form>
                                     </div>
                                     </div>
                                 </div>

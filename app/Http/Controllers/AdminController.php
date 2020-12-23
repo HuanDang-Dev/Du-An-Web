@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Motel;
 use App\User;
+use App\Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -15,21 +16,6 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
-    public function ApproveMotel(Request $request){
-        $id  = $request->get('id');
-        $room = Motel::find($id);
-        $room->approve = 1;
-        $room->save();
-        return redirect('admin/motelrooms/list')->with('thongbao','Đã kiểm duyệt bài đăng: '.$room->title);
-      }
-      
-      public function UnApproveMotel(Request $request){
-        $id  = $request->get('id');
-        $room = Motel::find($id);
-        $room->approve = 0;
-        $room->save();
-        return redirect('admin/motelrooms/list')->with('thongbao','Đã bỏ kiểm duyệt bài đăng: '.$room->title);
-      }
       
       public function indexAdmin(Request $request){
         $adminId = Auth::user()->id;
@@ -50,6 +36,9 @@ class AdminController extends Controller
         $user = DB::table('users')
               ->where('id', '<>', $adminId)
               ->get();
+        $report = DB::table('reports')
+                    ->where('activy', 0)
+                    ->get();
         foreach($list as $key => $item){
           $item->src = '/viewMotel/' . $item->slug;
         }
@@ -66,7 +55,36 @@ class AdminController extends Controller
             'list' => $list,
             'approve'=> $approve,
             'unapprove'=> $unapprove,
-            'users' => $user
+            'users' => $user,
+            'report' => $report
         ], 200);
       }
+
+      public function approveMotel(Request $request){
+        $slug = $request->slug;
+        $motel = Motel::where('slug', $slug)
+            ->update(['approve' => 1]);
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
+    public function confirmReport(Request $request){
+      $id = $request->id;
+      $report = Report::where('id', $id)
+          ->update(['activy' => 1]);
+      return response()->json([
+          'success' => true
+      ], 200);
+  }
+
+
+    public function deleteMotel(Request $request){
+      $slug  = $request->slug;
+      $motel = Motel::where('slug', $slug);
+      $motel->delete();
+      return response()->json([
+          'success' => true
+      ], 200);
+  }
 }
