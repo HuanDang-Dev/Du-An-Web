@@ -1,7 +1,6 @@
 <template>
-  <div class="Comment__wrapper" >
-    <div>Bình luận:</div>
-    <comment-add v-bind:motel_id=this.motel_id></comment-add>
+  <div class="Comment__wrapper">
+    <comment-add v-bind:comment_id=this.comment_id></comment-add>
     <div v-if="max > 4" >
       <div v-if="!is_more">
         <button type="button" class="btn btn-outline-primary" @click="changeAmountComment">Xem nhiều bình luận hơn</button>
@@ -9,9 +8,6 @@
       <div v-else>
       <button type="button" class="btn btn-outline-primary" @click="changeAmountComment">Xem ít bình luận hơn</button>
       </div>
-    </div>
-    <div v-if="max === 0">
-      <button type="button" class="btn btn-outline-primary" @click="loadComments">Xem bình luận</button>
     </div>
     <div v-for="comment in comments" v-bind:key="comment.id">
     <comment :comment="comment"></comment>
@@ -22,17 +18,17 @@
 <script>
   import CommentAdd from './CommentAdd.vue';
   import Comment from './Comment.vue';
-  import EventBus from './event-bus'
+import EventBus from '../Comments/event-bus';
   export default {
+    props:[
+      'comment_id'
+    ],
     components: {
       CommentAdd, Comment
     },
-    props:[
-      'motel_id',
-    ],
     created() {
       this.loadComments();
-      EventBus.$on('commentAddedEvent', (data) => {
+      EventBus.$on('replyAddedEvent', (data) => {
         if(data){
           this.loadComments();
         }
@@ -41,7 +37,6 @@
     data() {
       return {
         comments: [],
-        moreComments: [],
         max: 0,
         is_more: false,
       }
@@ -51,9 +46,11 @@
         this.comments.unshift(comment);
       },
       loadComments() {
-       axios.post('/motel/comment', {
-          motelId: this.motel_id,
-        }).then(response => {
+        var url = '/reply/comment';
+        var postData = {
+          commentId: this.comment_id
+        };
+        axios.post(url, postData).then(response => {
           this.comments = response.data.comments;
           this.moreComments = response.data.moreComments;
           this.max = response.data.max;
@@ -62,8 +59,6 @@
           }else{
             this.comments = response.data.comments
           }
-        }).catch(error => {
-          this.errors = error.response.data.comment
         })
       },
       changeAmountComment(){
@@ -73,3 +68,4 @@
     }
   }
 </script>
+
