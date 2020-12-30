@@ -22,4 +22,4 @@ Route::post('/storemotel', 'MotelController@storeMotel');
 Route::post('getmotel', 'MotelController@getMotel');
 Route::get('getdistrict', 'MotelController@getDistrict');
 Route::get('getuser', 'UserController@current_user');
-Route::post('search', 'MotelController@searchMotel');
+Route::post('/search', 'MotelController@searchMotel');

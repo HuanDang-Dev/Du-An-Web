@@ -3770,12 +3770,13 @@ __webpack_require__.r(__webpack_exports__);
 
     var url = window.location.href;
     this.slug = url.substring(url.search('/search/') + 8);
+    console.log(this.slug);
     axios.get('/api/getdistrict').then(function (response) {
       _this.districts = response.data;
     });
     axios.post('/api/search', {
       districtId: this.districtId,
-      slug: this.lug
+      slug: this.slug
     }).then(function (response) {
       _this.posts = response.data;
     });
@@ -3786,7 +3787,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/search', {
         districtId: this.districtId,
-        slug: this.lug
+        slug: this.slug
       }).then(function (response) {
         console.log(response.data);
         _this2.posts = response.data;

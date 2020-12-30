@@ -101,11 +101,19 @@ class MotelController extends Controller
 
     public function searchMotel(Request $request){
         $slug = $request->slug;
+        // $slug = utf8_decode(urldecode($slug));
         $district = $request->districtId;
         $listMotel = DB::table('motels')
-                    ->where('district_id', $district)
-                    ->where('slug','like', '%' . $slug . '%')
-                    ->where('approve', 1)
+                    ->where([
+                        ['title', 'like', '%' . $slug . '%'],
+                        ['approve', '=', '1'],
+                        ['district_id', '=', $district],
+                     ])
+                    ->orWhere([
+                        ['description', 'like', '%' . $slug . '%'],
+                        ['approve', '=', '1'],
+                        ['district_id', '=', $district],
+                     ])
                     ->orderByRaw('created_at DESC')
                     ->get();
         foreach($listMotel as $key => $item){

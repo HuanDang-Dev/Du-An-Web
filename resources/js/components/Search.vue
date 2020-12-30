@@ -60,12 +60,13 @@ export default {
   mounted() {
     let url = window.location.href;
     this.slug = url.substring(url.search('/search/') + 8)
+    console.log(this.slug)
     axios.get('/api/getdistrict').then((response) => {
               this.districts = response.data
     })
     axios.post('/api/search',  {
                     districtId: this.districtId,
-                    slug: this.lug
+                    slug: this.slug
                   }).then((response) => {
               this.posts = response.data
     })
@@ -74,7 +75,7 @@ export default {
         onSelectChange(event){
             axios.post('/api/search',  {
                     districtId: this.districtId,
-                    slug: this.lug
+                    slug: this.slug
                   }).then((response) => {
                     console.log(response.data)
                     this.posts = response.data
